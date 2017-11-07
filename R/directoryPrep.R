@@ -6,8 +6,7 @@ directoryPrep <- function(analysis,parameters){
   
   reportPath <- str_c(path,title,sep = '/')
   
-  dirCmd <- str_c('mkdir',reportPath,sep = ' ')
-  system(dirCmd)
+  dir.create(reportPath)
   
   save(analysis,file = str_c(reportPath,'reportData.RData',sep = '/'))
 }
