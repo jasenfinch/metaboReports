@@ -1,0 +1,24 @@
+---
+title: "Example Report"
+output: html_document
+---
+
+```{r libraryLoad,echo=FALSE,include=FALSE}
+suppressMessages(hrm::hrmAttach())
+suppressPackageStartupMessages(library(tidyverse))
+```
+
+```{r loadData,echo=FALSE}
+load('../data/exampleFIEworkflowResults.RData')
+```
+
+## Quality Control
+
+## Classification
+
+```{r classificationPlot,echo=FALSE}
+resultsAnalysis(analysis) %>%
+  plotClassification()
+```
+
+## Feature Selection
