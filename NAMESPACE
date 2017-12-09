@@ -2,6 +2,7 @@
 
 export(report)
 export(reportParameters)
+importFrom(magrittr,"%>%")
 importFrom(readr,write_file)
 importFrom(rmarkdown,render)
 importFrom(stringr,str_c)
