@@ -3,9 +3,9 @@ title: "Example Report"
 output: html_document
 ---
 
-```{r libraryLoad,echo=FALSE,include=FALSE}
-suppressMessages(hrm::hrmAttach())
-suppressPackageStartupMessages(library(tidyverse))
+```{r libraryLoad,include=FALSE}
+hrm::hrmAttach()
+library(tidyverse)
 ```
 
 ```{r loadData,echo=FALSE}
@@ -14,11 +14,44 @@ load('../data/exampleFIEworkflowResults.RData')
 
 ## Quality Control
 
+```{r RSD,echo=FALSE}
+suppressMessages(analysis %>%
+  resultsAnalysis() %>%
+  plotRSD()
+  )
+```
+
+```{r PCA,echo=FALSE}
+analysis %>%
+  resultsAnalysis() %>%
+  plotPCA()
+```
+
+```{r LDA,echo=FALSE}
+analysis %>%
+  resultsAnalysis() %>%
+  plotLDA()
+```
+
+
 ## Classification
 
 ```{r classificationPlot,echo=FALSE}
-resultsAnalysis(analysis) %>%
+analysis %>%
+  resultsAnalysis() %>%
   plotClassification()
 ```
 
 ## Feature Selection
+
+```{r featureSelection, echo=FALSE}
+analysis %>%
+  resultsAnalysis() %>%
+  plotFeatureSelection()
+```
+
+```{r explanatoryHeatmap,echo=FALSE}
+analysis %>%
+  resultsAnalysis() %>% 
+  plotExplanatoryHeatmap() 
+```

@@ -5,7 +5,7 @@ QCsection <- function(analysis,parameters){
   section <- '
 ## Quality Control
 
-  ```{r RSD,echo=FALSE}
+```{r RSD,echo=FALSE}
 suppressMessages(analysis %>%
   resultsAnalysis() %>%
   plotRSD()
