@@ -12,7 +12,67 @@ library(tidyverse)
 load('../data/exampleFIEworkflowResults.RData')
 ```
 
+```{r analysisResults}
+analysisResults <- analysis %>%
+  resultsAnalysis()
+QCparameters <- analysisResults %>% {.@parameters@preTreat$QC}
+```
+
+## Overview
+
+Raw Features:
+
+```{r rawFeatures,echo=FALSE}
+rawDat <- analysisResults %>% 
+  rawData() %>% 
+  .$Data %>%
+  gather('Feature','Intensity')
+
+negFeatures <- rawDat %>%
+  filter(str_detect(Feature,coll('n')))
+posFeatures <- rawDat %>%
+  filter(str_detect(Feature,coll('p')))
+
+getMissingFeatures <- function(features) {
+  features %>%
+  .$Intensity %>% 
+  .[. == 0] %>%
+  length(.) %>% 
+  {./nrow(rawDat)} %>%
+  {. * 100} %>% 
+  round(2)
+}
+
+missingNegFeatures <- getMissingFeatures(negFeatures) 
+missingPosFeatures <- getMissingFeatures(posFeatures)
+```
+
+* `r negFeatures %>% .$Feature %>% unique() %>% length()` in negative mode with `r missingNegFeatures`% missing data.
+* `r posFeatures %>% .$Feature %>% unique() %>% length()` in positive mode with `r missingPosFeatures`% missing data.
+
 ## Quality Control
+
+```{r extractQCsamples,echo=FALSE}
+QCidx <- QCparameters %>% {.$occupancyFilter$QCidx}
+QCclass <- QCparameters %>% {.$occupancyFilter$cls}
+qcInfo <- analysisResults %>% 
+  rawData() %>% 
+  .$Info %>%
+  filter(.[,QCclass] == QCidx)
+qcDat <- analysisResults %>%
+  rawData() %>%
+  .$Data %>%
+  .[qcInfo$fileOrder,] %>%
+  gather('Feature','Intensity')
+
+occ <- qcDat %>%
+  filter(Intensity > 0) %>%
+  
+  
+
+```
+
+* \* features with occupancy > `r QCparameters %>% {.$occupancyFilter$occupancy} %>% eval() %>% round(2)`
 
 ```{r RSD,echo=FALSE}
 suppressMessages(analysis %>%
