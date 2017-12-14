@@ -8,6 +8,8 @@ hrm::hrmAttach()
 library(tidyverse)
 library(missForest)
 library(knitr)
+library(ggthemes)
+library(patchwork)
 ```
 
 ```{r loadData,echo=FALSE}
@@ -74,6 +76,24 @@ chromatograms %>%
   ylab('Total Ion Current')
 ```
 
+```{r binMeasures,echo=FALSE}
+accurateDat <- processingResults %>%
+  accurateData()
+purity <- accurateDat %>%
+  ggplot(aes(x = Purity)) +
+  geom_histogram(fill = ptol_pal()(5)[2],colour = 'black') +
+  theme_bw() +
+  facet_wrap(~Mode) +
+  ggtitle('Purity')
+centrality <- accurateDat %>%
+  ggplot(aes(x = Centrality)) +
+  geom_histogram(fill = ptol_pal()(5)[2],colour = 'black') +
+  theme_bw() +
+  facet_wrap(~Mode) +
+  ggtitle('Centrality')
+
+purity + centrality
+```
 ## Quality Control
 
 ```{r rawFeatures,echo=FALSE}
@@ -239,6 +259,31 @@ suppressMessages(analysis %>%
                    resultsAnalysis() %>%
                    plotRSD()
 )
+```
+
+```{r retainedFeatureMeasures,echo=FALSE}
+features <- tibble(Feature = colnames(analysisResults@preTreated$Data))
+accurateDat <- processingResults %>% 
+  accurateData() %>%
+  select(Mode,mz,Purity,Centrality)
+feat <- features %>%
+  mutate(Mode = str_sub(Feature,1,1),mz = str_replace_all(Feature,'[:alpha:]','') %>% as.numeric()) %>%
+  left_join(accurateDat )
+
+purity <- feat %>%
+  ggplot(aes(x = Purity)) +
+  geom_histogram(fill = ptol_pal()(5)[2],colour = 'black') +
+  theme_bw() +
+  facet_wrap(~Mode) +
+  ggtitle('Purity')
+centrality <- feat %>%
+  ggplot(aes(x = Centrality)) +
+  geom_histogram(fill = ptol_pal()(5)[2],colour = 'black') +
+  theme_bw() +
+  facet_wrap(~Mode) +
+  ggtitle('Centrality')
+
+purity + centrality
 ```
 
 ## Pre-treatment
