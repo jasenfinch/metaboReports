@@ -135,6 +135,51 @@ purPlot + centPlot + plot_layout(ncol = 1)
 ```
 
 "
+    },
+    
+    ticPlot = function(binalysis){
+      "
+
+```{r TICplot,echo=FALSE}
+rawInfo <- binalysis %>%
+  info()
+TICdat <- binalysis %>% 
+  binnedData() %>% 
+   bind_cols() %>%
+  rowid_to_column(var = 'Sample') %>%
+  gather('Feature','Intensity',-Sample) %>%
+  mutate(Mode = str_sub(Feature,1,1)) %>%
+  group_by(Mode,Sample) %>%
+  summarise(TIC = sum(Intensity)) %>%
+  mutate(batchBlock = rawInfo$batchBlock %>% factor(),
+         injOrder = rawInfo$injOrder)
+
+TICdat$Mode[TICdat$Mode == 'n'] <- 'Negative'
+TICdat$Mode[TICdat$Mode == 'p'] <- 'Positive'
+
+TICmedian <- TICdat %>%
+  group_by(Mode) %>%
+  summarise(Median = median(TIC),Q1 = Median - IQR(TIC),Q3 = Median + IQR(TIC),LowerOut = Q1 - IQR(TIC) * 1.5,UpperOut = Q3 + IQR(TIC) * 1.5)
+
+ggplot(TICdat,aes(x = injOrder,y = TIC,colour = batchBlock)) +
+  geom_hline(data = TICmedian,aes(yintercept = Median)) +
+  geom_hline(data = TICmedian,aes(yintercept = Q1),linetype = 2) +
+  geom_hline(data = TICmedian,aes(yintercept = Q3),linetype = 2) +
+  geom_hline(data = TICmedian,aes(yintercept = LowerOut),linetype = 3) +
+  geom_hline(data = TICmedian,aes(yintercept = UpperOut),linetype = 3) +
+  geom_point() +
+  theme_bw() +
+  theme(plot.title = element_text(face = 'bold'),
+        axis.title = element_text(face = 'bold')) +
+  facet_wrap(~Mode) +
+  labs(title = 'Sample TICs',
+       caption = 'The solid line shows the median TIC across the sample set. \nThe dashed line shows the inter-quartile range (IQR) and \nthe dotted line shows the outlier boundary (1.5 X IQR).') +
+  xlab('Injection Order') +
+  ylab('Total Ion Count') +
+  guides(colour = guide_legend(title = 'Batch Block'))
+```   
+
+"
     }
   )
   
