@@ -1,0 +1,4 @@
+
+correlationMethods <- function(method){
+  
+}
