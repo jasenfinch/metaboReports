@@ -3,14 +3,14 @@
 #' @importFrom readr write_file
 #' @importFrom rmarkdown render
 #' @examples 
-#' 
+#' \dontrun{
 #' ## For just a Binalysis object
 #' data("exampleFIEworkflowResults")
 #' analysis <- analysis %>%
 #'  resultsProcessing()
 #' p <- reportParameters('test','Steve French')
 #' report(analysis,p)
-#' 
+#' }
 #' @export
 
 report <- function(analysis,parameters){

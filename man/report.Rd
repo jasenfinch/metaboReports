@@ -10,12 +10,12 @@ report(analysis, parameters)
 report
 }
 \examples{
-
+\dontrun{
 ## For just a Binalysis object
 data("exampleFIEworkflowResults")
 analysis <- analysis \%>\%
  resultsProcessing()
 p <- reportParameters('test','Steve French')
 report(analysis,p)
-
+}
 }
