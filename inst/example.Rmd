@@ -37,6 +37,23 @@ Number of samples:
 processingResults@binParameters
 ```
 
+```{r rawFeaturesTable,echo=FALSE}
+library(knitr)
+rawFeat <- processingResults %>%
+  binnedData() %>%
+  bind_cols() %>%
+  rowid_to_column(var = 'Sample') %>%
+  gather('Feature','Intensity',-Sample) %>%
+  mutate(Mode = str_sub(Feature,1,1)) %>%
+  group_by(Mode) %>%
+  summarise(`Number of bins` = n_distinct(Feature),`Missing Data (%)` = round(length(which(Intensity == 0))/length(Intensity) * 100,2))
+
+rawFeat$Mode[rawFeat$Mode == 'n'] = 'Negative'
+rawFeat$Mode[rawFeat$Mode == 'p'] = 'Positive'
+
+kable(rawFeat,caption = '')
+```
+
 ```{r chromatograms,echo=FALSE}
 chromatograms <- processingResults@spectra %>%
   .$headers

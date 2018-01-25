@@ -24,7 +24,11 @@ overViewSection <- function(analysis){
 **Date undertaken:** ',analysis@binLog,'
 
 **Number of samples:** ',nrow(info(analysis)),'
-      
+
+```{r loadData,echo=FALSE}
+binalysis <- read_rds("reportData.rds")
+```
+
 '
     )
   }
