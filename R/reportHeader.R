@@ -1,14 +1,14 @@
 
 reportHeader <- function(analysis,parameters){
   
-  path <- parameters@path
   title <- parameters@title
+  output <- parameters@output
   date <- parameters@date
   
   header <- str_c(
 '---
 title: "',title,'"
-output: html_document
+output: "',output,'"
 date: "',date,'"
 ---
 
