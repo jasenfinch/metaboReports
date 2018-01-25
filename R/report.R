@@ -6,7 +6,7 @@
 #' \dontrun{
 #' ## For just a Binalysis object
 #' data("exampleFIEworkflowResults")
-#' analysis <- analysis %>%
+#' analysis <- exampleFIEworkflowResults %>%
 #'  resultsProcessing()
 #' p <- reportParameters('test','Steve French')
 #' report(analysis,p)
