@@ -1,7 +1,9 @@
 
 reportMethods <- function(method) {
   methods <- list(
-    Binalysis = binalysisMethods()
+    Binalysis = binalysisMethods(),
+    Analysis = analysisMethods()
   )
-  return(methods)
+  method <- methods[method]
+  return(method)
 }

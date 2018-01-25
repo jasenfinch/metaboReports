@@ -21,7 +21,7 @@ overViewSection <- function(analysis){
       
 **Technique:** FIE-HRMS Spectral Binning
 
-**Date undertaken:** ',analysis@binLog,'
+**Undertaken:** ',analysis@binLog,'
 
 **Number of samples:** ',nrow(info(analysis)),'
 
@@ -38,6 +38,16 @@ binalysis <- read_rds("reportData.rds")
 '
       
 **Technique:** metabolyseR analysis
+
+**Date undertaken:** ',analysis@log$analysis,'
+
+**Analysis elements:** ',str_c(names(analysis@log)[-1],collapse = ', '),'
+
+**Number of raw samples**: ',rawData(analysis)$Info %>% nrow(),'
+
+```{r loadData,echo=FALSE}
+analysis <- read_rds("reportData.rds")
+```
 
 '
     )
