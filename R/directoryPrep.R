@@ -1,4 +1,5 @@
 #' @importFrom stringr str_c
+#' @importFrom readr write_rds
 
 directoryPrep <- function(analysis,parameters){
   title <- parameters@title
@@ -8,5 +9,5 @@ directoryPrep <- function(analysis,parameters){
   
   dir.create(reportPath)
   
-  save(analysis,file = str_c(reportPath,'reportData.RData',sep = '/'))
+  write_rds(analysis,str_c(reportPath,'reportData.rds',sep = '/'))
 }

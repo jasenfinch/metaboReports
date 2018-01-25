@@ -18,7 +18,7 @@ library(tidyverse)
 ```
 
 ```{r loadData,echo=FALSE}
-load("reportData.RData")
+analysis <- read_rds("reportData.rds")
 ```
 
 '
