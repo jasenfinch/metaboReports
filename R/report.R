@@ -3,9 +3,14 @@
 #' @importFrom readr write_file
 #' @importFrom rmarkdown render
 #' @examples 
+#' 
+#' ## For just a Binalysis object
 #' data("exampleFIEworkflowResults")
-#' p <- reportParameters('test')
+#' analysis <- analysis %>%
+#'  resultsProcessing()
+#' p <- reportParameters('test','Steve French')
 #' report(analysis,p)
+#' 
 #' @export
 
 report <- function(analysis,parameters){
@@ -13,7 +18,17 @@ report <- function(analysis,parameters){
   directoryPrep(analysis,parameters)
   
   report <- c(reportHeader(analysis,parameters),
-              overViewSection(analysis),
+              overViewSection(analysis))
+  
+  methods <- reportMethods(class(analysis)) %>%
+    unlist(recursive = F)
+  
+  methodSection <- map(methods,~{
+    .(analysis)
+  })
+  
+  report <- c(report,
+              methodSection,
               reportFooter()
               ) %>%
     str_c(collapse = '')

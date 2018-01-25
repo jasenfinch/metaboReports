@@ -2,6 +2,7 @@
 reportHeader <- function(analysis,parameters){
   
   title <- parameters@title
+  investigator <- parameters@investigator
   output <- parameters@output
   date <- parameters@date
   
@@ -9,16 +10,13 @@ reportHeader <- function(analysis,parameters){
 '---
 title: "',title,'"
 output: "',output,'"
+author: "',investigator,'"
 date: "',date,'"
 ---
 
 ```{r libraryLoad,include=FALSE}
 hrm::hrmAttach()
 library(tidyverse)
-```
-
-```{r loadData,echo=FALSE}
-analysis <- read_rds("reportData.rds")
 ```
 
 '
