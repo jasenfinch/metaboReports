@@ -6,10 +6,6 @@ output: html_document
 ```{r libraryLoad,include=FALSE}
 hrm::hrmAttach()
 library(tidyverse)
-library(missForest)
-library(knitr)
-library(ggthemes)
-library(patchwork)
 ```
 
 ```{r loadData,echo=FALSE}
@@ -76,24 +72,45 @@ chromatograms %>%
   ylab('Total Ion Current')
 ```
 
-```{r binMeasures,echo=FALSE}
-accurateDat <- processingResults %>%
-  accurateData()
-purity <- accurateDat %>%
-  ggplot(aes(x = Purity)) +
-  geom_histogram(fill = ptol_pal()(5)[2],colour = 'black') +
-  theme_bw() +
-  facet_wrap(~Mode) +
-  ggtitle('Purity')
-centrality <- accurateDat %>%
-  ggplot(aes(x = Centrality)) +
-  geom_histogram(fill = ptol_pal()(5)[2],colour = 'black') +
-  theme_bw() +
-  facet_wrap(~Mode) +
-  ggtitle('Centrality')
+```{r PurityCentrality,echo=FALSE}
+library(patchwork)
+library(ggthemes)
 
-purity + centrality
+histBins <- 30
+
+purCent <- processingResults %>%
+  accurateData() %>%
+  select(Mode,Purity,Centrality) %>%
+  gather('Measure','Value',-Mode) %>%
+  mutate(Mode = as.character(Mode)) %>%
+  na.omit()
+
+purCent$Mode[purCent$Mode == 'n'] <- 'Negative'
+purCent$Mode[purCent$Mode == 'p'] <- 'Positive'
+
+purPlot <- purCent %>%
+  filter(Measure == 'Purity') %>%
+  ggplot(aes(x = Value)) +
+  geom_histogram(fill = ptol_pal()(5)[2],colour = 'black',bins = histBins) +
+  theme_bw() +
+  facet_wrap(~Mode) +
+  ggtitle('Bin Purity Distribution') +
+  xlab('Purity Measure') +
+  ylab('Frequency')
+
+centPlot <- purCent %>%
+  filter(Measure == 'Centrality') %>%
+  ggplot(aes(x = Value)) +
+  geom_histogram(fill = ptol_pal()(5)[2],colour = 'black',bins = histBins) +
+  theme_bw() +
+  facet_wrap(~Mode) +
+  ggtitle('Bin Centrality Distribution') +
+  xlab('Centrality Measure') +
+  ylab('Frequency')
+
+purPlot + centPlot + plot_layout(ncol = 1)
 ```
+
 ## Quality Control
 
 ```{r rawFeatures,echo=FALSE}
@@ -146,6 +163,7 @@ ggplot(TICdat,aes(x = injOrder,y = TIC,colour = batchBlock)) +
 ```
 
 ```{r extractQCsamples,include=FALSE}
+library(missForest)
 QCidx <- QCparameters %>% {.$occupancyFilter$QCidx}
 QCclass <- QCparameters %>% {.$occupancyFilter$cls}
 QCocc <- QCparameters %>% {.$occupancyFilter$occupancy} %>% eval()
@@ -251,6 +269,7 @@ QCstats <- tibble(Mode = c('Negative','Positive'),
 ```
 
 ```{r,echo=FALSE}
+library(knitr)
 kable(QCstats)
 ```
 
