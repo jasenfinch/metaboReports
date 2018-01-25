@@ -10,7 +10,12 @@ report(analysis, parameters)
 report
 }
 \examples{
+
+## For just a Binalysis object
 data("exampleFIEworkflowResults")
-p <- reportParameters('test')
+analysis <- analysis \%>\%
+ resultsProcessing()
+p <- reportParameters('test','Steve French')
 report(analysis,p)
+
 }
