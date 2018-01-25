@@ -4,7 +4,7 @@
 #' @importFrom rmarkdown render
 #' @examples 
 #' data("exampleFIEworkflowResults")
-#' p <- reportParameters(analysis,'test')
+#' p <- reportParameters('test')
 #' report(analysis,p)
 #' @export
 
@@ -13,8 +13,7 @@ report <- function(analysis,parameters){
   directoryPrep(analysis,parameters)
   
   report <- c(reportHeader(analysis,parameters),
-              QCsection(analysis,parameters),
-              classificationSection(analysis,parameters),
+              overViewSection(analysis),
               reportFooter()
               ) %>%
     str_c(collapse = '')

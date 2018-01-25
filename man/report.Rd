@@ -11,6 +11,6 @@ report
 }
 \examples{
 data("exampleFIEworkflowResults")
-p <- reportParameters(analysis,'test')
+p <- reportParameters('test')
 report(analysis,p)
 }

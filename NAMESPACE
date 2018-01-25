@@ -2,6 +2,7 @@
 
 export(report)
 export(reportParameters)
+importFrom(binneRlyse,info)
 importFrom(magrittr,"%>%")
 importFrom(readr,write_file)
 importFrom(rmarkdown,render)
