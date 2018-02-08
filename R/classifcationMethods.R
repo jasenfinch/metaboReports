@@ -1,4 +1,4 @@
 
 classificationMethods <- function(method){
-  
+
 }
