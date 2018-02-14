@@ -6,6 +6,9 @@ cache: packages
 warnings_are_errors: true
 bioc_required: true
 
+apt_packages:
+ - libnetcdf-dev
+
 r:
   - release
   - devel
