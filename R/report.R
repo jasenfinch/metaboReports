@@ -23,18 +23,20 @@ report <- function(analysis,parameters){
   methods <- reportMethods(class(analysis)) %>%
     unlist(recursive = F)
   
+  methods <- methods[!(map(methods,is.null) %>% unlist())]
+  
   methodSection <- map(methods,~{
-    .(analysis)
+      .(analysis)
   })
   
   report <- c(report,
               methodSection,
               reportFooter()
-              ) %>%
+  ) %>%
     str_c(collapse = '')
   
   reportFile <- str_c(parameters@path,parameters@title,parameters@title,sep = '/')
-                      
+  
   write_file(report,str_c(reportFile,'.Rmd'))
   
   render(str_c(reportFile,'.Rmd'))

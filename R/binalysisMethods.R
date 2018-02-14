@@ -54,7 +54,7 @@ chromatograms <- binalysis@spectra %>%
   .$headers
 scans <- binalysis@binParameters@scans
 chromatograms <- chromatograms %>%
-  select(FileName,acquisitionNum,totIonCurrent,polarity) %>%
+  dplyr::select(FileName,acquisitionNum,totIonCurrent,polarity) %>%
   split(.$polarity) %>%
   map(~{
     f <- .
@@ -99,7 +99,7 @@ histBins <- 30
     
 purCent <- binalysis %>%
   accurateData() %>%
-  select(Mode,Purity,Centrality) %>%
+  dplyr::select(Mode,Purity,Centrality) %>%
   gather('Measure','Value',-Mode) %>%
   mutate(Mode = as.character(Mode)) %>%
   na.omit()
