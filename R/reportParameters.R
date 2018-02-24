@@ -1,3 +1,4 @@
+#' @importFrom methods new
 #' @export
 
 reportParameters <- function(title,investigator,path = '.') {

@@ -1,3 +1,4 @@
+#' @importFrom utils packageVersion
 
 reportFooter <- function(){
   str_c('
