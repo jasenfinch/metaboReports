@@ -1,4 +1,7 @@
 #' report
+#' @description generate a report from a Binalysis analysis. 
+#' @param analysis object of class Binalysis from which to genrate a report
+#' @param parameters object of class ReportParameters
 #' @importFrom magrittr %>%
 #' @importFrom readr write_file
 #' @importFrom rmarkdown render
