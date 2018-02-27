@@ -1,3 +1,8 @@
+#' reportParameters
+#' @description Initiate report parameters. 
+#' @param title report title
+#' @param investigator investigator name
+#' @param path report output path
 #' @importFrom methods new
 #' @export
 
