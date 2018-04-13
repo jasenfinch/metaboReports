@@ -15,8 +15,8 @@ date: "',date,'"
 ---
 
 ```{r libraryLoad,include=FALSE}
-hrm::hrmAttach()
 library(tidyverse)
+hrm::hrmAttach()
 ```
 
 '

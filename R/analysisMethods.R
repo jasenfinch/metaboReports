@@ -1,7 +1,7 @@
 
 analysisMethods <- function(method){
   method <- list(
-    parameters = list(function(analysis){
+    parameters = function(analysis){
       "
 ### Parameters
 
@@ -9,7 +9,7 @@ analysisMethods <- function(method){
 analysis@parameters
 ```
 "
-    }),
+    },
     preTreatment = preTreatmentMethods(),
     classification = classificationMethods(),
     featureSelection = featureSelectionMethods(),

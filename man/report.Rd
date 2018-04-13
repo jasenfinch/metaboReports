@@ -6,8 +6,13 @@
 \usage{
 report(analysis, parameters)
 }
+\arguments{
+\item{analysis}{object of class Binalysis from which to genrate a report}
+
+\item{parameters}{object of class ReportParameters}
+}
 \description{
-report
+generate a report from a Binalysis analysis.
 }
 \examples{
 \dontrun{

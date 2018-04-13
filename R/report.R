@@ -1,4 +1,7 @@
 #' report
+#' @description generate a report from a Binalysis analysis. 
+#' @param analysis object of class Binalysis from which to genrate a report
+#' @param parameters object of class ReportParameters
 #' @importFrom magrittr %>%
 #' @importFrom readr write_file
 #' @importFrom rmarkdown render
@@ -23,18 +26,20 @@ report <- function(analysis,parameters){
   methods <- reportMethods(class(analysis)) %>%
     unlist(recursive = F)
   
+  methods <- methods[!(map(methods,is.null) %>% unlist())]
+  
   methodSection <- map(methods,~{
-    .(analysis)
+      .(analysis)
   })
   
   report <- c(report,
               methodSection,
               reportFooter()
-              ) %>%
+  ) %>%
     str_c(collapse = '')
   
   reportFile <- str_c(parameters@path,parameters@title,parameters@title,sep = '/')
-                      
+  
   write_file(report,str_c(reportFile,'.Rmd'))
   
   render(str_c(reportFile,'.Rmd'))

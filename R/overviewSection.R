@@ -1,5 +1,7 @@
 #' @importFrom stringr str_c
 #' @importFrom binneRlyse info
+#' @importFrom metabolyseR rawData
+#' @importFrom purrr map
 
 overViewSection <- function(analysis){
   
