@@ -16,6 +16,7 @@ date: "',date,'"
 
 ```{r libraryLoad,include=FALSE}
 library(tidyverse)
+library(patchwork)
 hrm::hrmAttach()
 ```
 
