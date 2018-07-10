@@ -1,4 +1,12 @@
+#' @importFrom metabolyseR featureSelectionResults
 
-featureSelectionMethods <- function(method){
-  
+featureSelectionMethods <- function(analysis){
+  if ({analysis %>% featureSelectionResults() %>% nrow()} > 0) {
+    "
+### Feature selection
+
+"
+  } else {
+    ""
+  }
 }

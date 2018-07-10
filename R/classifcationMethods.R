@@ -1,4 +1,12 @@
+#' @importFrom metabolyseR classificationResults
 
-classificationMethods <- function(method){
+classificationMethods <- function(analysis){
+  if ({analysis %>% classificationResults() %>% nrow()} > 0) {
+    "
+### Classification
 
+"
+  } else {
+    ""
+  }
 }
