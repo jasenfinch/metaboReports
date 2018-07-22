@@ -8,6 +8,7 @@ bioc_required: true
 
 apt_packages:
  - libnetcdf-dev
+ - netcdf-bin
 
 r:
   - release
