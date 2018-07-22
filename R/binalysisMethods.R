@@ -1,5 +1,5 @@
 
-binalysisMethods <- function(method) {
+binalysisMethods <- function(analysis) {
   
   methods <- list(
     

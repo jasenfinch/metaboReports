@@ -9,9 +9,17 @@ overViewSection <- function(analysis){
   
   if (class(analysis) == 'Workflow') {
     overview <- str_c(overview,
-'
+                      '
       
-**Technique:** Workflow - ',analysis@logs,'
+**Technique:** `metaboWorkflows`` v',analysis@logs$packageVersion %>% as.character(),' workflow - ',analysis@workflowParameters@workflow,'
+
+**Undertaken:** ',analysis@logs$initialisation,'
+
+**Flags:** ',str_c(analysis@flags,collapse = ', '),'
+
+```{r loadData,echo=FALSE}
+workflowData <- read_rds("reportData.rds")
+```
 
 '
     )
@@ -19,7 +27,7 @@ overViewSection <- function(analysis){
   
   if (class(analysis) == 'Binalysis') {
     overview <- str_c(overview,
-'
+                      '
       
 **Technique:** FIE-HRMS Spectral Binning
 
@@ -37,7 +45,7 @@ binalysis <- read_rds("reportData.rds")
   
   if (class(analysis) == 'Analysis') {
     overview <- str_c(overview,
-'
+                      '
       
 **Technique:** `metabolyseR` analysis
 

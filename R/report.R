@@ -20,6 +20,11 @@
 #'  resultsAnalysis()
 #' p <- reportParameters('ExampleData','Steve French')
 #' report(analysis,p) 
+#' 
+#' ## For workflow object
+#' p <- reportParameters('ExampleData','Steve French')
+#' report(exampleFIEworkflowResults,p) 
+#' 
 #' }
 #' @export
 
@@ -31,9 +36,8 @@ report <- function(analysis,parameters){
               overViewSection(analysis))
   
   methods <- reportMethods(class(analysis)) %>%
-    unlist(recursive = F)
+    {.(analysis)}
   
-  methods <- methods[!(map(methods,is.null) %>% unlist())]
   
   methodSection <- map(methods,~{
       .(analysis)
