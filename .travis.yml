@@ -9,6 +9,7 @@ bioc_required: true
 apt_packages:
  - libnetcdf-dev
  - netcdf-bin
+ - libopenbabel-dev
 
 r:
   - release
