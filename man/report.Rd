@@ -20,7 +20,7 @@ generate a report from a Binalysis analysis.
 data("exampleFIEworkflowResults")
 analysis <- exampleFIEworkflowResults \%>\%
  resultsProcessing()
-p <- reportParameters('If You Love Something, Set It Free','Steve French')
+p <- reportParameters('B. distachyon ecotype comparison','Steve French')
 report(analysis,p)
 }
 }

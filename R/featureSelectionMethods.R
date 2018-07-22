@@ -5,6 +5,14 @@ featureSelectionMethods <- function(analysis){
     "
 ### Feature selection
 
+```{r featureSelectionPlot,echo = F}
+plotFeatureSelection(analysis)
+````
+
+```{r explanatoryHeatMap,echo = F}
+plotExplanatoryHeatmap(analysis)
+````
+
 "
   } else {
     ""

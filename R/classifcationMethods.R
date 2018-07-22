@@ -5,6 +5,14 @@ classificationMethods <- function(analysis){
     "
 ### Classification
 
+```{r classificationPlot,echo = F}
+plotClassification(analysis)
+````
+
+```{r classificationDendrogram,echo = F}
+plotClassificationDendrogram(analysis)
+````
+
 "
   } else {
     ""

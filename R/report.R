@@ -11,7 +11,7 @@
 #' data("exampleFIEworkflowResults")
 #' analysis <- exampleFIEworkflowResults %>%
 #'  resultsProcessing()
-#' p <- reportParameters('If You Love Something, Set It Free','Steve French')
+#' p <- reportParameters('B. distachyon ecotype comparison','Steve French')
 #' report(analysis,p)
 #' }
 #' @export
@@ -38,7 +38,10 @@ report <- function(analysis,parameters){
   ) %>%
     str_c(collapse = '')
   
-  reportFile <- str_c(parameters@path,parameters@title,parameters@title,sep = '/')
+  title <- parameters@title %>%
+    str_replace_all(' ','_')
+  
+  reportFile <- str_c(parameters@path,title,title,sep = '/')
   
   write_file(report,str_c(reportFile,'.Rmd'))
   

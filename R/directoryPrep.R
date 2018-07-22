@@ -1,8 +1,9 @@
-#' @importFrom stringr str_c
+#' @importFrom stringr str_c str_replace_all
 #' @importFrom readr write_rds
 
 directoryPrep <- function(analysis,parameters){
-  title <- parameters@title
+  title <- parameters@title %>%
+    str_replace_all(' ','_')
   path <- parameters@path
   
   reportPath <- str_c(path,title,sep = '/')
