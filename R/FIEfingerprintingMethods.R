@@ -6,6 +6,6 @@ FIEfingerprintingMethods <- function(analysis){
     preTreat = analysisMethods()$preTreatment
     
   )
-  methods <- methods[[names(methods %in% flags)]]
+  methods <- methods[names(methods) %in% flags]
   return(methods)
 }

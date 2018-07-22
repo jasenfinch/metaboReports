@@ -5,7 +5,7 @@ preTreatmentMethods <- function(analysis){
     "
 ### Pre-treatment
 
-```{r TICplot,echo = F}
+```{r rawTICplot,echo = F}
 plotTIC(analysis)
 ````
 

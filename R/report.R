@@ -36,7 +36,17 @@ report <- function(analysis,parameters){
               overViewSection(analysis))
   
   methods <- reportMethods(class(analysis)) %>%
-    {.(analysis)}
+  {.(analysis)}
+  
+  if (class(analysis) == 'Workflow') {
+    methods <- methods %>%
+    {.(analysis)} %>%
+      unlist(recursive = F)
+    binalysis <- analysis %>%
+      resultsProcessing()
+    analysis <- analysis %>%
+      resultsAnalysis()
+  }
   
   
   methodSection <- map(methods,~{
