@@ -11,14 +11,25 @@ overViewSection <- function(analysis){
     overview <- str_c(overview,
                       '
       
-**Technique:** `metaboWorkflows`` v',analysis@logs$packageVersion %>% as.character(),' workflow - ',analysis@workflowParameters@workflow,'
+**Technique:** `metaboWorkflows` v',analysis@logs$packageVersion %>% as.character(),' workflow - ',analysis@workflowParameters@workflow,'
 
 **Undertaken:** ',analysis@logs$initialisation,'
 
 **Flags:** ',str_c(analysis@flags,collapse = ', '),'
 
 ```{r loadData,echo=FALSE}
-workflowData <- read_rds("reportData.rds")
+workflowData <- read_rds("reportData.rds")',
+                      if ('spectralBin' %in% analysis@flags) {
+                        '
+binalysis <- workflowData %>%
+                        resultsProcessing()'
+                      },
+                      if ('preTreat' %in% analysis@flags) {
+                        '
+analysis <- workflowData %>%
+                        resultsAnalysis()'
+                      },
+                      '
 ```
 
 '
