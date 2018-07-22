@@ -16,11 +16,18 @@ generate a report from a Binalysis analysis.
 }
 \examples{
 \dontrun{
-## For just a Binalysis object
 data("exampleFIEworkflowResults")
+
+## For just a Binalysis object
 analysis <- exampleFIEworkflowResults \%>\%
  resultsProcessing()
-p <- reportParameters('B. distachyon ecotype comparison','Steve French')
+p <- reportParameters('ExampleData','Steve French')
 report(analysis,p)
+
+## For Analysis object
+analysis <- exampleFIEworkflowResults \%>\%
+ resultsAnalysis()
+p <- reportParameters('ExampleData','Steve French')
+report(analysis,p) 
 }
 }

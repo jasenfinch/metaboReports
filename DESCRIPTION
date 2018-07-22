@@ -5,7 +5,7 @@ Authors@R: person("Jasen", "Finch", email = "jsf9@aber.ac.uk", role = c("aut", "
 Description: Generate reports for metabolomics analyses.
 Depends: R (>= 3.4.0)
 Imports: stringr,
-         binneRlyse,
+         binneR,
          magrittr,
          readr,
          rmarkdown,

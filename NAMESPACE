@@ -2,7 +2,7 @@
 
 export(report)
 export(reportParameters)
-importFrom(binneRlyse,info)
+importFrom(binneR,info)
 importFrom(magrittr,"%>%")
 importFrom(metabolyseR,classificationResults)
 importFrom(metabolyseR,correlationResults)
