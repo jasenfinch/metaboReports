@@ -19,6 +19,8 @@ bioc_packages:
 r_github_packages:
   - jasenfinch/binneR
   - jasenfinch/binneRlyse
+  - jasenfinch/metabolyseR
+  - aberhrml/FIEmspro
 
 notifications:
     email:

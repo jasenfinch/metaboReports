@@ -1,6 +1,6 @@
 #' @importFrom stringr str_c
-#' @importFrom binneRlyse info
-#' @importFrom metabolyseR rawData
+#' @importFrom binneR info
+#' @importFrom metabolyseR rawInfo
 #' @importFrom purrr map
 
 overViewSection <- function(analysis){
@@ -39,13 +39,13 @@ binalysis <- read_rds("reportData.rds")
     overview <- str_c(overview,
 '
       
-**Technique:** metabolyseR analysis
+**Technique:** `metabolyseR` analysis
 
-**Date undertaken:** ',analysis@log$analysis,'
+**Processed:** ',analysis@log$analysis,'
 
-**Analysis elements:** ',str_c(names(analysis@log)[-1],collapse = ', '),'
+**Analysis elements:** ',str_c(names(analysis@log)[-(1:3)],collapse = ', '),'
 
-**Number of raw samples**: ',rawData(analysis)$Info %>% nrow(),'
+**Number of raw samples**: ',rawInfo(analysis) %>% nrow(),'
 
 ```{r loadData,echo=FALSE}
 analysis <- read_rds("reportData.rds")

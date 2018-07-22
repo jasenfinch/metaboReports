@@ -10,10 +10,10 @@ analysis@parameters
 ```
 "
     },
-    preTreatment = preTreatmentMethods(),
-    classification = classificationMethods(),
-    featureSelection = featureSelectionMethods(),
-    correlations = correlationMethods()
+    preTreatment = preTreatmentMethods,
+    classification = classificationMethods,
+    featureSelection = featureSelectionMethods,
+    correlations = correlationMethods
   )
   return(method)
 }

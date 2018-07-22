@@ -7,12 +7,19 @@
 #' @importFrom rmarkdown render
 #' @examples 
 #' \dontrun{
-#' ## For just a Binalysis object
 #' data("exampleFIEworkflowResults")
+#' 
+#' ## For just a Binalysis object
 #' analysis <- exampleFIEworkflowResults %>%
 #'  resultsProcessing()
-#' p <- reportParameters('test','Steve French')
+#' p <- reportParameters('ExampleData','Steve French')
 #' report(analysis,p)
+#' 
+#' ## For Analysis object
+#' analysis <- exampleFIEworkflowResults %>%
+#'  resultsAnalysis()
+#' p <- reportParameters('ExampleData','Steve French')
+#' report(analysis,p) 
 #' }
 #' @export
 
@@ -38,7 +45,10 @@ report <- function(analysis,parameters){
   ) %>%
     str_c(collapse = '')
   
-  reportFile <- str_c(parameters@path,parameters@title,parameters@title,sep = '/')
+  title <- parameters@title %>%
+    str_replace_all(' ','_')
+  
+  reportFile <- str_c(parameters@path,title,title,sep = '/')
   
   write_file(report,str_c(reportFile,'.Rmd'))
   
