@@ -54,39 +54,7 @@ kable(rawFeat,caption = 'Table overview of spectral bins returned for each acqus
       "
 
 ```{r chromatograms,echo=FALSE}
-chromatograms <- binalysis@spectra %>%
-  .$headers
-scans <- binalysis@binParameters@scans
-chromatograms <- chromatograms %>%
-  dplyr::select(FileName,acquisitionNum,totIonCurrent,polarity) %>%
-  split(.$polarity) %>%
-  map(~{
-    f <- .
-    f %>% 
-      split(.$FileName) %>%
-      map(~{
-        s <- .
-        s$acquisitionNum <- 1:nrow(s)
-        return(s)
-      }) %>% bind_rows()
-  }) %>% bind_rows() %>%
-  group_by(polarity,acquisitionNum) %>%
-  summarise(totIonCurrent = mean(totIonCurrent))
-chromatograms$polarity[chromatograms$polarity == 0] <- 'Negative'
-chromatograms$polarity[chromatograms$polarity == 1] <- 'Positive'
-chromatograms %>%
-  ggplot(aes(x = acquisitionNum,y = totIonCurrent)) +
-  geom_line() +
-  geom_vline(xintercept = min(scans),colour = 'red',linetype = 2) +
-  geom_vline(xintercept = max(scans),colour = 'red',linetype = 2) +
-  theme_bw() +
-  labs(title = 'TIC chromatograms of infusion profile',
-       caption = 'Red lines indcate scan range used for spectral binning.') +
-  theme(plot.title = element_text(face = 'bold'),
-        axis.title = element_text(face = 'bold')) +
-  facet_wrap(~polarity) +
-  xlab('Scan') +
-  ylab('Total Ion Current')
+plotChromatograms(analysis)
 ```
 
 "
@@ -145,43 +113,7 @@ purPlot + centPlot + plot_layout(ncol = 1)
       "
 
 ```{r TICplot,echo=FALSE}
-rawInfo <- binalysis %>%
-  info()
-
-TICdat <- binalysis %>%
-  binnedData %>%
-  map(rowSums) %>%
-  bind_cols() %>%
-  rowid_to_column(var = 'Sample') %>%
-  mutate(block = rawInfo$block %>% factor(),
-         injOrder = rawInfo$injOrder) %>%
-  gather('Mode','TIC',-Sample,-block,-injOrder)
-
-TICdat$Mode[TICdat$Mode == 'n'] <- 'Negative'
-TICdat$Mode[TICdat$Mode == 'p'] <- 'Positive'
-
-TICmedian <- TICdat %>%
-  group_by(Mode) %>%
-  summarise(Median = median(TIC),Q1 = Median - IQR(TIC),Q3 = Median + IQR(TIC),LowerOut = Q1 - IQR(TIC) * 1.5,UpperOut = Q3 + IQR(TIC) * 1.5)
-
-ggplot(TICdat,aes(x = injOrder,y = TIC,colour = block)) +
-  geom_hline(data = TICmedian,aes(yintercept = Median)) +
-  geom_hline(data = TICmedian,aes(yintercept = Q1),linetype = 2) +
-  geom_hline(data = TICmedian,aes(yintercept = Q3),linetype = 2) +
-  geom_hline(data = TICmedian,aes(yintercept = LowerOut),linetype = 3) +
-  geom_hline(data = TICmedian,aes(yintercept = UpperOut),linetype = 3) +
-  geom_point() +
-  theme_bw() +
-  theme(plot.title = element_text(face = 'bold'),
-        axis.title = element_text(face = 'bold')) +
-  facet_wrap(~Mode) +
-  labs(title = 'Sample TICs',
-       caption = 'The solid line shows the median TIC across the sample set. 
-The dashed line shows the inter-quartile range (IQR) and 
-the dotted line shows the outlier boundary (1.5 X IQR).') +
-  xlab('Injection Order') +
-  ylab('Total Ion Count') +
-  guides(colour = guide_legend(title = 'Block'))
+plotTIC(analysis, by = 'injOrder', colour = 'block')
 ```   
 
 "
