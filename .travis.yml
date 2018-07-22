@@ -21,6 +21,11 @@ r_github_packages:
   - jasenfinch/binneR
   - aberhrml/FIEmspro
   - jasenfinch/metabolyseR
+  - jasenfinch/metaboWorkflows
+  - jasenfinch/mzAnnotation
+  - jasenfinch/MFassign
+  - jasenfinch/profilePro
+  - jasenfinch/metaboData
 
 notifications:
     email:
