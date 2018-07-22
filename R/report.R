@@ -7,12 +7,19 @@
 #' @importFrom rmarkdown render
 #' @examples 
 #' \dontrun{
-#' ## For just a Binalysis object
 #' data("exampleFIEworkflowResults")
+#' 
+#' ## For just a Binalysis object
 #' analysis <- exampleFIEworkflowResults %>%
 #'  resultsProcessing()
-#' p <- reportParameters('If You Love Something, Set It Free','Steve French')
+#' p <- reportParameters('ExampleData','Steve French')
 #' report(analysis,p)
+#' 
+#' ## For Analysis object
+#' analysis <- exampleFIEworkflowResults %>%
+#'  resultsAnalysis()
+#' p <- reportParameters('ExampleData','Steve French')
+#' report(analysis,p) 
 #' }
 #' @export
 
