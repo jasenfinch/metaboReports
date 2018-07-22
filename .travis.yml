@@ -19,9 +19,13 @@ bioc_packages:
 
 r_github_packages:
   - jasenfinch/binneR
-  - jasenfinch/binneRlyse
-  - jasenfinch/metabolyseR
   - aberhrml/FIEmspro
+  - jasenfinch/metabolyseR
+  - jasenfinch/mzAnnotation
+  - jasenfinch/MFassign
+  - jasenfinch/profilePro
+  - jasenfinch/metaboData
+  - jasenfinch/metaboWorkflows
 
 notifications:
     email:
