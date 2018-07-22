@@ -45,7 +45,10 @@ report <- function(analysis,parameters){
   ) %>%
     str_c(collapse = '')
   
-  reportFile <- str_c(parameters@path,parameters@title,parameters@title,sep = '/')
+  title <- parameters@title %>%
+    str_replace_all(' ','_')
+  
+  reportFile <- str_c(parameters@path,title,title,sep = '/')
   
   write_file(report,str_c(reportFile,'.Rmd'))
   
