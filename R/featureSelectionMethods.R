@@ -10,7 +10,10 @@ plotFeatureSelection(analysis)
 ````
 
 ```{r explanatoryHeatMap,echo = F,fig.height = 10}
-plotExplanatoryHeatmap(analysis)
+feat <- analysis %>% featureSelectionResults()
+if (T %in%(feat$Pvalue < 0.01)) {
+ plotExplanatoryHeatmap(analysis)   
+}
 ````
 
 "
