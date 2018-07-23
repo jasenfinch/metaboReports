@@ -21,11 +21,6 @@ overViewSection <- function(analysis,type = 'head'){
 **Undertaken:** ',analysis@logs$initialisation,'
 
 **Flags:** ',str_c(analysis@flags,collapse = ', '),'
-
-```{r analysisOverview}
-print(analysis)
-```
-
 '
     )
   }
@@ -49,11 +44,9 @@ print(analysis)
       
 **Technique:** `metabolyseR` analysis
 
-**Processed:** ',analysis@log$analysis,'
-
-**Analysis elements:** ',str_c(names(analysis@log)[-(1:3)],collapse = ', '),'
-
-**Number of raw samples**: ',rawInfo(analysis) %>% nrow(),'
+```{r analysisOverview,echo = FALSE}
+print(analysis)
+```
 '
     )
   }
