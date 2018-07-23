@@ -1,5 +1,5 @@
 
-binalysisMethods <- function(method) {
+binalysisMethods <- function(analysis) {
   
   methods <- list(
     
@@ -54,7 +54,7 @@ kable(rawFeat,caption = 'Table overview of spectral bins returned for each acqus
       "
 
 ```{r chromatograms,echo=FALSE}
-plotChromatogram(analysis)
+plotChromatogram(binalysis)
 ```
 
 "
@@ -64,9 +64,6 @@ plotChromatogram(analysis)
       "
 
 ```{r PurityCentrality,echo=FALSE}
-library(patchwork)
-library(ggthemes)
-    
 histBins <- 30
     
 purCent <- binalysis %>%
@@ -113,7 +110,7 @@ purPlot + centPlot + plot_layout(ncol = 1)
       "
 
 ```{r TICplot,echo=FALSE}
-binneR::plotTIC(analysis, by = 'injOrder', colour = 'block')
+binneR::plotTIC(binalysis, by = 'injOrder', colour = 'block')
 ```   
 
 "

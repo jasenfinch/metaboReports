@@ -20,6 +20,11 @@
 #'  resultsAnalysis()
 #' p <- reportParameters('ExampleData','Steve French')
 #' report(analysis,p) 
+#' 
+#' ## For workflow object
+#' p <- reportParameters('ExampleData','Steve French')
+#' report(exampleFIEworkflowResults,p) 
+#' 
 #' }
 #' @export
 
@@ -28,15 +33,29 @@ report <- function(analysis,parameters){
   directoryPrep(analysis,parameters)
   
   report <- c(reportHeader(analysis,parameters),
-              overViewSection(analysis))
+              overViewSection(analysis),
+              loadData(analysis))
   
   methods <- reportMethods(class(analysis)) %>%
-    unlist(recursive = F)
+  {.(analysis)}
   
-  methods <- methods[!(map(methods,is.null) %>% unlist())]
+  if (class(analysis) == 'Workflow') {
+    methods <- methods %>%
+    {.(analysis)} %>%
+      unlist(recursive = T)
+    binalysis <- analysis %>%
+      resultsProcessing()
+    analysis <- analysis %>%
+      resultsAnalysis()
+  }
+  
   
   methodSection <- map(methods,~{
+    if (is.function(.)) {
       .(analysis)
+    } else {
+      .
+    }
   })
   
   report <- c(report,

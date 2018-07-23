@@ -9,7 +9,7 @@ featureSelectionMethods <- function(analysis){
 plotFeatureSelection(analysis)
 ````
 
-```{r explanatoryHeatMap,echo = F}
+```{r explanatoryHeatMap,echo = F,fig.height = 10}
 plotExplanatoryHeatmap(analysis)
 ````
 
