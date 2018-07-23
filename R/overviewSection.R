@@ -21,6 +21,11 @@ overViewSection <- function(analysis,type = 'head'){
 **Undertaken:** ',analysis@logs$initialisation,'
 
 **Flags:** ',str_c(analysis@flags,collapse = ', '),'
+
+```{r analysisOverview}
+print(analysis)
+```
+
 '
     )
   }
