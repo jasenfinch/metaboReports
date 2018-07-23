@@ -7,7 +7,7 @@ FIEfingerprintingMethods <- function(analysis){
 ## Spectral Binning
       
 ',
-      overViewSection(analysis %>% resultsProcessing()),
+      overViewSection(analysis %>% resultsProcessing(),type = 'sub'),
       binalysisMethods()
     ),
     preTreat = list(
@@ -15,7 +15,7 @@ FIEfingerprintingMethods <- function(analysis){
 ## Analysis
       
 ',
-      overViewSection(analysis %>% resultsAnalysis()),
+      overViewSection(analysis %>% resultsAnalysis(),type = 'sub'),
       analysisMethods()$preTreatment
     ),
     classification = analysisMethods()$classification,

@@ -3,9 +3,14 @@
 #' @importFrom metabolyseR rawInfo
 #' @importFrom purrr map
 
-overViewSection <- function(analysis){
+overViewSection <- function(analysis,type = 'head'){
   
-  overview <- '## Overview'
+  if (type == 'head') {
+    overview <- '## Overview'
+  }
+  if (type == 'sub') {
+    overview <- '### Overview'
+  }
   
   if (class(analysis) == 'Workflow') {
     overview <- str_c(overview,
@@ -16,8 +21,7 @@ overViewSection <- function(analysis){
 **Undertaken:** ',analysis@logs$initialisation,'
 
 **Flags:** ',str_c(analysis@flags,collapse = ', '),'
-                      
-                      '
+'
     )
   }
   
@@ -30,8 +34,7 @@ overViewSection <- function(analysis){
 **Undertaken:** ',analysis@binLog,'
 
 **Number of samples:** ',nrow(info(analysis)),'
-                      
-                      '
+'
     )
   }
   
@@ -46,8 +49,7 @@ overViewSection <- function(analysis){
 **Analysis elements:** ',str_c(names(analysis@log)[-(1:3)],collapse = ', '),'
 
 **Number of raw samples**: ',rawInfo(analysis) %>% nrow(),'
-                      
-                      '
+'
     )
   }
   return(overview)
