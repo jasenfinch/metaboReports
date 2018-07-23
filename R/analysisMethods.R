@@ -1,5 +1,5 @@
 
-analysisMethods <- function(method){
+analysisMethods <- function(analysis){
   method <- list(
     parameters = function(analysis){
       "
