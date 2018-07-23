@@ -1,3 +1,4 @@
+#' @importFrom metaboWorkflows resultsProcessing resultsAnalysis
 
 FIEfingerprintingMethods <- function(analysis){
   flags <- analysis@flags
