@@ -33,7 +33,8 @@ report <- function(analysis,parameters){
   directoryPrep(analysis,parameters)
   
   report <- c(reportHeader(analysis,parameters),
-              overViewSection(analysis))
+              overViewSection(analysis),
+              loadData(analysis))
   
   methods <- reportMethods(class(analysis)) %>%
   {.(analysis)}
@@ -41,7 +42,7 @@ report <- function(analysis,parameters){
   if (class(analysis) == 'Workflow') {
     methods <- methods %>%
     {.(analysis)} %>%
-      unlist(recursive = F)
+      unlist(recursive = T)
     binalysis <- analysis %>%
       resultsProcessing()
     analysis <- analysis %>%
@@ -50,7 +51,11 @@ report <- function(analysis,parameters){
   
   
   methodSection <- map(methods,~{
+    if (is.function(.)) {
       .(analysis)
+    } else {
+      .
+    }
   })
   
   report <- c(report,

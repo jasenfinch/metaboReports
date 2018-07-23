@@ -5,19 +5,15 @@ preTreatmentMethods <- function(analysis){
     "
 ### Pre-treatment
 
-```{r rawTICplot,echo = F}
-plotTIC(analysis)
-````
-
 ```{r RSDplot,echo = F}
 plotRSD(analysis)
 ````
 
-```{r unsupervisedPlots,echo = F}
+```{r unsupervisedPlots,echo = F,fig.width = 10}
 {plotPCA(analysis) %>% .@plot} + {plotUnsupervisedRF(analysis) %>% .@plot}
 ````
 
-```{r supervisedPlots,echo = F}
+```{r supervisedPlots,echo = F,fig.width = 10}
 {plotLDA(analysis) %>% .@plot} + {plotSupervisedRF(analysis) %>% .@plot}
 ````
 "

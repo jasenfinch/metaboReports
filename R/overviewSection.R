@@ -16,23 +16,8 @@ overViewSection <- function(analysis){
 **Undertaken:** ',analysis@logs$initialisation,'
 
 **Flags:** ',str_c(analysis@flags,collapse = ', '),'
-
-```{r loadData,echo=FALSE}
-workflowData <- read_rds("reportData.rds")',
-                      if ('spectralBin' %in% analysis@flags) {
-                        '
-binalysis <- workflowData %>%
-                        resultsProcessing()'
-                      },
-                      if ('preTreat' %in% analysis@flags) {
-                        '
-analysis <- workflowData %>%
-                        resultsAnalysis()'
-                      },
+                      
                       '
-```
-
-'
     )
   }
   
@@ -45,12 +30,8 @@ analysis <- workflowData %>%
 **Undertaken:** ',analysis@binLog,'
 
 **Number of samples:** ',nrow(info(analysis)),'
-
-```{r loadData,echo=FALSE}
-binalysis <- read_rds("reportData.rds")
-```
-
-'
+                      
+                      '
     )
   }
   
@@ -65,12 +46,8 @@ binalysis <- read_rds("reportData.rds")
 **Analysis elements:** ',str_c(names(analysis@log)[-(1:3)],collapse = ', '),'
 
 **Number of raw samples**: ',rawInfo(analysis) %>% nrow(),'
-
-```{r loadData,echo=FALSE}
-analysis <- read_rds("reportData.rds")
-```
-
-'
+                      
+                      '
     )
   }
   return(overview)
