@@ -64,9 +64,6 @@ plotChromatogram(binalysis)
       "
 
 ```{r PurityCentrality,echo=FALSE}
-library(patchwork)
-library(ggthemes)
-    
 histBins <- 30
     
 purCent <- binalysis %>%
