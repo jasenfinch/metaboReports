@@ -17,6 +17,7 @@ FIEfingerprintingMethods <- function(analysis){
       
 ',
       overViewSection(analysis %>% resultsAnalysis(),type = 'sub'),
+      analysisMethods()$parameters,
       analysisMethods()$preTreatment,
       "
 ```{r ptPurityCentrality,echo=FALSE}

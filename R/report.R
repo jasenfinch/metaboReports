@@ -7,6 +7,8 @@
 #' @importFrom rmarkdown render
 #' @examples 
 #' \dontrun{
+#' library(metaboWorkflows)
+#' library(magrittr)
 #' data("exampleFIEworkflowResults")
 #' 
 #' ## For just a Binalysis object

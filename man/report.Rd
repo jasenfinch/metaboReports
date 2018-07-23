@@ -16,6 +16,8 @@ generate a report from a Binalysis analysis.
 }
 \examples{
 \dontrun{
+library(metaboWorkflows)
+library(magrittr)
 data("exampleFIEworkflowResults")
 
 ## For just a Binalysis object
