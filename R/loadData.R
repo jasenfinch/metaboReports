@@ -1,7 +1,7 @@
 
 loadData <- function(analysis){
   if (class(analysis) == 'Binalysis') {
-    '
+    ld <- '
 
 ```{r loadData,echo=FALSE}
 binalysis <- read_rds("reportData.rds")
@@ -10,7 +10,7 @@ binalysis <- read_rds("reportData.rds")
 '
   }
   if (class(analysis) == 'Analysis') {
-    '
+    ld <- '
 
 ```{r loadData,echo=FALSE}
 analysis <- read_rds("reportData.rds")
@@ -19,7 +19,7 @@ analysis <- read_rds("reportData.rds")
 '
   }
   if (class(analysis) == 'Workflow') {
-    str_c('
+    ld <- str_c('
 
 ```{r loadData,echo=FALSE}
 workflowData <- read_rds("reportData.rds")',
@@ -44,7 +44,7 @@ assignment <- workflowData %>%
 ')
   }
   if (class(analysis) == 'Assignment') {
-    '
+    ld <- '
 
 ```{r loadData,echo=FALSE}
 assignment <- read_rds("reportData.rds")
@@ -52,4 +52,5 @@ assignment <- read_rds("reportData.rds")
 
 '
   }
+  return(ld)
 }
