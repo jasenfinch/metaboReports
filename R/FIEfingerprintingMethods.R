@@ -1,4 +1,4 @@
-#' @importFrom metaboWorkflows resultsProcessing resultsAnalysis
+#' @importFrom metaboWorkflows resultsProcessing resultsAnalysis resultsAnnotation
 
 FIEfingerprintingMethods <- function(analysis){
   flags <- analysis@flags
@@ -71,8 +71,15 @@ purPlot + centPlot + plot_layout(ncol = 1)
     ),
     classification = analysisMethods()$classification,
     featureSelection = analysisMethods()$featureSelection,
-    correlations = analysisMethods()$correlations
-    
+    correlations = analysisMethods()$correlations,
+    annotation = list(
+      '
+## Annotation
+      
+',
+      overViewSection(analysis %>% resultsAnnotation(),type = 'sub'),
+      assignmentMethods()
+    )
   )
   methods <- methods[names(methods) %in% flags]
   return(methods)

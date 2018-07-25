@@ -15,10 +15,11 @@ date: "',date,'"
 ---
 
 ```{r libraryLoad,include=FALSE}
+hrm::hrmAttach()
 library(tidyverse)
 library(patchwork)
 library(ggthemes)
-hrm::hrmAttach()
+library(DT)
 ```
 
 '

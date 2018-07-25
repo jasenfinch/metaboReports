@@ -33,9 +33,23 @@ binalysis <- workflowData %>%
 analysis <- workflowData %>%
                         resultsAnalysis()'
     },
+    if ('annotation' %in% analysis@flags) {
+      '
+assignment <- workflowData %>%
+      resultsAnnotation()'
+    },
     '
 ```
     
 ')
+  }
+  if (class(analysis) == 'Assignment') {
+    '
+
+```{r loadData,echo=FALSE}
+assignment <- read_rds("reportData.rds")
+```
+
+'
   }
 }

@@ -6,7 +6,7 @@ preTreatmentMethods <- function(analysis){
 ### Pre-treatment
 
 ```{r RSDplot,echo = F}
-if (T %in% str_detect(preTreatedInfo(analysis)$class,'QC')) {
+if (T %in% str_detect(analysis@parameters@preTreat %>% names(),'QC')) {
     plotRSD(analysis)
 }
 ```
