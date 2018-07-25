@@ -31,9 +31,9 @@ overViewSection <- function(analysis,type = 'head'){
       
 **Technique:** FIE-HRMS Spectral Binning
 
-**Undertaken:** ',analysis@binLog,'
-
-**Number of samples:** ',nrow(info(analysis)),'
+```{r binalysisOverview,echo = FALSE}
+print(binalysis)
+```
 '
     )
   }
@@ -50,5 +50,19 @@ print(analysis)
 '
     )
   }
+  
+  if (class(analysis) == 'Assignment') {
+    overview <- str_c(overview,
+                      '
+                      
+**Technique:** `MFassign` assignment
+
+```{r assignmentOverview,echo = FALSE}
+print(assignment)
+```
+'
+    )
+  }
+  
   return(overview)
 }

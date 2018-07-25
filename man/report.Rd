@@ -32,6 +32,12 @@ analysis <- exampleFIEworkflowResults \%>\%
 p <- reportParameters('ExampleData','Steve French')
 report(analysis,p) 
 
+## For Assignment object
+analysis <- exampleFIEworkflowResults \%>\%
+ resultsAnnotation()
+p <- reportParameters('ExampleData','Steve French')
+report(analysis,p) 
+
 ## For workflow object
 p <- reportParameters('ExampleData','Steve French')
 report(exampleFIEworkflowResults,p) 
