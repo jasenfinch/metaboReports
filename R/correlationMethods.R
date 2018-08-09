@@ -17,7 +17,7 @@ analysis %>%
         axis.title = element_text(face = 'bold')) +
       ggtitle('Histogram of correlation coefficients')
   }
-````
+```
 
 "
   } else {

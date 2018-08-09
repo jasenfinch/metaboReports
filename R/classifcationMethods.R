@@ -7,11 +7,11 @@ classificationMethods <- function(analysis){
 
 ```{r classificationPlot,echo = F}
 plotClassification(analysis)
-````
+```
 
 ```{r classificationDendrogram,echo = F}
 plotClassificationDendrogram(analysis)
-````
+```
 
 "
   } else {
