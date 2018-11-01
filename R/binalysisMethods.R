@@ -53,7 +53,7 @@ kable(rawFeat,caption = 'Table overview of spectral bins returned for each acqus
     chromatogams = function(binalysis){
       "
 
-```{r chromatograms,echo=FALSE}
+```{r chromatograms,warning = FALSE,echo=FALSE}
 plotChromatogram(binalysis)
 ```
 
