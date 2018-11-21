@@ -41,8 +41,8 @@ report <- function(analysis,parameters){
   directoryPrep(analysis,parameters)
   
   report <- c(reportHeader(analysis,parameters),
-              overViewSection(analysis),
-              loadData(analysis))
+              loadData(analysis),
+              overViewSection(analysis))
   
   methods <- reportMethods(class(analysis)) %>%
   {.(analysis)}
