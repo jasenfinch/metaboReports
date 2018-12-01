@@ -1,6 +1,6 @@
 #' @importFrom stringr str_c str_replace_all
 #' @importFrom readr write_rds
-#' @importFrom rstudioapi initializeProject
+#' @importFrom rstudioapi initializeProject isAvailable
 
 directoryPrep <- function(analysis,parameters){
   title <- parameters@title %>%
@@ -11,7 +11,9 @@ directoryPrep <- function(analysis,parameters){
   
   dir.create(reportPath)
   
-  initializeProject(reportPath)
+  if (isAvailable()) {
+    initializeProject(reportPath) 
+  }
   
   write_rds(analysis,str_c(reportPath,'reportData.rds',sep = '/'))
 }
