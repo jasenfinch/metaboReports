@@ -19,14 +19,12 @@ bioc_packages:
   - mzR
 
 r_github_packages:
-  - jasenfinch/binneR
-  - aberhrml/FIEmspro
   - jasenfinch/metabolyseR
   - jasenfinch/mzAnnotation
   - jasenfinch/MFassign
   - jasenfinch/profilePro
-  - jasenfinch/metaboData
   - jasenfinch/metaboWorkflows
+  - thomasp85/patchwork
 
 notifications:
     email:
