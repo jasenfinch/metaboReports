@@ -16,7 +16,11 @@ cache:
 # Adapt as necessary starting from here
 
 build_script:
-  - travis-tool.sh install_deps
+  - travis-tool.sh install_github thomasp85/patchwork
+  - travis-tool.sh install_github jasenfinch/metabolyseR
+  - travis-tool.sh install_github jasenfinch/metaboWorkflows
+  - travis-tool.sh install_github jasenfinch/hrm
+  - travis-tool.sh bioc_install_deps
 
 test_script:
   - travis-tool.sh run_tests
