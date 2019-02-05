@@ -51,8 +51,18 @@ report <- function(analysis,parameters){
     methods <- methods %>%
     {.(analysis)} %>%
       unlist(recursive = T)
-    binalysis <- analysis %>%
-      resultsProcessing()
+    if (analysis %>%
+        resultsProcessing() %>%
+        class() == 'Binalysis') {
+      binalysis <- analysis %>%
+        resultsProcessing()
+    }
+    if (analysis %>%
+        resultsProcessing() %>%
+        class() == 'MetaboProfile') {
+      processed <- analysis %>%
+        resultsProcessing()
+    }
     analysis <- analysis %>%
       resultsAnalysis()
   }
