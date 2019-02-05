@@ -18,15 +18,35 @@ analysis <- read_rds("reportData.rds")
 
 '
   }
+  if (class(analysis) == 'MetaboProfile') {
+    ld <- '
+
+```{r loadData,echo=FALSE}
+processed <- read_rds("reportData.rds")
+```
+
+'
+  }
   if (class(analysis) == 'Workflow') {
     ld <- str_c('
 
 ```{r loadData,echo=FALSE}
 workflowData <- read_rds("reportData.rds")',
-    if ('spectralBin' %in% analysis@flags) {
-      '
+    if (T %in% (c('peakPick','spectralBin') %in% analysis@flags)) {
+      if (analysis %>%
+          resultsProcessing() %>%
+          class() == 'Binalysis') {
+        '
 binalysis <- workflowData %>%
-                        resultsProcessing()'
+                        resultsProcessing()' 
+      }
+      if (analysis %>%
+          resultsProcessing() %>%
+          class() == 'MetaboProfile') {
+        '
+processed <- workflowData %>%
+                        resultsProcessing()' 
+      }
     },
     if ('preTreat' %in% analysis@flags) {
       '
