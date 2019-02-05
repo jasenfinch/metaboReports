@@ -24,6 +24,9 @@ r_github_packages:
   - jasenfinch/hrm
   - thomasp85/patchwork
 
+after_success:
+    - Rscript -e 'covr::codecov()'
+    
 notifications:
     email:
     on_success: change
