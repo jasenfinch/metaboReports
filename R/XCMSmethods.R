@@ -48,18 +48,19 @@ The plots and tables below give an overview of the results of the XCMS spectral 
 
 ```{r chromatograms,echo=FALSE}
 processed %>%
-  extractProcObject() %>%
-  map(~{
-    chromatogram(.,aggregationFun = 'max') %>%
-      plot()
-  })
+  profilePro::plotChromatogram(cls = 'class',group = T)
 ```
 
 "
   },
   
   ticPlot = function(processed){
-    
+"
+```{r ticPlots,echo=FALSE}
+processed %>%
+  profilePro::plotTIC()
+```
+"
   },
 
   featureTable = function(processed){
