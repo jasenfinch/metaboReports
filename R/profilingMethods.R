@@ -2,7 +2,7 @@
 profilingMethods <- function(analysis){
   flags <- analysis@flags
   methods <- list(
-    spectralProcessing = list(
+    peakPick = list(
       '
 ## Spectral Processing
       
