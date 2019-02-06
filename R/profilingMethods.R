@@ -8,7 +8,8 @@ profilingMethods <- function(analysis){
       
       ',
       overViewSection(analysis %>% resultsProcessing(),type = 'sub'),
-      XCMSmethods()
+      XCMSmethods %>%
+        unlist()
     ),
     preTreat = list(
       '
