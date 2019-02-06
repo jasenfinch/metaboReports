@@ -16,7 +16,12 @@ if (T %in% str_detect(analysis@parameters@preTreat %>% names(),'QC')) {
 ```
 
 ```{r supervisedPlots,echo = F,fig.width = 10}
-{plotLDA(analysis) %>% .@plot} + {plotSupervisedRF(analysis,label = NULL) %>% .@plot}
+classes <- analysis %>% preTreatedInfo() %>% .$class
+if (!(1 %in% (classes %>% table()))){
+  plotSupervisedRF(analysis,label = NULL) %>% .@plot
+} else {
+  {plotLDA(analysis) %>% .@plot} + {plotSupervisedRF(analysis,label = NULL) %>% .@plot}
+}
 ```
 "
   } else {
