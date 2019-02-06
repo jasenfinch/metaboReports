@@ -2,18 +2,21 @@
 profilingMethods <- function(analysis){
   flags <- analysis@flags
   methods <- list(
-    spectralProcessing = list(
+    peakPick = list(
       '
-      ## Spectral Processing
+## Spectral Processing
       
       ',
       overViewSection(analysis %>% resultsProcessing(),type = 'sub'),
-      XCMSmethods %>%
-        unlist()
+      XCMSmethods$parameters,
+      XCMSmethods$results,
+      XCMSmethods$chromatogams,
+      XCMSmethods$ticPlot,
+      XCMSmethods$featureTable
     ),
     preTreat = list(
       '
-      ## Analysis
+## Analysis
       
       ',
       overViewSection(analysis %>% resultsAnalysis(),type = 'sub'),
