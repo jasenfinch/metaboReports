@@ -54,7 +54,7 @@ kable(rawFeat,caption = 'Table overview of spectral bins returned for each acqus
       "
 
 ```{r chromatograms,warning = FALSE,echo=FALSE}
-plotChromatogram(binalysis)
+binneR::plotChromatogram(binalysis)
 ```
 
 "
