@@ -1,7 +1,7 @@
 #' @importFrom metabolyseR classificationResults
 
 classificationMethods <- function(analysis){
-  if ({analysis %>% classificationResults() %>% nrow()} > 0) {
+  if ({analysis %>% classificationResults() %>% length()} > 0) {
     "
 ### Classification
 

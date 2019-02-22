@@ -1,7 +1,7 @@
 #' @importFrom metabolyseR correlationResults
 
 correlationMethods <- function(analysis){
-  if ({analysis %>% correlationResults() %>% nrow()} > 0) {
+  if ({analysis %>% correlationResults() %>% length()} > 0) {
     "
 ### Correlations
 
