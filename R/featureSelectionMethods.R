@@ -5,11 +5,25 @@ featureSelectionMethods <- function(analysis){
     "
 ### Feature selection
 
-```{r featureSelectionPlot,echo = F}
-plotFeatureSelection(analysis)
+```{r featureSelectionTable}
+analysis %>%
+  featureSelectionResults() %>%
+  mutate_if(is.numeric,round,digits = 3) %>%
+  datatable(rownames = F,filter = 'top',caption = 'Table of feature selection results')
 ```
 
-```{r explanatoryHeatMap,echo = F,fig.height = 10}
+```{r explanatoryFeatureOverview}
+threshold <- 0.01
+
+analysis %>%
+  featureSelectionResults() %>%
+  filter(Pvalue < threshold) %>%
+  group_by(Type,Method,Pairwise) %>%
+  summarise(`# Explanatory` = n()) %>%
+  datatable(rownames = F,filter = 'top',caption = str_c('Overview of numbers of explanatory features (p < ',threshold,')'))
+```
+
+```{r explanatoryHeatMap,fig.height = 10}
 feat <- analysis %>% featureSelectionResults()
 methods <- feat$Method %>%
   unique()
@@ -26,7 +40,19 @@ if (T %in% (feat$Pvalue < 0.05)) {
       .[1] %>%
       names()
   }
-  plotExplanatoryHeatmap(analysis,method = method)   
+
+  explan <- feat %>%
+    filter(Pvalue < 0.01 & Method == method) %>%
+    .$Feature %>%
+    unique()
+
+  if (length(explan) > 100){
+    featNames <- F
+  } else {
+    featNames <- T
+  }
+
+  plotExplanatoryHeatmap(analysis,method = method,featureNames = featNames)   
 }
 ```
 
