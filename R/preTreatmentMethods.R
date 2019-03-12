@@ -12,17 +12,22 @@ if (T %in% str_detect(analysis@parameters@preTreat %>% names(),'QC')) {
 ```
 
 ```{r unsupervisedPlots,echo = F,fig.width = 10}
-{plotPCA(analysis) %>% .@plot} + {plotUnsupervisedRF(analysis) %>% .@plot}
+{plotPCA(analysis) %>% .@plot %>% .[[1]]} + {plotUnsupervisedRF(analysis) %>% .@plot %>% .[[1]]}
 ```
 
-```{r supervisedPlots,echo = F,fig.width = 10}
+```{r LDAplot,echo = F,fig.width = 10}
 classes <- analysis %>% preTreatedInfo() %>% .$class
 if (length(unique(classes)) > 1) {
-  if (1 %in% (classes %>% table())){
-    plotSupervisedRF(analysis,label = NULL) %>% .@plot
-  } else {
-    {plotLDA(analysis) %>% .@plot} + {plotSupervisedRF(analysis,label = NULL) %>% .@plot}
-  }
+  if (!(1 %in% (classes %>% table()))){
+    plotLDA(analysis) %>% .@plot %>% .[[1]]
+  } 
+}
+```
+
+```{r supervisedRFplots,echo = F,fig.width = 10}
+classes <- analysis %>% preTreatedInfo() %>% .$class
+if (length(unique(classes)) > 1) {
+  plotSupervisedRF(analysis,label = NULL) %>% .@plot %>% .[[1]]
 }
 ```
 "

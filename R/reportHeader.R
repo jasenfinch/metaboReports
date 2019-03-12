@@ -14,6 +14,10 @@ author: "',investigator,'"
 date: "',date,'"
 ---
 
+```{r setup,echo=FALSE}
+knitr::opts_chunk$set(cache = T,fig.align = "center",echo = F)
+```
+
 ```{r libraryLoad,include=FALSE}
 hrm::hrmAttach()
 library(tidyverse)
