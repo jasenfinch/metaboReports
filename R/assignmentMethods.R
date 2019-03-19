@@ -14,9 +14,9 @@ assignment@parameters
      '
 ### Assignments  
 
-```{r assignmentTable,echo = FALSE}
+```{r assignmentTable,echo = FALSE,cache = FALSE}
 datatable(assignment %>%
-  summariseAsignment(),
+  summariseAssignment(),
           rownames = F,filter = "top",caption = "Summary table of molecular formula assignments")
 ```
 

@@ -5,7 +5,7 @@ classificationMethods <- function(analysis){
     "
 ### Classification
 
-```{r classificationOverview}
+```{r classificationOverview, cache = FALSE}
 pairwises <- analysis %>%
   classificationResults() %>%
   .$Pairwise %>%

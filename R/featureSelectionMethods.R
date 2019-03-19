@@ -5,7 +5,7 @@ featureSelectionMethods <- function(analysis){
     "
 ### Feature selection
 
-```{r explanatoryFeatureOverview}
+```{r explanatoryFeatureOverview,cache = FALSE}
 threshold <- 0.01
 
 analysis %>%
@@ -16,12 +16,21 @@ analysis %>%
   datatable(rownames = F,filter = 'top',caption = str_c('Overview of numbers of explanatory features (p < ',threshold,')'))
 ```
 
-```{r explanatoryFeatures}
-analysis %>%
+```{r explanatoryFeatures,cache = FALSE}
+ef <- analysis %>%
   featureSelectionResults() %>%
   filter(Pvalue < threshold) %>%
   mutate_if(is.numeric,round,digits = 3) %>%
-  datatable(rownames = F,filter = 'top',caption = str_c('Table of explanatory features (p < ',threshold,')'))
+  arrange(desc(Pvalue))
+
+if (nrow(ef) > 10000){
+  ef %>%
+    .[1:10000,] %>%
+    datatable(rownames = F,filter = 'top',caption = str_c('Table of top 10000 explanatory features (p < ',threshold,')'))
+} else {
+  ef %>%
+    datatable(rownames = F,filter = 'top',caption = str_c('Table of explanatory features (p < ',threshold,')'))
+}
 ```
 
 ```{r explanatoryHeatMap,fig.height = 10}
