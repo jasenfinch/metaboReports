@@ -28,37 +28,53 @@ processed <- read_rds("reportData.rds")
 '
   }
   if (class(analysis) == 'Workflow') {
+    if (T %in% (c('peakPick','spectralBin') %in% analysis@flags)) {
+      
+      if ({analysis %>%
+          resultsProcessing() %>%
+          class()} == 'Binalysis') {
+        pr <- '
+binalysis <- workflowData %>%
+                        resultsProcessing()' 
+      }
+      
+      if ({analysis %>%
+          resultsProcessing() %>%
+          class()} == 'MetaboProfile') {
+        pr <- '
+processed <- workflowData %>%
+                        resultsProcessing()' 
+      } 
+    } else {
+      pr <- ''
+    }
+    
+    
+    if ('preTreat' %in% analysis@flags) {
+      ar <- '
+analysis <- workflowData %>%
+                        resultsAnalysis()'
+    } else {
+      ar <- ''
+    }
+    
+    
+    if ('annotation' %in% analysis@flags) {
+      anr <- '
+assignment <- workflowData %>%
+      resultsAnnotation()'
+    } else {
+      anr <- ''
+    }
+    
+    
+    
     ld <- str_c('
 
 ```{r loadData,echo=FALSE}
 workflowData <- read_rds("reportData.rds")',
-    if (T %in% (c('peakPick','spectralBin') %in% analysis@flags)) {
-      if (analysis %>%
-          resultsProcessing() %>%
-          class() == 'Binalysis') {
-        '
-binalysis <- workflowData %>%
-                        resultsProcessing()' 
-      }
-      if (analysis %>%
-          resultsProcessing() %>%
-          class() == 'MetaboProfile') {
-        '
-processed <- workflowData %>%
-                        resultsProcessing()' 
-      }
-    },
-    if ('preTreat' %in% analysis@flags) {
-      '
-analysis <- workflowData %>%
-                        resultsAnalysis()'
-    },
-    if ('annotation' %in% analysis@flags) {
-      '
-assignment <- workflowData %>%
-      resultsAnnotation()'
-    },
-    '
+                pr,ar,anr,
+                '
 ```
     
 ')
