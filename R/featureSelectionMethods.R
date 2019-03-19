@@ -5,13 +5,6 @@ featureSelectionMethods <- function(analysis){
     "
 ### Feature selection
 
-```{r featureSelectionTable}
-analysis %>%
-  featureSelectionResults() %>%
-  mutate_if(is.numeric,round,digits = 3) %>%
-  datatable(rownames = F,filter = 'top',caption = 'Table of feature selection results')
-```
-
 ```{r explanatoryFeatureOverview}
 threshold <- 0.01
 
@@ -21,6 +14,14 @@ analysis %>%
   group_by(Type,Method,Pairwise) %>%
   summarise(`# Explanatory` = n()) %>%
   datatable(rownames = F,filter = 'top',caption = str_c('Overview of numbers of explanatory features (p < ',threshold,')'))
+```
+
+```{r explanatoryFeatures}
+analysis %>%
+  featureSelectionResults() %>%
+  filter(Pvalue < threshold) %>%
+  mutate_if(is.numeric,round,digits = 3) %>%
+  datatable(rownames = F,filter = 'top',caption = str_c('Table of explanatory features (p < ',threshold,')'))
 ```
 
 ```{r explanatoryHeatMap,fig.height = 10}

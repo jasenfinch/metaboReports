@@ -15,11 +15,17 @@ assignment@parameters
 ### Assignments  
 
 ```{r assignmentTable,echo = FALSE}
-datatable(assignment@assignments %>%
-              arrange(`Theoretical M`,MF) %>%
-              mutate(`PPM Error` = `PPM Error` %>% round(3),
-                     Score = Score %>% round(3)),
-          rownames = F,filter = "top")
+datatable(assignment %>%
+  summariseAsignment(),
+          rownames = F,filter = "top",caption = "Summary table of molecular formula assignments")
+```
+
+'
+   },
+   network = function(analysis){
+     '
+```{r assignmentNetwork}
+plotNetwork(assignment,layout = "nicely")
 ```
 
 '

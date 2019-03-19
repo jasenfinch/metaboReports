@@ -11,15 +11,23 @@ if (T %in% str_detect(analysis@parameters@preTreat %>% names(),'QC')) {
 }
 ```
 
+```{r ellipses}
+classes <- analysis %>% preTreatedInfo() %>% .$class
+if (length(unique(classes)) > 10){
+  ellipses <- FALSE
+} else {
+  ellipses <- TRUE
+}
+````
+
 ```{r unsupervisedPlots,echo = F,fig.width = 10}
-{plotPCA(analysis) %>% .@plot %>% .[[1]]} + {plotUnsupervisedRF(analysis) %>% .@plot %>% .[[1]]}
+{plotPCA(analysis,ellipses = ellipses) %>% .@plot %>% .[[1]]} + {plotUnsupervisedRF(analysis,ellipses = ellipses) %>% .@plot %>% .[[1]]}
 ```
 
 ```{r LDAplot,echo = F,fig.width = 10}
-classes <- analysis %>% preTreatedInfo() %>% .$class
 if (length(unique(classes)) > 1) {
   if (!(1 %in% (classes %>% table()))){
-    plotLDA(analysis) %>% .@plot %>% .[[1]]
+    plotLDA(analysis,ellipses = ellipses) %>% .@plot %>% .[[1]]
   } 
 }
 ```
@@ -27,7 +35,7 @@ if (length(unique(classes)) > 1) {
 ```{r supervisedRFplots,echo = F,fig.width = 10}
 classes <- analysis %>% preTreatedInfo() %>% .$class
 if (length(unique(classes)) > 1) {
-  plotSupervisedRF(analysis,label = NULL) %>% .@plot %>% .[[1]]
+  plotSupervisedRF(analysis,label = NULL,ellipses = ellipses) %>% .@plot %>% .[[1]]
 }
 ```
 "
