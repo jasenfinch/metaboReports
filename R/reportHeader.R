@@ -15,7 +15,7 @@ date: "',date,'"
 ---
 
 ```{r setup,echo=FALSE}
-knitr::opts_chunk$set(cache = T,fig.align = "center",echo = F)
+knitr::opts_chunk$set(cache = T,fig.align = "center",echo = F,cache.lazy = FALSE)
 ```
 
 ```{r libraryLoad,include=FALSE}
