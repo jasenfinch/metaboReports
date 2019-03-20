@@ -60,6 +60,16 @@ binneR::plotChromatogram(binalysis)
 "
     },
     
+    fingerprint = function(binalysis){
+      "
+
+```{r fingerprint,warning = FALSE,echo=FALSE}
+plotFingerprint(binalysis)
+```
+
+"
+    },
+    
     purityAndCentrality = function(binalysis){
       "
 
