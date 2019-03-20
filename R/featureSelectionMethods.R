@@ -21,7 +21,7 @@ ef <- analysis %>%
   featureSelectionResults() %>%
   filter(Pvalue < threshold) %>%
   mutate_if(is.numeric,round,digits = 3) %>%
-  arrange(desc(Pvalue))
+  arrange(Pvalue)
 
 if (nrow(ef) > 10000){
   ef %>%
