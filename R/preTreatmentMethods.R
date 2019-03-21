@@ -18,7 +18,7 @@ if (length(unique(classes)) > 10){
 } else {
   ellipses <- TRUE
 }
-````
+```
 
 ```{r unsupervisedPlots,echo = F,fig.width = 10}
 {plotPCA(analysis,ellipses = ellipses) %>% .@plot %>% .[[1]]} + {plotUnsupervisedRF(analysis,ellipses = ellipses) %>% .@plot %>% .[[1]]}
