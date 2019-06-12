@@ -12,6 +12,8 @@ apt_packages:
  - libopenbabel-dev
  - r-cran-igraph
  - r-cran-httpuv
+ - r-cran-dplyr
+ - r-cran-stringi
 
 r:
   - release
