@@ -10,6 +10,7 @@ apt_packages:
  - libnetcdf-dev
  - netcdf-bin
  - libopenbabel-dev
+ - r-cran-igraph
 
 r:
   - release
