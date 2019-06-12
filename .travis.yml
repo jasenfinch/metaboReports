@@ -14,6 +14,8 @@ apt_packages:
  - r-cran-httpuv
  - r-cran-dplyr
  - r-cran-stringi
+ - r-cran-readr
+ - r-cran-haven
 
 r:
   - release
