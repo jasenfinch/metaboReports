@@ -17,6 +17,7 @@ r:
 
 r_github_packages:
   - thomasp85/patchwork
+  - jasenfinch/binneR
   - jasenfinch/metabolyseR
   - jasenfinch/mzAnnotation
   - jasenfinch/MFassign
