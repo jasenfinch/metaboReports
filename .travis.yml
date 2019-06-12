@@ -16,13 +16,13 @@ r:
   - devel
 
 r_github_packages:
+  - thomasp85/patchwork
   - jasenfinch/metabolyseR
   - jasenfinch/mzAnnotation
   - jasenfinch/MFassign
   - jasenfinch/profilePro
   - jasenfinch/metaboWorkflows
   - jasenfinch/hrm
-  - thomasp85/patchwork
 
 after_success:
     - Rscript -e 'covr::codecov()'
