@@ -10,19 +10,27 @@ apt_packages:
  - libnetcdf-dev
  - netcdf-bin
  - libopenbabel-dev
+ - r-cran-igraph
+ - r-cran-httpuv
+ - r-cran-dplyr
+ - r-cran-stringi
+ - r-cran-readr
+ - r-cran-haven
 
 r:
   - release
   - devel
 
 r_github_packages:
+  - thomasp85/patchwork
+  - jasenfinch/binneR
   - jasenfinch/metabolyseR
   - jasenfinch/mzAnnotation
   - jasenfinch/MFassign
   - jasenfinch/profilePro
+  - jasenfinch/metaboMisc
   - jasenfinch/metaboWorkflows
   - jasenfinch/hrm
-  - thomasp85/patchwork
 
 after_success:
     - Rscript -e 'covr::codecov()'
