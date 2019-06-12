@@ -21,7 +21,7 @@ if (length(unique(classes)) > 10){
 ```
 
 ```{r unsupervisedPlots,echo = F,fig.width = 10}
-{plotPCA(analysis,ellipses = ellipses) %>% .@plot %>% .[[1]]} + {plotUnsupervisedRF(analysis,ellipses = ellipses) %>% .@plot %>% .[[1]]}
+{metabolyseR::plotPCA(analysis,ellipses = ellipses) %>% .@plot %>% .[[1]]} + {plotUnsupervisedRF(analysis,ellipses = ellipses) %>% .@plot %>% .[[1]]}
 ```
 
 ```{r LDAplot,echo = F,fig.width = 10}
