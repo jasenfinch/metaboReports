@@ -11,6 +11,7 @@ apt_packages:
  - netcdf-bin
  - libopenbabel-dev
  - r-cran-igraph
+ - r-cran-httpuv
 
 r:
   - release
