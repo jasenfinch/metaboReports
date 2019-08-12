@@ -11,8 +11,7 @@ analysis@parameters
 "
     },
     preTreatment = preTreatmentMethods,
-    classification = classificationMethods,
-    featureSelection = featureSelectionMethods,
+    modelling = modellingMethods,
     correlations = correlationMethods
   )
   return(method)

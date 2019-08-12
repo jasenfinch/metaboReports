@@ -1,12 +1,17 @@
-#' @importFrom metabolyseR featureSelectionResults
+#' @importFrom metabolyseR modellingResults
 
-featureSelectionMethods <- function(analysis){
-  if ({analysis %>% featureSelectionResults() %>% length()} > 0) {
+modellingMethods <- function(analysis){
+  if ({analysis %>% modellingResults() %>% length()} > 0) {
     "
-### Feature selection
+### Modelling
+
+```{r modellingOverview, cache = FALSE}
+modellingRes <- analysis %>%
+  modellingResults()
+```
 
 ```{r explanatoryFeatureOverview,cache = FALSE}
-threshold <- 0.01
+threshold <- 0.05
 
 analysis %>%
   featureSelectionResults() %>%
@@ -65,7 +70,6 @@ if (T %in% (feat$Pvalue < 0.05)) {
   plotExplanatoryHeatmap(analysis,method = method,featureNames = featNames)   
 }
 ```
-
 "
   } else {
     ""
