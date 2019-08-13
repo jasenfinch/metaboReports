@@ -2,7 +2,7 @@
 
 reportFooter <- function(){
   str_c('
-### Session Info
+## Session Info
 
 ```{r sessionInfo}
 sessionInfo()

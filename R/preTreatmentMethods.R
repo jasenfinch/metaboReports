@@ -1,9 +1,15 @@
 #' @importFrom metabolyseR preTreatedInfo
 
-preTreatmentMethods <- function(analysis){
+preTreatmentMethods <- function(analysis,type = 'head'){
+  headHash <- '##'
+  
+  if (type == 'sub') {
+    headHash <- '###'
+  }
+  
   if ({analysis %>% preTreatedInfo() %>% nrow()} > 0) {
-    "
-### Pre-treatment
+    str_c("
+",headHash," Pre-treatment
 
 ```{r RSDplot,echo = F}
 if (T %in% str_detect(analysis@parameters@preTreat %>% names(),'QC')) {
@@ -38,7 +44,7 @@ if (length(unique(classes)) > 1) {
   plotSupervisedRF(analysis,label = NULL,ellipses = ellipses,title = 'Multidimensional scaling (MDS) -\nsupervised Random Forest')
 }
 ```
-"
+")
   } else {
     ""
   }

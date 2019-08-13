@@ -1,11 +1,18 @@
 #' @importFrom metabolyseR correlationResults
 
-correlationMethods <- function(analysis){
+correlationMethods <- function(analysis,type = 'head'){
+  
+  headHash <- '##'
+  
+  if (type == 'sub') {
+    headHash <- '###'
+  }
+  
   if ({analysis %>% correlationResults() %>% length()} > 0) {
-    "
-### Correlations
+    str_c("
+",headHash," Correlations
 
-```{r correlationTable,echo = F}
+```{r correlationTable,echo = F,cache = F}
 cors <- analysis %>%
   correlationResults()
 if (nrow(cors) > 10000) {
@@ -21,7 +28,7 @@ datatable(cors %>%
           rownames = F,filter = 'top',caption = caption)
 ```
 
-"
+")
   } else {
     ""
   }
