@@ -6,12 +6,20 @@ reportHeader <- function(analysis,parameters){
   output <- parameters@output
   date <- parameters@date
   
+  if (isTRUE(parameters@toc)) {
+    toc <- str_c(
+      'output: 
+        ',output,':
+          toc: true'
+    )
+  } else {
+    toc <- str_c('output: "',output,'"')
+  }
+  
   header <- str_c(
 '---
 title: "',title,'"
-output: 
-  ',output,':
-    toc: true
+',toc,'
 author: "',investigator,'"
 date: "',date,'"
 ---
