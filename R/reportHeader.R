@@ -6,10 +6,20 @@ reportHeader <- function(analysis,parameters){
   output <- parameters@output
   date <- parameters@date
   
+  if (isTRUE(parameters@toc)) {
+    toc <- str_c(
+      'output: 
+        ',output,':
+          toc: true'
+    )
+  } else {
+    toc <- str_c('output: "',output,'"')
+  }
+  
   header <- str_c(
 '---
 title: "',title,'"
-output: "',output,'"
+',toc,'
 author: "',investigator,'"
 date: "',date,'"
 ---
@@ -20,7 +30,6 @@ knitr::opts_chunk$set(cache = T,fig.align = "center",echo = F,cache.lazy = FALSE
 
 ```{r libraryLoad,include=FALSE,cache = FALSE}
 hrm::hrmAttach()
-library(tidyverse)
 library(patchwork)
 library(ggthemes)
 library(DT)

@@ -1,18 +1,30 @@
 
 assignmentMethods <- function(analysis){
   methods <- list(
-   parameters = function(analysis){
-     "
-### Parameters
+   parameters = function(analysis,type = 'head'){
+      headHash <- '##'
+      
+      if (type == 'sub') {
+         headHash <- '###'
+      }
+      
+     str_c("
+",headHash," Parameters
 
 ```{r assignmentParamters,echo=FALSE}
 assignment@parameters
 ```
-"
+")
    },
-   assignments = function(analysis){
-     '
-### Assignments  
+   assignments = function(analysis,type = 'head'){
+      headHash <- '##'
+      
+      if (type == 'sub') {
+         headHash <- '###'
+      }
+      
+     str_c('
+',headHash,' Assignments  
 
 ```{r assignmentTable,echo = FALSE,cache = FALSE}
 datatable(assignment %>%
@@ -20,7 +32,7 @@ datatable(assignment %>%
           rownames = F,filter = "top",caption = "Summary table of molecular formula assignments")
 ```
 
-'
+')
    },
    network = function(analysis){
      '

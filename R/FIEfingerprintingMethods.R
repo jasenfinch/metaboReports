@@ -9,7 +9,13 @@ FIEfingerprintingMethods <- function(analysis){
       
 ',
       overViewSection(analysis %>% resultsProcessing(),type = 'sub'),
-      binalysisMethods()
+      binalysisMethods()$parameters(analysis %>% resultsProcessing(),type = 'sub'),
+      binalysisMethods()$results(analysis %>% resultsProcessing(),type = 'sub'),
+      binalysisMethods()$featureTable(analysis %>% resultsProcessing()),
+      binalysisMethods()$chromatograms(analysis %>% resultsProcessing()),
+      binalysisMethods()$fingerprint(analysis %>% resultsProcessing()),
+      binalysisMethods()$purityAndCentrality(analysis %>% resultsProcessing()),
+      binalysisMethods()$ticPlot(analysis %>% resultsProcessing())
     ),
     preTreat = list(
       '
@@ -17,8 +23,8 @@ FIEfingerprintingMethods <- function(analysis){
       
 ',
       overViewSection(analysis %>% resultsAnalysis(),type = 'sub'),
-      analysisMethods()$parameters,
-      analysisMethods()$preTreatment,
+      analysisMethods()$parameters(analysis %>% resultsAnalysis(),type = 'sub'),
+      analysisMethods()$preTreatment(analysis %>% resultsAnalysis(),type = 'sub'),
       "
 ```{r ptPurityCentrality,echo=FALSE}
 histBins <- 30
@@ -69,16 +75,17 @@ purPlot + centPlot + plot_layout(ncol = 1)
 
 "
     ),
-    classification = analysisMethods()$classification,
-    featureSelection = analysisMethods()$featureSelection,
-    correlations = analysisMethods()$correlations,
-    annotation = list(
+    modelling = analysisMethods()$modelling(analysis %>% resultsAnalysis(),type = 'sub'),
+    correlations = analysisMethods()$correlations(analysis %>% resultsAnalysis(),type = 'sub'),
+    MFassignment = list(
       '
 ## Annotation
       
 ',
       overViewSection(analysis %>% resultsAnnotation(),type = 'sub'),
-      assignmentMethods()
+      assignmentMethods()$parameters(analysis %>% resultsAnnotation(),type = 'sub'),
+      assignmentMethods()$assignments(analysis %>% resultsAnnotation(),type = 'sub'),
+      assignmentMethods()$network(analysis %>% resultsAnnotation())
     )
   )
   methods <- methods[names(methods) %in% flags]

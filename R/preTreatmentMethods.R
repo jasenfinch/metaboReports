@@ -1,9 +1,15 @@
 #' @importFrom metabolyseR preTreatedInfo
 
-preTreatmentMethods <- function(analysis){
+preTreatmentMethods <- function(analysis,type = 'head'){
+  headHash <- '##'
+  
+  if (type == 'sub') {
+    headHash <- '###'
+  }
+  
   if ({analysis %>% preTreatedInfo() %>% nrow()} > 0) {
-    "
-### Pre-treatment
+    str_c("
+",headHash," Pre-treatment
 
 ```{r RSDplot,echo = F}
 if (T %in% str_detect(analysis@parameters@preTreat %>% names(),'QC')) {
@@ -21,13 +27,13 @@ if (length(unique(classes)) > 10){
 ```
 
 ```{r unsupervisedPlots,echo = F,fig.width = 10}
-{metabolyseR::plotPCA(analysis,ellipses = ellipses) %>% .@plot %>% .[[1]]} + {plotUnsupervisedRF(analysis,ellipses = ellipses) %>% .@plot %>% .[[1]]}
+metabolyseR::plotPCA(analysis,ellipses = ellipses) + plotUnsupervisedRF(analysis,ellipses = ellipses,title = 'Multidimensional scaling (MDS) -\nunsupervised Random Forest')
 ```
 
 ```{r LDAplot,echo = F,fig.width = 10}
 if (length(unique(classes)) > 1) {
   if (!(1 %in% (classes %>% table()))){
-    plotLDA(analysis,ellipses = ellipses) %>% .@plot %>% .[[1]]
+    plotLDA(analysis,ellipses = ellipses)
   } 
 }
 ```
@@ -35,10 +41,10 @@ if (length(unique(classes)) > 1) {
 ```{r supervisedRFplots,echo = F,fig.width = 10}
 classes <- analysis %>% preTreatedInfo() %>% .$class
 if (length(unique(classes)) > 1) {
-  plotSupervisedRF(analysis,label = NULL,ellipses = ellipses) %>% .@plot %>% .[[1]]
+  plotSupervisedRF(analysis,label = NULL,ellipses = ellipses,title = 'Multidimensional scaling (MDS) -\nsupervised Random Forest')
 }
 ```
-"
+")
   } else {
     ""
   }

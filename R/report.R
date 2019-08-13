@@ -78,7 +78,7 @@ report <- function(analysis,parameters){
   
   report <- c(report,
               methodSection,
-              reportFooter()
+              reportFooter(sessionInfo = parameters@sessionInfo)
   ) %>%
     str_c(collapse = '')
   
