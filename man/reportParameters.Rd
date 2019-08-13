@@ -4,12 +4,17 @@
 \alias{reportParameters}
 \title{reportParameters}
 \usage{
-reportParameters(title, investigator, path = ".")
+reportParameters(title, investigator, sessionInfo = TRUE, toc = TRUE,
+  path = ".")
 }
 \arguments{
 \item{title}{report title}
 
 \item{investigator}{investigator name}
+
+\item{sessionInfo}{TRUE/FALSE, should session info included?}
+
+\item{toc}{TRUE/FALSE, should a table of contents be included}
 
 \item{path}{report output path}
 }
