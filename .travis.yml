@@ -10,6 +10,7 @@ apt_packages:
  - libnetcdf-dev
  - netcdf-bin
  - libopenbabel-dev
+ - mesa-common-dev
  - r-cran-igraph
  - r-cran-httpuv
  - r-cran-dplyr
