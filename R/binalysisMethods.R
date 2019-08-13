@@ -3,24 +3,36 @@ binalysisMethods <- function(analysis) {
   
   methods <- list(
     
-    parameters = function(binalysis){
-      "
-### Parameters
+    parameters = function(binalysis,type = 'head'){
+      headHash <- '##'
+      
+      if (type == 'sub') {
+        headHash <- '###'
+      }
+      
+      str_c("
+",headHash," Parameters
 
 ```{r binParamters,echo=FALSE}
 binalysis@binParameters
 ```
-"
+")
     },
     
-    results = function(binalysis){
-      "
+    results = function(binalysis,type = 'head'){
+      headHash <- '##'
+      
+      if (type == 'sub') {
+        headHash <- '###'
+      }
+      
+      str_c("
 
-### Results   
+",headHash," Results   
 
 The plots and tables below give an overview of the results of the spectral binning approach applied to this data set.
 
-"
+")
     },
     
     featureTable = function(binalysis){
@@ -50,7 +62,7 @@ kable(rawFeat,caption = 'Table overview of spectral bins returned for each acqus
 "
     },
     
-    chromatogams = function(binalysis){
+    chromatograms = function(binalysis){
       "
 
 ```{r chromatograms,warning = FALSE,echo=FALSE}
