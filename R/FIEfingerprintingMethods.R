@@ -69,16 +69,17 @@ purPlot + centPlot + plot_layout(ncol = 1)
 
 "
     ),
-    classification = analysisMethods()$classification,
-    featureSelection = analysisMethods()$featureSelection,
+    modelling = analysisMethods()$modelling,
     correlations = analysisMethods()$correlations,
-    annotation = list(
+    MFassignment = list(
       '
 ## Annotation
       
 ',
       overViewSection(analysis %>% resultsAnnotation(),type = 'sub'),
-      assignmentMethods()
+      assignmentMethods()$parameters,
+      assignmentMethods()$assignments,
+      assignmentMethods()$network
     )
   )
   methods <- methods[names(methods) %in% flags]

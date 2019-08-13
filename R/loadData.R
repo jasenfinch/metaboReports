@@ -59,7 +59,7 @@ analysis <- workflowData %>%
     }
     
     
-    if ('annotation' %in% analysis@flags) {
+    if ('MFassignment' %in% analysis@flags) {
       anr <- '
 assignment <- workflowData %>%
       resultsAnnotation()'
