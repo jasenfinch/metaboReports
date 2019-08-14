@@ -1,6 +1,6 @@
 Package: metaboReports
 Title: Automated Report Generation For Metabolomics Analyses
-Version: 0.7.0
+Version: 0.7.1
 Authors@R: person("Jasen", "Finch", email = "jsf9@aber.ac.uk", role = c("aut", "cre"))
 Description: Automatically generate reports for metabolomics analyses.
 biocViews: Metabolomics
