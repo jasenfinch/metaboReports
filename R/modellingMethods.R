@@ -29,10 +29,16 @@ modellingRes %>%
 ```{r explanatoryFeatureOverview,cache = FALSE}
 threshold <- 0.05
 
-explanFeat <- modellingRes %>%
-  .[[1]] %>%
-  map(explanatoryFeatures,threshold = threshold) %>%
-  bind_rows()
+if (is.list(modellingRes %>% .[[1]])) {
+  explanFeat <- modellingRes %>%
+    .[[1]] %>%
+    map(explanatoryFeatures,threshold = threshold) %>%
+    bind_rows() 
+} else {
+  explanFeat <- modellingRes %>%
+    .[[1]] %>%
+    explanatoryFeatures(threshold = threshold)
+}
 
 explanFeat %>%
   group_by(Predictor,Comparison) %>%
@@ -43,10 +49,17 @@ explanFeat %>%
 ```{r explanatoryFeatures,cache = FALSE}
 ef <- explanFeat %>%
   tbl_df() %>%
-  mutate_if(is.numeric,round,digits = 3) %>%
-  arrange(adjustedPvalue)
-  
-if (nrow(ef) > 10000){
+  mutate_if(is.numeric,round,digits = 3)
+
+if ('adjustedPvalue' %in% colnames(ef)) {
+  ef <- ef  %>%
+    arrange(adjustedPvalue)
+} else {
+  ef <- ef %>%
+    arrange(adjusted.p.value)
+}
+
+if (nrow(ef) > 10000) {
   ef %>%
     .[1:10000,] %>%
     datatable(rownames = F,filter = 'top',caption = str_c('Table of top 10000 explanatory features (p < ',threshold,')'))
@@ -59,12 +72,18 @@ if (nrow(ef) > 10000){
 ```{r explanatoryHeatMap,fig.height = 10}
 if (nrow(ef) > 0) {
   if (length(unique(ef$Feature)) > 150) {
-  featNames <- F
+    featNames <- F
   } else {
-  featNames <- T
+    featNames <- T
   }
   
-  plotExplanatoryHeatmap(modellingRes[[1]][[1]],featureNames = featNames)
+  if (is.list(modellingRes[[1]])) {
+    mod <- modellingRes[[1]][[1]]
+  } else {
+    mod <- modellingRes[[1]] 
+  }
+  
+  plotExplanatoryHeatmap(mod,featureNames = featNames)
 }
 ```
 ")
