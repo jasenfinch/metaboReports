@@ -70,7 +70,7 @@ if (nrow(ef) > 10000) {
 ```
 
 ```{r explanatoryHeatMap,fig.height = 10}
-if (nrow(ef) > 0) {
+if (nrow(ef) > 2) {
   if (length(unique(ef$Feature)) > 150) {
     featNames <- F
   } else {
