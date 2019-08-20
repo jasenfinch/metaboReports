@@ -43,7 +43,7 @@ The plots and tables below give an overview of the results of the XCMS spectral 
 "
   },
   
-  chromatogams = function(processed){
+  chromatograms = function(processed){
 "
 
 ```{r chromatograms,echo=FALSE}

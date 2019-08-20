@@ -10,22 +10,33 @@ profilingMethods <- function(analysis){
       overViewSection(analysis %>% resultsProcessing(),type = 'sub'),
       XCMSmethods$parameters,
       XCMSmethods$results,
-      XCMSmethods$chromatogams,
+      XCMSmethods$chromatograms,
       XCMSmethods$ticPlot,
       XCMSmethods$featureTable
+    ),
+    deconvolve = list(
+      '
+## Spectral deconvolution
+
+',
+      overViewSection(analysis %>% resultsProcessing(),type = 'sub'),
+      erahMethods$parameters,
+      erahMethods$results,
+      erahMethods$chromatograms,
+      erahMethods$ticPlot,
+      erahMethods$featureTable
     ),
     preTreat = list(
       '
 ## Analysis
       
-      ',
+',
       overViewSection(analysis %>% resultsAnalysis(),type = 'sub'),
-      analysisMethods()$parameters,
-      analysisMethods()$preTreatment
+      analysisMethods()$parameters(analysis %>% resultsAnalysis(),type = 'sub'),
+      analysisMethods()$preTreatment(analysis %>% resultsAnalysis(),type = 'sub')
     ),
-    classification = analysisMethods()$classification,
-    featureSelection = analysisMethods()$featureSelection,
-    correlations = analysisMethods()$correlations,
+    modelling = analysisMethods()$modelling(analysis %>% resultsAnalysis(),type = 'sub'),
+    correlations = analysisMethods()$correlations(analysis %>% resultsAnalysis(),type = 'sub'),
     annotation = list(
       '
 ## Annotation
