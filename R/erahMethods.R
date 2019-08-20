@@ -69,7 +69,6 @@ processed %>%
 ```{r featureTable,echo=FALSE}
 processed %>%
   peakInfo() %>%
-  bind_rows(.id = 'Mode') %>%
   mutate_if(is.numeric,round,digits = 5) %>%
   datatable(rownames = F,filter = 'top')
 ```    
