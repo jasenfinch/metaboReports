@@ -51,12 +51,14 @@ ef <- explanFeat %>%
   tbl_df() %>%
   mutate_if(is.numeric,round,digits = 3)
 
-if ('adjustedPvalue' %in% colnames(ef)) {
-  ef <- ef  %>%
-    arrange(adjustedPvalue)
+names(ef)[names(ef) == 'adjusted.p.value'] <- 'adjustedPvalue' 
+
+if ('adjustedPvalue' %in% names(ef)) {
+ ef <- ef  %>%
+    arrange(adjustedPvalue) 
 } else {
   ef <- ef %>%
-    arrange(adjusted.p.value)
+    arrange(Value)
 }
 
 if (nrow(ef) > 10000) {
