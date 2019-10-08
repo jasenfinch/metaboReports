@@ -8,30 +8,35 @@
 #' @examples 
 #' \dontrun{
 #' library(metaboWorkflows)
-#' library(magrittr)
-#' data("exampleFIEworkflowResults")
 #' 
+#' files <- metaboData::filePaths('FIE-HRMS','BdistachyonEcotypes') 
+#' info <- metaboData::runinfo('FIE-HRMS','BdistachyonEcotypes')
+#' 
+#' wp <- workflowParameters('FIE-HRMS fingerprinting',files = files)
+#' flags(wp) <- flags(wp)[-c(5,7)]
+#' analysis <- workflow(files, info, wp)
+#'
 #' ## For just a Binalysis object
-#' analysis <- exampleFIEworkflowResults %>%
+#' bd <- analysis %>%
 #'  resultsProcessing()
 #' p <- reportParameters('ExampleData','Steve French')
-#' report(analysis,p)
+#' report(bd,p)
 #' 
 #' ## For Analysis object
-#' analysis <- exampleFIEworkflowResults %>%
+#' ad <- analysis %>%
 #'  resultsAnalysis()
 #' p <- reportParameters('ExampleData','Steve French')
-#' report(analysis,p) 
+#' report(ad,p) 
 #' 
 #' ## For Assignment object
-#' analysis <- exampleFIEworkflowResults %>%
+#' as <- analysis %>%
 #'  resultsAnnotation()
 #' p <- reportParameters('ExampleData','Steve French')
-#' report(analysis,p) 
+#' report(as,p) 
 #' 
 #' ## For workflow object
 #' p <- reportParameters('ExampleData','Steve French')
-#' report(exampleFIEworkflowResults,p) 
+#' report(analysis,p) 
 #' 
 #' }
 #' @export
