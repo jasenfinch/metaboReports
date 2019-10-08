@@ -35,23 +35,23 @@ preTreatedFeatures <- analysis %>%
 
 purCent <- binalysis %>%
   accurateData() %>%
-  mutate(Feature = str_c(Mode,mz)) %>%
-  dplyr::select(Mode,Feature,Purity,Centrality) %>%
-  gather('Measure','Value',-Mode,-Feature) %>%
-  mutate(Mode = as.character(Mode)) %>%
+  mutate(Feature = str_c(polarity,mz)) %>%
+  dplyr::select(polarity,Feature,Purity,Centrality) %>%
+  gather('Measure','Value',-polarity,-Feature) %>%
+  mutate(polarity = as.character(polarity)) %>%
   na.omit() %>%
   filter(Feature %in% preTreatedFeatures)
   
     
-purCent$Mode[purCent$Mode == 'n'] <- 'Negative'
-purCent$Mode[purCent$Mode == 'p'] <- 'Positive'
+purCent$polarity[purCent$polarity == 'n'] <- 'Negative'
+purCent$polarity[purCent$polarity == 'p'] <- 'Positive'
     
 purPlot <- purCent %>%
   filter(Measure == 'Purity') %>%
   ggplot(aes(x = Value)) +
   geom_histogram(fill = ptol_pal()(5)[2],colour = 'black',bins = histBins) +
   theme_bw() +
-  facet_wrap(~Mode) +
+  facet_wrap(~polarity) +
   ggtitle('Bin Purity Distribution') +
   theme(plot.title = element_text(face = 'bold'),
         axis.title = element_text(face = 'bold')) +
@@ -63,7 +63,7 @@ filter(Measure == 'Centrality') %>%
 ggplot(aes(x = Value)) +
   geom_histogram(fill = ptol_pal()(5)[2],colour = 'black',bins = histBins) +
   theme_bw() +
-  facet_wrap(~Mode) +
+  facet_wrap(~polarity) +
   ggtitle('Bin Centrality Distribution') +
   theme(plot.title = element_text(face = 'bold'),
         axis.title = element_text(face = 'bold')) +

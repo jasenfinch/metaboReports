@@ -1,10 +1,11 @@
 
 workflowMethods <- function(analysis){
   method <- list(
-    FIE_HRMSfingerprinting = FIEfingerprintingMethods,
-    NP_LC_HRMSprofiling = profilingMethods,
-    RP_LC_HRMSprofiling = profilingMethods,
-    GC_MSprofilingDeconvolution = profilingMethods
+    `FIE-HRMS fingerprinting` = FIEfingerprintingMethods,
+    `NSI-HRMS fingerprinting` = FIEfingerprintingMethods,
+    `NP-LC-HRMS profiling` = profilingMethods,
+    `RP-LC-HRMS profiling` = profilingMethods,
+    `GC-MS profiling deconvolution` = profilingMethods
   )
   method <- method[[analysis@workflowParameters@workflow]]
   return(method)
