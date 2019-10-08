@@ -11,8 +11,9 @@
 #' 
 #' files <- metaboData::filePaths('FIE-HRMS','BdistachyonEcotypes') 
 #' info <- metaboData::runinfo('FIE-HRMS','BdistachyonEcotypes')
-#'
+#' 
 #' wp <- workflowParameters('FIE-HRMS fingerprinting',files = files)
+#' flags(wp) <- flags(wp)[-c(5,7)]
 #' analysis <- workflow(files, info, wp)
 #'
 #' ## For just a Binalysis object
