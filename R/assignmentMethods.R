@@ -33,14 +33,6 @@ datatable(assignment %>%
 ```
 
 ')
-   },
-   network = function(analysis){
-     '
-```{r assignmentNetwork,fig.height=12,fig.width=12}
-plotNetwork(assignment,layout = "nicely")
-```
-
-'
    }
   )
   
