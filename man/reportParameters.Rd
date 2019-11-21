@@ -4,8 +4,13 @@
 \alias{reportParameters}
 \title{reportParameters}
 \usage{
-reportParameters(title, investigator, sessionInfo = TRUE, toc = TRUE,
-  path = ".")
+reportParameters(
+  title,
+  investigator,
+  sessionInfo = TRUE,
+  toc = TRUE,
+  path = "."
+)
 }
 \arguments{
 \item{title}{report title}
