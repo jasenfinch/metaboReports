@@ -13,6 +13,7 @@ preTreatmentMethods <- function(analysis, type = 'head', cls = 'class'){
   
   if ({analysis %>% preTreatedInfo() %>% nrow()} > 0) {
     glue("
+    
 {headHash} Pre-treatment
 {RSDplot(analysis,cls)}
 ```{{r unsupervisedPlots,echo = F,fig.width = 10}}
@@ -65,6 +66,15 @@ addLegend <- function(analysis,cls = 'class'){
   }
 }
 
+ROCplot <- function(analysis,cls = 'class'){
+  classes <- getClasses(analysis,cls)
+  if (is.numeric(classes)){
+    FALSE
+  } else {
+    TRUE
+  }
+}
+
 RSDplot <- function(analysis,cls = 'class'){
   if (T %in% str_detect(analysis@parameters@preTreat %>% names(),'QC')) {
     glue("
@@ -108,7 +118,7 @@ supervisedRFplots <- function(analysis,cls = 'class'){
       glue("
     
 ```{{r supervisedRFplots,echo = F,fig.width = 10}}
-  plotSupervisedRF(analysis,cls = '{cls}',label = NULL,ellipses = {ellipses},title = 'Multidimensional scaling (MDS) -\nsupervised Random Forest',legend = {legend})
+  plotSupervisedRF(analysis,cls = '{cls}',label = NULL,ellipses = {ellipses},title = 'Multidimensional scaling (MDS) -\nsupervised Random Forest',legend = {legend},ROC = {ROCplot(analysis,cls)})
 ```
        ")
     } else {
