@@ -26,19 +26,19 @@ flags(wp) <- flags(wp)[-c(5,7)]
 analysis <- workflow(files, info, wp)
 
 ## For just a Binalysis object
-bd <- analysis \%>\%
+bd <- analysis %>%
  resultsProcessing()
 p <- reportParameters('ExampleData','Steve French')
 report(bd,p)
 
 ## For Analysis object
-ad <- analysis \%>\%
+ad <- analysis %>%
  resultsAnalysis()
 p <- reportParameters('ExampleData','Steve French')
 report(ad,p) 
 
 ## For Assignment object
-as <- analysis \%>\%
+as <- analysis %>%
  resultsAnnotation()
 p <- reportParameters('ExampleData','Steve French')
 report(as,p) 

@@ -96,3 +96,14 @@ report <- function(analysis,parameters){
   
   render(str_c(reportFile,'.Rmd'))
 }
+
+hash <- function(type){
+  if (type == 'head') {
+    headHash <- '##' 
+  }
+  
+  if (type == 'sub') {
+    headHash <- '###'
+  }
+  return(headHash)
+}
