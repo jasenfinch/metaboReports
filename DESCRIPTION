@@ -4,7 +4,7 @@ Version: 0.7.5
 Authors@R: person("Jasen", "Finch", email = "jsf9@aber.ac.uk", role = c("aut", "cre"))
 Description: Automatically generate reports for metabolomics analyses.
 biocViews: Metabolomics
-Depends: R (>= 3.4.0)
+Depends: R (>= 3.5.0)
 Imports: stringr,
          binneR,
          magrittr,
@@ -14,7 +14,10 @@ Imports: stringr,
          purrr,
          methods,
          metaboWorkflows,
-         rstudioapi
+         rstudioapi,
+         dplyr,
+         glue,
+         tibble
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

@@ -2,7 +2,7 @@
 #' @importFrom glue glue
 #' @importFrom stringr str_detect
 #' @importFrom tibble deframe tibble
-#' @importFrom dplyr select group_by summarise filter
+#' @importFrom dplyr select group_by summarise filter n
 
 preTreatmentMethods <- function(analysis, type = 'head', cls = 'class'){
   headHash <- hash(type)
