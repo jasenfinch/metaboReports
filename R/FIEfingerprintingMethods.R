@@ -84,8 +84,7 @@ purPlot + centPlot + plot_layout(ncol = 1)
 ',
       overViewSection(analysis %>% resultsAnnotation(),type = 'sub'),
       assignmentMethods()$parameters(analysis %>% resultsAnnotation(),type = 'sub'),
-      assignmentMethods()$assignments(analysis %>% resultsAnnotation(),type = 'sub'),
-      assignmentMethods()$network(analysis %>% resultsAnnotation())
+      assignmentMethods()$assignments(analysis %>% resultsAnnotation(),type = 'sub')
     )
   )
   methods <- methods[names(methods) %in% flags]
