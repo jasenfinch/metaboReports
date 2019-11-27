@@ -1,48 +1,16 @@
-#' report
-#' @description generate a report from a Binalysis analysis. 
-#' @param analysis object of class Binalysis from which to genrate a report
-#' @param parameters object of class ReportParameters
-#' @importFrom magrittr %>%
-#' @importFrom readr write_file
-#' @importFrom rmarkdown render
-#' @examples 
-#' \dontrun{
-#' library(metaboWorkflows)
-#' 
-#' files <- metaboData::filePaths('FIE-HRMS','BdistachyonEcotypes') 
-#' info <- metaboData::runinfo('FIE-HRMS','BdistachyonEcotypes')
-#' 
-#' wp <- workflowParameters('FIE-HRMS fingerprinting',files = files)
-#' flags(wp) <- flags(wp)[-c(5,7)]
-#' analysis <- workflow(files, info, wp)
-#'
-#' ## For just a Binalysis object
-#' bd <- analysis %>%
-#'  resultsProcessing()
-#' p <- reportParameters('ExampleData','Steve French')
-#' report(bd,p)
-#' 
-#' ## For Analysis object
-#' ad <- analysis %>%
-#'  resultsAnalysis()
-#' p <- reportParameters('ExampleData','Steve French')
-#' report(ad,p) 
-#' 
-#' ## For Assignment object
-#' as <- analysis %>%
-#'  resultsAnnotation()
-#' p <- reportParameters('ExampleData','Steve French')
-#' report(as,p) 
-#' 
-#' ## For workflow object
-#' p <- reportParameters('ExampleData','Steve French')
-#' report(analysis,p) 
-#' 
-#' }
-#' @export
 
-report <- function(analysis,parameters){
+hash <- function(type){
+  if (type == 'head') {
+    headHash <- '##'
+  }
   
+  if (type == 'sub') {
+    headHash <- '###'
+  }
+  return(headHash)
+}
+
+doReport <- function(analysis,parameters){
   directoryPrep(analysis,parameters)
   
   report <- c(reportHeader(analysis,parameters),
@@ -50,11 +18,11 @@ report <- function(analysis,parameters){
               overViewSection(analysis))
   
   methods <- reportMethods(class(analysis)) %>%
-  {.(analysis)}
+    {.(analysis)}
   
   if (class(analysis) == 'Workflow') {
     methods <- methods %>%
-    {.(analysis)} %>%
+      {.(analysis)} %>%
       unlist(recursive = T)
     if (analysis %>%
         resultsProcessing() %>%
@@ -97,13 +65,78 @@ report <- function(analysis,parameters){
   render(str_c(reportFile,'.Rmd'))
 }
 
-hash <- function(type){
-  if (type == 'head') {
-    headHash <- '##' 
-  }
-  
-  if (type == 'sub') {
-    headHash <- '###'
-  }
-  return(headHash)
-}
+#' report
+#' @rdname report
+#' @description generate a report from a Binalysis analysis. 
+#' @param analysis object of class Binalysis from which to genrate a report
+#' @param parameters object of class ReportParameters
+#' @importFrom magrittr %>%
+#' @importFrom readr write_file
+#' @importFrom rmarkdown render
+#' @examples 
+#' \dontrun{
+#' library(metaboWorkflows)
+#' 
+#' files <- metaboData::filePaths('FIE-HRMS','BdistachyonEcotypes') 
+#' info <- metaboData::runinfo('FIE-HRMS','BdistachyonEcotypes')
+#' 
+#' wp <- workflowParameters('FIE-HRMS fingerprinting',files = files)
+#' flags(wp) <- flags(wp)[-c(5,7)]
+#' analysis <- workflow(files, info, wp)
+#'
+#' ## For just a Binalysis object
+#' bd <- analysis %>%
+#'  resultsProcessing()
+#' p <- reportParameters('ExampleData','Steve French')
+#' report(bd,p)
+#' 
+#' ## For Analysis object
+#' ad <- analysis %>%
+#'  resultsAnalysis()
+#' p <- reportParameters('ExampleData','Steve French')
+#' report(ad,p) 
+#' 
+#' ## For Assignment object
+#' as <- analysis %>%
+#'  resultsAnnotation()
+#' p <- reportParameters('ExampleData','Steve French')
+#' report(as,p) 
+#' 
+#' ## For workflow object
+#' p <- reportParameters('ExampleData','Steve French')
+#' report(analysis,p) 
+#' 
+#' }
+#' @export
+
+setMethod('report',signature = 'Binalysis',function(analysis,parameters){
+  doReport(analysis,parameters)
+})
+
+#' @rdname report
+#' @export
+
+setMethod('report',signature = 'MetaboProfile',function(analysis,parameters){
+  doReport(analysis,parameters)
+})
+
+#' @rdname report
+#' @export
+
+setMethod('report',signature = 'Analysis',function(analysis,parameters){
+  doReport(analysis,parameters)
+})
+
+#' @rdname report
+#' @export
+
+setMethod('report',signature = 'Assignment',function(analysis,parameters){
+  doReport(analysis,parameters)
+})
+
+#' @rdname report
+#' @export
+
+setMethod('report',signature = 'Workflow',function(analysis,parameters){
+  doReport(analysis,parameters)
+})
