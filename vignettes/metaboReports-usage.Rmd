@@ -1,0 +1,38 @@
+---
+title: "metaboReports"
+subtitle: "`r paste0('v',packageVersion('metaboReports'))`"
+author: "Jasen Finch"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  prettydoc::html_pretty:
+    toc: true
+    highlight: github
+    theme: tactile
+vignette: >
+  %\VignetteIndexEntry{metaboReports-usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r,include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+## Introduction
+
+## Basic usage
+
+```{r setup}
+library(metaboReports)
+```
+
+```{r parameters}
+rp <- reportParameters(title = 'A metabolomics analysis',
+                       investigator = 'Steve French')
+```
+
+```{r report}
+report(analysis,rp)
+```
+
+

@@ -28,4 +28,7 @@ Suggests:
     ggthemes,
     DT,
     hrm,
-    covr
+    covr,
+    knitr,
+    prettydoc
+VignetteBuilder: knitr
