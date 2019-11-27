@@ -22,13 +22,20 @@ knitr::opts_chunk$set(eval = FALSE)
 
 ## Basic usage
 
+First load the library:
+
 ```{r setup}
 library(metaboReports)
 ```
 
+The parameters for the report can be defined using the `reportParameters()` functionas follows:
+
 ```{r parameters}
 rp <- reportParameters(title = 'A metabolomics analysis',
-                       investigator = 'Steve French')
+                       investigator = 'Steve French',
+                       sessionInfo = TRUE,
+                       toc = TRUE,
+                       path = '.')
 ```
 
 ```{r report}
