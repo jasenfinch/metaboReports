@@ -16,6 +16,9 @@ vignette: >
 
 ```{r,include=FALSE}
 knitr::opts_chunk$set(eval = FALSE)
+library(knitr)
+library(magrittr)
+library(tibble)
 ```
 
 ## Introduction
@@ -37,6 +40,17 @@ rp <- reportParameters(title = 'A metabolomics analysis',
                        toc = TRUE,
                        path = '.')
 ```
+
+Report methods are available for:
+
+```{r, echo=FALSE,eval=TRUE}
+tibble(
+  Package = c('binneR','profilePro','metabolyseR','MFassign','metaboWorkflows'),
+  Class = c('Binalysis','MetaboProfile','Analysis','Assignment','Workflow')
+) %>%
+  kable()
+```
+
 
 ```{r report}
 report(analysis,rp)
