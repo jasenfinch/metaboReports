@@ -136,6 +136,15 @@ binneR::plotTIC(binalysis, by = 'injOrder', colour = 'block')
 ```   
 
 "
+    },
+    rsdPlot = function(binalysis){
+      "
+```{r RSDplot,echo=FALSE}
+metaboMisc::plotRSD(binalysis) %>%
+  walk(print)
+```   
+
+      "
     }
   )
   
