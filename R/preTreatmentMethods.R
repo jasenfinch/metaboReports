@@ -4,7 +4,7 @@
 #' @importFrom tibble deframe tibble
 #' @importFrom dplyr select group_by summarise filter n
 
-preTreatmentMethods <- function(analysis, type = 'head', cls = 'class'){
+preTreatmentMethods <- function(analysis, type = 'head', cls = 'class', chunks = c('rsd','lda','supervisedRF')){
   headHash <- hash(type)
   
   ellipses <- addEllipses(analysis,cls)
@@ -15,12 +15,12 @@ preTreatmentMethods <- function(analysis, type = 'head', cls = 'class'){
     glue("
     
 {headHash} Pre-treatment
-{RSDplot(analysis,cls)}
+{if ('rsd' %in% chunks) RSDplot(analysis,cls)}
 ```{{r unsupervisedPlots,echo = F,fig.width = 10}}
 metabolyseR::plotPCA(analysis,cls = '{cls}',ellipses = {ellipses},legend = {legend}) + plotUnsupervisedRF(analysis,cls = '{cls}',ellipses = {ellipses},title = 'Multidimensional scaling (MDS) -\nunsupervised Random Forest',legend = {legend})
 ```
-{LDAplot(analysis,cls)}
-{supervisedRFplots(analysis,cls)}
+{if ('lda' %in% chunks) LDAplot(analysis,cls)}
+{if ('supervisedRF' %in% chunks) supervisedRFplots(analysis,cls)}
 ")
   } else {
     ""
