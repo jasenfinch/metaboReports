@@ -15,7 +15,8 @@ FIEfingerprintingMethods <- function(analysis){
       binalysisMethods()$chromatograms(analysis %>% resultsProcessing()),
       binalysisMethods()$fingerprint(analysis %>% resultsProcessing()),
       binalysisMethods()$purityAndCentrality(analysis %>% resultsProcessing()),
-      binalysisMethods()$ticPlot(analysis %>% resultsProcessing())
+      binalysisMethods()$ticPlot(analysis %>% resultsProcessing()),
+      binalysisMethods()$rsdPlot(analysis %>% resultsProcessing())
     ),
     preTreat = list(
       '
@@ -24,8 +25,9 @@ FIEfingerprintingMethods <- function(analysis){
 ',
       overViewSection(analysis %>% resultsAnalysis(),type = 'sub'),
       analysisMethods()$parameters(analysis %>% resultsAnalysis(),type = 'sub'),
-      analysisMethods()$preTreatment(analysis %>% resultsAnalysis(),type = 'sub'),
+      analysisMethods()$preTreatment(analysis %>% resultsAnalysis(),type = 'sub',chunks = c('lda','supervisedRF')),
       "
+      
 ```{r ptPurityCentrality,echo=FALSE}
 histBins <- 30
 
