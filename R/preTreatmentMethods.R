@@ -15,12 +15,12 @@ preTreatmentMethods <- function(analysis, type = 'head', cls = 'class', chunks =
     glue("
     
 {headHash} Pre-treatment
-{if ('rsd' %in% chunks) RSDplot(analysis,cls)}
+{ifelse('rsd' %in% chunks,RSDplot(analysis,cls),'')}
 ```{{r unsupervisedPlots,echo = F,fig.width = 10}}
 metabolyseR::plotPCA(analysis,cls = '{cls}',ellipses = {ellipses},legend = {legend}) + plotUnsupervisedRF(analysis,cls = '{cls}',ellipses = {ellipses},title = 'Multidimensional scaling (MDS) -\nunsupervised Random Forest',legend = {legend})
 ```
-{if ('lda' %in% chunks) LDAplot(analysis,cls)}
-{if ('supervisedRF' %in% chunks) supervisedRFplots(analysis,cls)}
+{ifelse('lda' %in% chunks,LDAplot(analysis,cls),'')}
+{ifelse('supervisedRF' %in% chunks,supervisedRFplots(analysis,cls),'')}
 ")
   } else {
     ""

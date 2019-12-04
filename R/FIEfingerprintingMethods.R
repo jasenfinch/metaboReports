@@ -27,6 +27,7 @@ FIEfingerprintingMethods <- function(analysis){
       analysisMethods()$parameters(analysis %>% resultsAnalysis(),type = 'sub'),
       analysisMethods()$preTreatment(analysis %>% resultsAnalysis(),type = 'sub',chunks = c('lda','supervisedRF')),
       "
+      
 ```{r ptPurityCentrality,echo=FALSE}
 histBins <- 30
 
