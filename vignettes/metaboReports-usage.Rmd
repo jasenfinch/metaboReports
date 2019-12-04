@@ -51,13 +51,14 @@ tibble(
   kable()
 ```
 
-The report can then be generated using the following:
+The report can then be generated for the given object using the following:
 
 ```{r report,eval=FALSE}
 report(analysis,rp)
 ```
 
 This will create an output project directory named using the parameter `title` at the specified `path`.
-If `report()` is triggered in RStudio
+Within this directory, an Rmarkdown file containing the
+If `report()` is triggered from within RStudio, an RStudio project (`.proj`) file will also be created.
 
 
