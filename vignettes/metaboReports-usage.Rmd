@@ -1,0 +1,69 @@
+---
+title: "metaboReports"
+subtitle: "`r paste0('v',packageVersion('metaboReports'))`"
+author: "Jasen Finch"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  prettydoc::html_pretty:
+    toc: true
+    highlight: github
+    theme: tactile
+vignette: >
+  %\VignetteIndexEntry{metaboReports-usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r,include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+library(knitr)
+library(magrittr)
+library(tibble)
+```
+
+## Introduction
+
+`metaboReports` provides a simple interface to enable automated, dynamic HTML report generation for results objects created from metabolomics analyses using the powerful R Markdown format.
+Detailed information on the R Markdown format can be found [here](https://bookdown.org/yihui/rmarkdown/).
+
+Currently, report methods are available for:
+
+```{r, echo=FALSE,eval=TRUE}
+tibble(
+  `S4 class` = c('Binalysis','MetaboProfile','Analysis','Assignment','Workflow'),
+  Package = c('[binneR](https://github.com/aberHRML/binneR)','[profilePro](https://github.com/jasenfinch/profilePro)','[metabolyseR](https://github.com/jasenfinch/metabolyseR)','[MFassign](https://github.com/jasenfinch/MFassign)','[metaboWorkflows](https://github.com/jasenfinch/metaboWorkflows)')
+) %>%
+  kable()
+```
+
+## Basic usage
+
+First load the library:
+
+```{r setup}
+library(metaboReports)
+```
+
+The parameters for the report can be defined using the `reportParameters()` function as follows:
+
+```{r parameters}
+rp <- reportParameters(title = 'A metabolomics analysis',
+                       investigator = 'Steve French',
+                       sessionInfo = TRUE,
+                       toc = TRUE,
+                       path = '.')
+```
+
+The report can then be generated for the given object using the following:
+
+```{r report,eval=FALSE}
+report(analysis,rp)
+```
+
+This will create an output project directory named using the parameter `title` at the specified `path`.
+Within this directory, the files necessary to create the report will be generated and include an R Markdown file (`.Rmd`) containing the R and markdown code and a file containing the necessary data (`reportData.rds`).
+If `report()` is triggered from within RStudio, an RStudio project (`.proj`) file will also be created.
+Once these files are created, `rmarkdown::render()` is automatically called which will generate the final HTML report.
+Directories containing cached data and plot image files will also be created during this process.
+
+

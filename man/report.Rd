@@ -22,43 +22,43 @@ report(analysis, parameters)
 \S4method{report}{Workflow}(analysis, parameters)
 }
 \arguments{
-\item{analysis}{object of class Binalysis from which to genrate a report}
+\item{analysis}{S4 object of class Binalysis, MetaboProfile, Analysis, Assignment or Workflow from which to genrate a report}
 
 \item{parameters}{object of class ReportParameters}
 }
 \description{
-generate a report from a Binalysis analysis.
+Automated, dynamic report generation for a metabolomic analysis.
 }
 \examples{
 \dontrun{
 library(metaboWorkflows)
 
-files <- metaboData::filePaths('FIE-HRMS','BdistachyonEcotypes') 
-info <- metaboData::runinfo('FIE-HRMS','BdistachyonEcotypes')
+fp <- metaboData::filePaths('FIE-HRMS','BdistachyonEcotypes') 
+si <- metaboData::runinfo('FIE-HRMS','BdistachyonEcotypes')
 
-wp <- workflowParameters('FIE-HRMS fingerprinting',files = files)
-flags(wp) <- flags(wp)[-c(5,7)]
-analysis <- workflow(files, info, wp)
+wp <- workflowParameters('FIE-HRMS fingerprinting',fp,si,breaks = FALSE)
 
-## For just a Binalysis object
+analysis <- workflow(wp)
+
+## For a Binalysis object
 bd <- analysis \%>\%
  resultsProcessing()
 p <- reportParameters('ExampleData','Steve French')
 report(bd,p)
 
-## For Analysis object
+## For an Analysis object
 ad <- analysis \%>\%
  resultsAnalysis()
 p <- reportParameters('ExampleData','Steve French')
 report(ad,p) 
 
-## For Assignment object
+## For an Assignment object
 as <- analysis \%>\%
  resultsAnnotation()
 p <- reportParameters('ExampleData','Steve French')
 report(as,p) 
 
-## For workflow object
+## For a Workflow object
 p <- reportParameters('ExampleData','Steve French')
 report(analysis,p) 
 
