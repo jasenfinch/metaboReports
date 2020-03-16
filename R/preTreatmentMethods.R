@@ -102,6 +102,8 @@ LDAplot <- function(analysis,cls = 'class'){
 plotLDA(analysis,cls = '{cls}',ellipses = {ellipses},legend = {legend})
 ```
   ")
+    } else {
+      ''
     }
   }
 }
