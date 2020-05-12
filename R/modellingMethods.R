@@ -41,7 +41,7 @@ if (is.list(modellingRes %>% .[[1]])) {
 }
 
 explanFeat %>%
-  group_by(Predictor,Comparison) %>%
+  group_by(Response,Comparison) %>%
   summarise(`# Explanatory` = n()) %>%
   datatable(rownames = F,filter = 'top',caption = str_c('Overview of numbers of explanatory features (p < ',threshold,')'))
 ```
