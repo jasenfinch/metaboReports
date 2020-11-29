@@ -6,7 +6,6 @@
 \alias{report,MetaboProfile-method}
 \alias{report,Analysis-method}
 \alias{report,Assignment-method}
-\alias{report,Workflow-method}
 \title{Report generation}
 \usage{
 report(analysis, parameters)
@@ -18,8 +17,6 @@ report(analysis, parameters)
 \S4method{report}{Analysis}(analysis, parameters)
 
 \S4method{report}{Assignment}(analysis, parameters)
-
-\S4method{report}{Workflow}(analysis, parameters)
 }
 \arguments{
 \item{analysis}{S4 object of class Binalysis, MetaboProfile, Analysis, Assignment or Workflow from which to genrate a report}
@@ -57,10 +54,6 @@ as <- analysis \%>\%
  resultsAnnotation()
 p <- reportParameters('ExampleData','Steve French')
 report(as,p) 
-
-## For a Workflow object
-p <- reportParameters('ExampleData','Steve French')
-report(analysis,p) 
 
 }
 }

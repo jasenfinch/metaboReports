@@ -20,27 +20,6 @@ doReport <- function(analysis,parameters){
   methods <- reportMethods(class(analysis)) %>%
     {.(analysis)}
   
-  if (class(analysis) == 'Workflow') {
-    methods <- methods %>%
-      {.(analysis)} %>%
-      unlist(recursive = T)
-    if (analysis %>%
-        resultsProcessing() %>%
-        class() == 'Binalysis') {
-      binalysis <- analysis %>%
-        resultsProcessing()
-    }
-    if (analysis %>%
-        resultsProcessing() %>%
-        class() == 'MetaboProfile') {
-      processed <- analysis %>%
-        resultsProcessing()
-    }
-    analysis <- analysis %>%
-      resultsAnalysis()
-  }
-  
-  
   methodSection <- map(methods,~{
     if (is.function(.)) {
       .(analysis)
@@ -103,10 +82,6 @@ doReport <- function(analysis,parameters){
 #' p <- reportParameters('ExampleData','Steve French')
 #' report(as,p) 
 #' 
-#' ## For a Workflow object
-#' p <- reportParameters('ExampleData','Steve French')
-#' report(analysis,p) 
-#' 
 #' }
 #' @export
 
@@ -132,12 +107,5 @@ setMethod('report',signature = 'Analysis',function(analysis,parameters){
 #' @export
 
 setMethod('report',signature = 'Assignment',function(analysis,parameters){
-  doReport(analysis,parameters)
-})
-
-#' @rdname report
-#' @export
-
-setMethod('report',signature = 'Workflow',function(analysis,parameters){
   doReport(analysis,parameters)
 })
