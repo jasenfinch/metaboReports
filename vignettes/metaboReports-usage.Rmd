@@ -1,15 +1,12 @@
 ---
 title: "metaboReports"
-subtitle: "`r paste0('v',packageVersion('metaboReports'))`"
-author: "Jasen Finch"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   prettydoc::html_pretty:
     toc: true
     highlight: github
     theme: tactile
 vignette: >
-  %\VignetteIndexEntry{metaboReports-usage}
+  %\VignetteIndexEntry{metaboReports usage}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

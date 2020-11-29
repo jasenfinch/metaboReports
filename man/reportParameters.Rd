@@ -2,7 +2,7 @@
 % Please edit documentation in R/reportParameters.R
 \name{reportParameters}
 \alias{reportParameters}
-\title{reportParameters}
+\title{Report parameters}
 \usage{
 reportParameters(
   title,
@@ -25,4 +25,7 @@ reportParameters(
 }
 \description{
 Initiate report parameters.
+}
+\seealso{
+\code{\link{report}}
 }

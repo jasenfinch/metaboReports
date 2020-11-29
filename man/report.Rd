@@ -7,7 +7,7 @@
 \alias{report,Analysis-method}
 \alias{report,Assignment-method}
 \alias{report,Workflow-method}
-\title{report}
+\title{Report generation}
 \usage{
 report(analysis, parameters)
 
@@ -63,4 +63,7 @@ p <- reportParameters('ExampleData','Steve French')
 report(analysis,p) 
 
 }
+}
+\seealso{
+\code{\link{reportParameters}}
 }

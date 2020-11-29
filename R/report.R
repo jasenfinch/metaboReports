@@ -65,11 +65,12 @@ doReport <- function(analysis,parameters){
   render(str_c(reportFile,'.Rmd'))
 }
 
-#' report
+#' Report generation
 #' @rdname report
 #' @description Automated, dynamic report generation for a metabolomic analysis. 
 #' @param analysis S4 object of class Binalysis, MetaboProfile, Analysis, Assignment or Workflow from which to genrate a report
 #' @param parameters object of class ReportParameters
+#' @seealso \code{\link{reportParameters}}
 #' @importFrom magrittr %>%
 #' @importFrom readr write_file
 #' @importFrom rmarkdown render

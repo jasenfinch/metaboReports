@@ -1,10 +1,11 @@
-#' reportParameters
+#' Report parameters
 #' @description Initiate report parameters. 
 #' @param title report title
 #' @param investigator investigator name
 #' @param sessionInfo TRUE/FALSE, should session info included?
 #' @param toc TRUE/FALSE, should a table of contents be included
 #' @param path report output path
+#' @seealso \code{\link{report}}
 #' @importFrom methods new
 #' @export
 
