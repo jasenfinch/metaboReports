@@ -13,7 +13,6 @@ Imports: stringr,
          metabolyseR,
          purrr,
          methods,
-         metaboWorkflows,
          rstudioapi,
          dplyr,
          glue,
@@ -32,3 +31,5 @@ Suggests:
     knitr,
     prettydoc
 VignetteBuilder: knitr
+Remotes: aberHRML/binneR,
+        jasenfinch/metabolyseR

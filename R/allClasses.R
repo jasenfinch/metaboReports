@@ -20,3 +20,10 @@ setClass('ReportParameters',
            output = 'character'
          )
 )
+
+setClass('Report',
+         slots = list(
+           data = 'list',
+           report = 'list',
+         ),
+         contains = 'ReportParameters')

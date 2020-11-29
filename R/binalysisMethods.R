@@ -1,153 +1,118 @@
 
-binalysisMethods <- function(analysis) {
+
+setMethod('parameters',signature = 'Binalysis',
+          function(x){
+            object_name <- deparse(substitute(x))
+            glue(
+"
+### Parameters
   
-  methods <- list(
-    
-    parameters = function(binalysis,type = 'head'){
-      headHash <- '##'
-      
-      if (type == 'sub') {
-        headHash <- '###'
-      }
-      
-      str_c("
-",headHash," Parameters
-
-```{r binParamters,echo=FALSE}
-binalysis@binParameters
+```{{r binParamters}}
+{object_name}@binParameters
 ```
-")
-    },
-    
-    results = function(binalysis,type = 'head'){
-      headHash <- '##'
-      
-      if (type == 'sub') {
-        headHash <- '###'
-      }
-      
-      str_c("
+"
+            )
+          })
 
-",headHash," Results   
+setMethod('results',signature = 'Binalysis',
+          function(x){
+"
+### Results
 
 The plots and tables below give an overview of the results of the spectral binning approach applied to this data set.
+"
+          })
 
-")
-    },
-    
-    featureTable = function(binalysis){
-      "
+setMethod('featureTable',signature = 'Binalysis',
+          function(x){
+            object_name <- deparse(substitute(x))
+            glue(
+"
+```{{r rawFeaturesTable}}
+rawFeat <- {object_name} %>%
+  binneR::binnedData() %>%
+  purrr::map(~{{
+    .x %>%
+      tibble::rowid_to_column(var = 'Sample') %>%
+      tidyr::gather('Feature','Intensity',-Sample)
+  }}) %>%
+  dplyr::bind_rows() %>%
+  dplyr::mutate(Mode = str_sub(Feature,1,1)) %>%
+  dplyr::group_by(Mode) %>%
+  dplyr::summarise(
+    `Number of bins` = dplyr::n_distinct(Feature),
+    `Missing Data (%)` = round(length(which(Intensity == 0)) / length(Intensity) * 100,2)) %>%
+  {{
+    .$Mode[.$Mode == 'n'] = 'Negative'
+    .$Mode[.$Mode == 'p'] = 'Positive'
+    .
+  }}
 
-```{r rawFeaturesTable,echo=FALSE}
-library(knitr)
-rawFeat <- binalysis %>%
-  binnedData() %>%
-  map(~{
-    d <- .
-    d %>%
-      rowid_to_column(var = 'Sample') %>%
-      gather('Feature','Intensity',-Sample)
-    }) %>%
-  bind_rows() %>%
-  mutate(Mode = str_sub(Feature,1,1)) %>%
-  group_by(Mode) %>%
-  summarise(`Number of bins` = n_distinct(Feature),`Missing Data (%)` = round(length(which(Intensity == 0))/length(Intensity) * 100,2))
+knitr::kable(
+  rawFeat,
+  caption = 'Table overview of spectral bins returned for each acqusition mode')
+```        
+" 
+            )
+          })
 
-rawFeat$Mode[rawFeat$Mode == 'n'] = 'Negative'
-rawFeat$Mode[rawFeat$Mode == 'p'] = 'Positive'
-
-kable(rawFeat,caption = 'Table overview of spectral bins returned for each acqusition mode')
+setMethod('chromatograms',signature = 'Binalysis',
+          function(x){
+            object_name <- deparse(substitute(x))
+            glue(
+"
+```{{r chromatograms}}
+binneR::plotChromatogram({object_name})
 ```
+" 
+            )
+})
 
+setMethod('fingerprints',signature = 'Binalysis',
+          function(x){
+            object_name <- deparse(substitute(x))
+            glue(
 "
-    },
-    
-    chromatograms = function(binalysis){
-      "
-
-```{r chromatograms,warning = FALSE,echo=FALSE}
-binneR::plotChromatogram(binalysis)
+```{{r fingerprint}}
+binneR::plotFingerprint({object_name})
 ```
+" 
+            )
+})
 
+setMethod('purityAndCentrality',signature = 'Binalysis',
+          function(x){
+            object_name <- deparse(substitute(x))
+            glue(
 "
-    },
-    
-    fingerprint = function(binalysis){
-      "
-
-```{r fingerprint,warning = FALSE,echo=FALSE}
-plotFingerprint(binalysis)
+```{{r PurityCentrality}}
+patchwork::wrap_plots(binneR::plotPurity({object_name}),
+                      binneR::plotCentrality({object_name}))
 ```
-
 "
-    },
-    
-    purityAndCentrality = function(binalysis){
-      "
+            )
 
-```{r PurityCentrality,echo=FALSE}
-histBins <- 30
-    
-purCent <- binalysis %>%
-  accurateData() %>%
-  dplyr::select(polarity,Purity,Centrality) %>%
-  gather('Measure','Value',-polarity) %>%
-  mutate(polarity = as.character(polarity)) %>%
-  na.omit()
-    
-purCent$polarity[purCent$polarity == 'n'] <- 'Negative'
-purCent$polarity[purCent$polarity == 'p'] <- 'Positive'
-    
-purPlot <- purCent %>%
-  filter(Measure == 'Purity') %>%
-  ggplot(aes(x = Value)) +
-  geom_histogram(fill = ptol_pal()(5)[2],colour = 'black',bins = histBins) +
-  theme_bw() +
-  facet_wrap(~polarity) +
-  ggtitle('Bin Purity Distribution') +
-  theme(plot.title = element_text(face = 'bold'),
-        axis.title = element_text(face = 'bold')) +
-  xlab('Purity Measure') +
-  ylab('Frequency')
-    
-centPlot <- purCent %>%
-filter(Measure == 'Centrality') %>%
-ggplot(aes(x = Value)) +
-  geom_histogram(fill = ptol_pal()(5)[2],colour = 'black',bins = histBins) +
-  theme_bw() +
-  facet_wrap(~polarity) +
-  ggtitle('Bin Centrality Distribution') +
-  theme(plot.title = element_text(face = 'bold'),
-        axis.title = element_text(face = 'bold')) +
-  xlab('Centrality Measure') +
-  ylab('Frequency')
-    
-purPlot + centPlot + plot_layout(ncol = 1)
-```
+})
 
+setMethod('ticPlot',signature = 'Binalysis',
+          function(x){
+            object_name <- deparse(substitute(x))
+            glue(
 "
-    },
-    
-    ticPlot = function(binalysis){
-      "
+```{{r TICplot}}
+binneR::plotTIC(object_name, 
+                by = 'injOrder', 
+                colour = 'block')
+``` 
+" 
+            )
+          })
 
-```{r TICplot,echo=FALSE}
-binneR::plotTIC(binalysis, by = 'injOrder', colour = 'block')
-```   
-
+setMethod('rsdPlot',signature = 'Binalysis',
+          function(x){
 "
-    },
-    rsdPlot = function(binalysis){
-      "
-```{r RSDplot,echo=FALSE}
-metaboMisc::plotRSD(binalysis) %>%
-  walk(print)
-```   
-
-      "
-    }
-  )
-  
-  return(methods)
-  
-}
+```{{r RSDplot,fig.show='hold''}}
+metaboMisc::plotRSD(binalysis)
+````
+"
+          })
