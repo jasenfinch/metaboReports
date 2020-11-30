@@ -3,6 +3,7 @@
 #' @slot path report directory output path
 #' @slot title report title
 #' @slot investigator investigator name
+#' @slot echo logical, inclusion of code chunks
 #' @slot sessionInfo logical, inclusion of session info
 #' @slot toc logical, inclusion of table of contents
 #' @slot date creation date

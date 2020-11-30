@@ -1,4 +1,16 @@
 
+#' @rdname parameters
+
+setGeneric("sessionInformation", function(x) {
+  standardGeneric("sessionInformation")
+})
+
+#' @rdname parameters
+
+setGeneric("sessionInformation<-", function(x,value) {
+  standardGeneric("sessionInformation<-")
+})
+
 #' @rdname report
 
 setGeneric("report", function(x) {
@@ -23,12 +35,26 @@ setGeneric("reportData<-", function(x,value) {
   standardGeneric("reportData<-")
 })
 
+#' @rdname reportRMD
+
+setGeneric("reportRMD", function(x) {
+  standardGeneric("reportRMD")
+})
+
 setGeneric('generateReport', function(parameters,...){
   standardGeneric('generateReport')
 })
 
 setGeneric('generate', function(...){
   standardGeneric('generate')
+})
+
+setGeneric('sessionInformationSection', function(x){
+  standardGeneric('sessionInformationSection')
+})
+
+setGeneric('reportFooter', function(x){
+  standardGeneric('reportFooter')
 })
 
 setGeneric('title', function(...){
@@ -66,5 +92,3 @@ setGeneric('ticPlot', function(...){
 setGeneric('rsdPlot', function(...){
   standardGeneric('rsdPlot')
 })
-
-

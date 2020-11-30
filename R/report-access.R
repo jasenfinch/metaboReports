@@ -39,3 +39,22 @@ setMethod('report<-',signature = 'Report',
             x@report <- value
             return(x)
           })
+
+#' Return a report .Rmd
+#' @rdname reportRMD
+#' @description  Return a report markdown as a character string
+#' @param x S4 object of class Report
+#' @importFrom purrr flatten
+#' @importFrom glue glue_collapse
+#' @export
+
+setMethod('reportRMD',signature = 'Report',
+          function(x){
+            r <- report(x) %>%
+              flatten()
+            
+            c(r,
+              sessionInformationSection(x),
+              reportFooter(x)) %>%
+              glue_collapse(sep = '\n\n')
+          })
