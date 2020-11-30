@@ -1,7 +1,30 @@
+#' @rdname parameters
+
+setGeneric('title', function(x){
+  standardGeneric('title')
+})
 
 #' @rdname parameters
 
-setGeneric("sessionInformation", function(x) {
+setGeneric('title<-', function(x,value){
+  standardGeneric('title<-')
+})
+
+#' @rdname parameters
+
+setGeneric('investigator', function(x){
+  standardGeneric('investigator')
+})
+
+#' @rdname parameters
+
+setGeneric('investigator<-', function(x,value){
+  standardGeneric('investigator<-')
+})
+
+#' @rdname parameters
+
+setGeneric("sessionInformation", function(x){
   standardGeneric("sessionInformation")
 })
 
@@ -9,6 +32,66 @@ setGeneric("sessionInformation", function(x) {
 
 setGeneric("sessionInformation<-", function(x,value) {
   standardGeneric("sessionInformation<-")
+})
+
+#' @rdname parameters
+
+setGeneric('toc', function(x){
+  standardGeneric('toc')
+})
+
+#' @rdname parameters
+
+setGeneric('toc<-', function(x,value){
+  standardGeneric('toc<-')
+})
+
+#' @rdname parameters
+
+setGeneric('echo', function(x){
+  standardGeneric('echo')
+})
+
+#' @rdname parameters
+
+setGeneric('echo<-', function(x,value){
+  standardGeneric('echo<-')
+})
+
+#' @rdname parameters
+
+setGeneric('cache', function(x){
+  standardGeneric('cache')
+})
+
+#' @rdname parameters
+
+setGeneric('cache<-', function(x,value){
+  standardGeneric('cache<-')
+})
+
+#' @rdname parameters
+
+setGeneric('time', function(x){
+  standardGeneric('time')
+})
+
+#' @rdname parameters
+
+setGeneric('time<-', function(...){
+  standardGeneric('time<-')
+})
+
+#' @rdname parameters
+
+setGeneric('output', function(x){
+  standardGeneric('output')
+})
+
+#' @rdname parameters
+
+setGeneric('output<-', function(x,value){
+  standardGeneric('output<-')
 })
 
 #' @rdname report
@@ -49,6 +132,10 @@ setGeneric('generate', function(...){
   standardGeneric('generate')
 })
 
+setGeneric('reportHeader', function(x){
+  standardGeneric('reportHeader')
+})
+
 setGeneric('sessionInformationSection', function(x){
   standardGeneric('sessionInformationSection')
 })
@@ -57,8 +144,8 @@ setGeneric('reportFooter', function(x){
   standardGeneric('reportFooter')
 })
 
-setGeneric('title', function(...){
-  standardGeneric('title')
+setGeneric('sectionTitle', function(...){
+  standardGeneric('sectionTitle')
 })
 
 setGeneric('load', function(...){
