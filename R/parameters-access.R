@@ -7,7 +7,7 @@
 
 setMethod('title',signature = 'ReportParameters',
           function(x){
-            
+            x@title
           })
 
 #' @rdname parameters
@@ -15,7 +15,8 @@ setMethod('title',signature = 'ReportParameters',
 
 setMethod('title<-',signature = 'ReportParameters',
           function(x,value){
-            
+            x@title <- value
+            return(title)
           })
 
 #' @rdname parameters

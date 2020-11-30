@@ -53,7 +53,9 @@ setMethod('reportRMD',signature = 'Report',
             r <- report(x) %>%
               flatten()
             
-            c(r,
+            c(reportHeader(x),
+              reportOptions(x),
+              r,
               sessionInformationSection(x),
               reportFooter(x)) %>%
               glue_collapse(sep = '\n\n')

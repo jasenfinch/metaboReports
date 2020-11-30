@@ -3,7 +3,7 @@ objectName <- function(x){
   deparse(substitute(x))
 }
 
-sectionTitle <- function(x){
+objectTitle <- function(x){
   object_name <- deparse(substitute(x))
   glue(
     "
@@ -26,6 +26,38 @@ loadData <- function(x){
 argumentNames <- function(...){
   as.character(match.call())
 }
+
+setMethod('reportHeader',signature = 'Report',
+          function(x){
+            toc_option <- x %>%
+              toc() %>%
+              tolower()
+            glue(
+"
+---
+title: {title(x)}
+investigator: {investigator(x)}
+date: {time(x)}
+output: 
+  {output(x)}:
+    toc: {toc_option}
+---
+"
+            )
+          })
+
+setMethod('reportOptions',signature = 'Report',
+          function(x){
+            glue(
+"
+```{{r setup,include = FALSE}}
+knitr::opts_chunk$set(fig.align = 'center',
+                      cache = {cache(x)},
+                      echo = {echo(x)})
+```
+"
+            )
+          })
 
 setMethod('sessionInformationSection',signature = 'Report',
           function(x){

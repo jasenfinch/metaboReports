@@ -136,6 +136,10 @@ setGeneric('reportHeader', function(x){
   standardGeneric('reportHeader')
 })
 
+setGeneric('reportOptions', function(x){
+  standardGeneric('reportOptions')
+})
+
 setGeneric('sessionInformationSection', function(x){
   standardGeneric('sessionInformationSection')
 })
