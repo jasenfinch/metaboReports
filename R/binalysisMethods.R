@@ -14,15 +14,6 @@ setMethod('parameters',signature = 'Binalysis',
             )
           })
 
-setMethod('results',signature = 'Binalysis',
-          function(x){
-"
-### Results
-
-The plots and tables below give an overview of the results of the spectral binning approach applied to this data set.
-"
-          })
-
 setMethod('featureTable',signature = 'Binalysis',
           function(x){
             object_name <- deparse(substitute(x))

@@ -24,6 +24,6 @@ setClass('ReportParameters',
 setClass('Report',
          slots = list(
            data = 'list',
-           report = 'list',
+           report = 'list'
          ),
          contains = 'ReportParameters')

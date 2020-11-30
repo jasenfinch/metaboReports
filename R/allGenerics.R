@@ -1,8 +1,14 @@
 
 #' @rdname report
 
-setGeneric("report", function(analysis,parameters) {
+setGeneric("report", function(x) {
   standardGeneric("report")
+})
+
+#' @rdname report
+
+setGeneric("report<-", function(x,value) {
+  standardGeneric("report<-")
 })
 
 #' @rdname reportData
@@ -23,10 +29,6 @@ setGeneric('generate', function(x){
 
 setGeneric('parameters', function(x){
   standardGeneric('parameters')
-})
-
-setGeneric('results', function(x){
-  standardGeneric('results')
 })
 
 setGeneric('featureTable', function(x){
