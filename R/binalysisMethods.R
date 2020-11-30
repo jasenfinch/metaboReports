@@ -1,6 +1,6 @@
 
-setMethod('title',signature = 'Binalysis',function(...){
-  sectionTitle(...)
+setMethod('sectionTitle',signature = 'Binalysis',function(...){
+  objectTitle(...)
 })
 
 setMethod('load',signature = 'Binalysis',function(...){

@@ -4,7 +4,7 @@ setMethod('generate',signature = 'Binalysis',
           function(...){
             
             list(
-              title = title(...),
+              title = sectionTitle(...),
               load = load(...),
               parameters = parameters(...),
               featureTable = featureTable(...),
