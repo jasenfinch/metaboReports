@@ -3,10 +3,11 @@
 #' @slot path report directory output path
 #' @slot title report title
 #' @slot investigator investigator name
-#' @slot echo logical, inclusion of code chunks
 #' @slot sessionInfo logical, inclusion of session info
 #' @slot toc logical, inclusion of table of contents
-#' @slot date creation date
+#' @slot echo logical, inclusion of code chunks
+#' @slot cache logical, cache data
+#' @slot time creation time
 #' @slot output output type
 #' @export
 
@@ -17,7 +18,9 @@ setClass('ReportParameters',
            investigator = 'character',
            sessionInfo = 'logical',
            toc = 'logical',
-           date = 'Date',
+           echo = 'logical',
+           cache = 'logical',
+           time = 'Date',
            output = 'character'
          )
 )
