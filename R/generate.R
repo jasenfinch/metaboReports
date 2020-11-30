@@ -1,30 +1,53 @@
 #' @importFrom magrittr set_names
 
 setMethod('generate',signature = 'Binalysis',
-          function(x){
+          function(...){
             
             list(
-              parameters = parameters(x),
-              featureTable = featureTable(x),
-              chromatograms = chromatograms(x),
-              fingerprints = fingerprints(x),
-              purityAndCentrality = purityAndCentrality(x),
-              ticPlot = ticPlot(x),
-              rsdPlot = rsdPlot(x)
+              title = title(...),
+              load = load(...),
+              parameters = parameters(...),
+              featureTable = featureTable(...),
+              chromatograms = chromatograms(...),
+              fingerprints = fingerprints(...),
+              purityAndCentrality = purityAndCentrality(...),
+              ticPlot = ticPlot(...),
+              rsdPlot = rsdPlot(...)
             ) 
-            
             
           })
 
+#' Generate a report
+#' @description Generate a report skeleton.
+#' @param parameters S4 object of class ReportParameters
+#' @param ... 
+#' @importFrom magrittr %>%
 
 setMethod('generateReport',signature = 'ReportParameters',
           function(parameters,...){
-            # r <- new('Report')
-            # 
-            # report(r) <- 
-            #   
-            #   reportData(r) <- list(x) %>%
-            #   set_names(deparse(substitute(x)))
-            # 
-            # return(r)
+            
+            r <- new('Report',parameters)
+            
+            argument_names <- as.character(match.call()) %>%
+              .[-(1:2)]
+            
+            reports <- argument_names %>%
+              map(~{
+                glue('generate({.x})') %>%
+                  parse(text = .) %>%
+                  eval()
+              }) %>%
+              set_names(argument_names)
+            
+            report(r) <- reports
+
+            reportData(r) <- argument_names %>%
+              map(~{
+                .x %>%
+                  parse(text = .) %>%
+                  eval()
+              }) %>%
+              set_names(argument_names)
+            
+            return(r)
           })

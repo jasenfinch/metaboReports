@@ -23,35 +23,47 @@ setGeneric("reportData<-", function(x,value) {
   standardGeneric("reportData<-")
 })
 
-setGeneric('generate', function(x){
+setGeneric('generateReport', function(parameters,...){
+  standardGeneric('generateReport')
+})
+
+setGeneric('generate', function(...){
   standardGeneric('generate')
 })
 
-setGeneric('parameters', function(x){
+setGeneric('title', function(...){
+  standardGeneric('title')
+})
+
+setGeneric('load', function(...){
+  standardGeneric('load')
+})
+
+setGeneric('parameters', function(...){
   standardGeneric('parameters')
 })
 
-setGeneric('featureTable', function(x){
+setGeneric('featureTable', function(...){
   standardGeneric('featureTable')
 })
 
-setGeneric('chromatograms', function(x){
+setGeneric('chromatograms', function(...){
   standardGeneric('chromatograms')
 })
 
-setGeneric('fingerprints', function(x){
+setGeneric('fingerprints', function(...){
   standardGeneric('fingerprints')
 })
 
-setGeneric('purityAndCentrality', function(x){
+setGeneric('purityAndCentrality', function(...){
   standardGeneric('purityAndCentrality')
 })
 
-setGeneric('ticPlot', function(x){
+setGeneric('ticPlot', function(...){
   standardGeneric('ticPlot')
 })
 
-setGeneric('rsdPlot', function(x){
+setGeneric('rsdPlot', function(...){
   standardGeneric('rsdPlot')
 })
 

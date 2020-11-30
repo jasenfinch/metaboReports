@@ -1,8 +1,15 @@
 
+setMethod('title',signature = 'Binalysis',function(...){
+  sectionTitle(...)
+})
+
+setMethod('load',signature = 'Binalysis',function(...){
+  loadData(...)
+})
 
 setMethod('parameters',signature = 'Binalysis',
-          function(x){
-            object_name <- deparse(substitute(x))
+          function(...){
+            object_name <- objectName(...)
             glue(
 "
 ### Parameters
@@ -15,8 +22,8 @@ setMethod('parameters',signature = 'Binalysis',
           })
 
 setMethod('featureTable',signature = 'Binalysis',
-          function(x){
-            object_name <- deparse(substitute(x))
+          function(...){
+            object_name <- objectName(...)
             glue(
 "
 ```{{r rawFeaturesTable}}
@@ -48,8 +55,8 @@ knitr::kable(
           })
 
 setMethod('chromatograms',signature = 'Binalysis',
-          function(x){
-            object_name <- deparse(substitute(x))
+          function(...){
+            object_name <- objectName(...)
             glue(
 "
 ```{{r chromatograms}}
@@ -60,8 +67,8 @@ binneR::plotChromatogram({object_name})
 })
 
 setMethod('fingerprints',signature = 'Binalysis',
-          function(x){
-            object_name <- deparse(substitute(x))
+          function(...){
+            object_name <- objectName(...)
             glue(
 "
 ```{{r fingerprint}}
@@ -72,8 +79,8 @@ binneR::plotFingerprint({object_name})
 })
 
 setMethod('purityAndCentrality',signature = 'Binalysis',
-          function(x){
-            object_name <- deparse(substitute(x))
+          function(...){
+            object_name <- objectName(...)
             glue(
 "
 ```{{r PurityCentrality}}
@@ -86,12 +93,12 @@ patchwork::wrap_plots(binneR::plotPurity({object_name}),
 })
 
 setMethod('ticPlot',signature = 'Binalysis',
-          function(x){
-            object_name <- deparse(substitute(x))
+          function(...){
+            object_name <- objectName(...)
             glue(
 "
 ```{{r TICplot}}
-binneR::plotTIC(object_name, 
+binneR::plotTIC({object_name}, 
                 by = 'injOrder', 
                 colour = 'block')
 ``` 
@@ -100,10 +107,13 @@ binneR::plotTIC(object_name,
           })
 
 setMethod('rsdPlot',signature = 'Binalysis',
-          function(x){
+          function(...){
+            object_name <- objectName(...)
+            glue(
 "
 ```{{r RSDplot,fig.show='hold''}}
-metaboMisc::plotRSD(binalysis)
+metaboMisc::plotRSD({object_name})
 ````
-"
+" 
+            )
           })
