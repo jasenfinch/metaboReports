@@ -8,7 +8,7 @@ setMethod('generate',signature = 'Binalysis',
               load = load(...),
               introduction = introduction(...),
               parameters = parameters(...),
-              #featureTable = featureTable(...),
+              featureTable = featureTable(...),
               chromatograms = chromatograms(...),
               fingerprints = fingerprints(...),
               purityAndCentrality = purityAndCentrality(...),
@@ -23,6 +23,7 @@ setMethod('generate',signature = 'Binalysis',
 #' @param parameters S4 object of class ReportParameters
 #' @param ... 
 #' @importFrom magrittr %>%
+#' @importFrom purrr map_chr
 
 setMethod('generateReport',signature = 'ReportParameters',
           function(parameters,...){
@@ -30,25 +31,30 @@ setMethod('generateReport',signature = 'ReportParameters',
             r <- new('Report',parameters)
             
             argument_names <- as.character(match.call()) %>%
-              .[-(1:2)]
+              .[-(1:2)] 
             
-            reports <- argument_names %>%
+            argument_names <- argument_names %>%
+              map(sanitiseArgumentNames) %>%
+              {
+                names(.) <- map_chr(.,~{.$name}) 
+                .
+              }
+            
+            report(r) <- argument_names %>%
               map(~{
-                glue('generate({.x})') %>%
+                glue('generate({.x$variable})') %>%
                   parse(text = .) %>%
                   eval()
               }) %>%
-              set_names(argument_names)
-            
-            report(r) <- reports
+              set_names(names(argument_names))
 
             reportData(r) <- argument_names %>%
               map(~{
-                .x %>%
+                .x$variable %>%
                   parse(text = .) %>%
                   eval()
               }) %>%
-              set_names(argument_names)
+              set_names(names(argument_names))
             
             return(r)
           })
