@@ -18,6 +18,19 @@ setMethod('generate',signature = 'Binalysis',
             
           })
 
+setMethod('generate',signature = 'Assignment',
+          function(...){
+            
+            list(
+              title = sectionTitle(...),
+              load = load(...),
+              introduction = introduction(...),
+              parameters = parameters(...),
+              assignments = assignments(...)
+            ) 
+            
+          })
+
 #' Generate a report
 #' @description Generate a report skeleton.
 #' @param parameters S4 object of class ReportParameters

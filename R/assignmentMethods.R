@@ -1,41 +1,47 @@
 
-assignmentMethods <- function(analysis){
-  methods <- list(
-   parameters = function(analysis,type = 'head'){
-      headHash <- '##'
-      
-      if (type == 'sub') {
-         headHash <- '###'
-      }
-      
-     str_c("
-",headHash," Parameters
+setMethod('sectionTitle',signature = 'Assignment',
+          function(...){
+  objectTitle(...)
+})
 
-```{r assignmentParamters,echo=FALSE}
-assignment@parameters
-```
-")
-   },
-   assignments = function(analysis,type = 'head'){
-      headHash <- '##'
-      
-      if (type == 'sub') {
-         headHash <- '###'
-      }
-      
-     str_c('
-',headHash,' Assignments  
+setMethod('load',signature = 'Assignment',
+          function(...){
+  loadData(...)
+})
 
-```{r assignmentTable,echo = FALSE,cache = FALSE}
-datatable(assignment %>%
-  summariseAssignment(),
-          rownames = F,filter = "top",caption = "Summary table of molecular formula assignments")
-```
+setMethod('introduction',signature = 'Assignment',
+          function(...){
+  ""
+})
 
-')
-   }
-  )
+setMethod('parameters',signature = 'Assignment',
+          function(...){
+            object_name <- objectName(...)
+            glue(
+              "
+### Parameters
   
-  return(methods)
-  
-}
+```{{r {object_name$chunk}_assignment_paramters}}
+{object_name$variable}@parameters
+```
+"
+            )
+          })
+
+setMethod('assignments',signature = 'Assignment',
+          function(...){
+            object_name <- objectName(...)
+            glue(
+"
+### Assignments
+
+```{{r {object_name$chunk}_assignment_table,echo = FALSE,cache = FALSE}}
+assignments <- MFassign::summariseAssignment({object_name$variable})
+DT::datatable(assignments,
+          rownames = FALSE,
+          filter = 'top',
+          caption = 'Summary table of molecular formula assignments')
+```               
+"
+)
+          })

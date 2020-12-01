@@ -215,3 +215,7 @@ setGeneric('ticPlot', function(...){
 setGeneric('rsdPlot', function(...){
   standardGeneric('rsdPlot')
 })
+
+setGeneric('assignments', function(...){
+  standardGeneric('assignments')
+})

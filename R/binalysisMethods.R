@@ -1,13 +1,16 @@
 
-setMethod('sectionTitle',signature = 'Binalysis',function(...){
+setMethod('sectionTitle',signature = 'Binalysis',
+          function(...){
   objectTitle(...)
 })
 
-setMethod('load',signature = 'Binalysis',function(...){
+setMethod('load',signature = 'Binalysis',
+          function(...){
   loadData(...)
 })
 
-setMethod('introduction',signature = 'Binalysis',function(...){
+setMethod('introduction',signature = 'Binalysis',
+          function(...){
   "Processing results using a spectral binning approach."
 })
 
