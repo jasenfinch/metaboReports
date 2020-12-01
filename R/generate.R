@@ -6,6 +6,7 @@ setMethod('generate',signature = 'Binalysis',
             list(
               title = sectionTitle(...),
               load = load(...),
+              introduction = introduction(...),
               parameters = parameters(...),
               #featureTable = featureTable(...),
               chromatograms = chromatograms(...),

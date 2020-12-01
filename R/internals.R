@@ -16,7 +16,7 @@ loadData <- function(x){
   object_name <- deparse(substitute(x))
   glue(
   "
-```{{r loadData}}
+```{{r {object_name}_load_data}}
 {object_name} <- readr::read_rds('data/{object_name}.rds')
 ```
 "
@@ -66,7 +66,7 @@ setMethod('sessionInformationSection',signature = 'Report',
 '
 ## Session Info
 
-```{{r sessionInfo}}
+```{{r session_info}}
 sessionInfo()
 ```
 '

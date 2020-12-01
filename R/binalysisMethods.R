@@ -7,6 +7,10 @@ setMethod('load',signature = 'Binalysis',function(...){
   loadData(...)
 })
 
+setMethod('introduction',signature = 'Binalysis',function(...){
+  "Processing results using a spectral binning approach."
+})
+
 setMethod('parameters',signature = 'Binalysis',
           function(...){
             object_name <- objectName(...)
@@ -14,7 +18,7 @@ setMethod('parameters',signature = 'Binalysis',
 "
 ### Parameters
   
-```{{r binParamters}}
+```{{r {object_name}_bin_paramters}}
 {object_name}@binParameters
 ```
 "
@@ -26,7 +30,9 @@ setMethod('featureTable',signature = 'Binalysis',
             object_name <- objectName(...)
             glue(
 "
-```{{r rawFeaturesTable}}
+### Feature overview
+
+```{{r {object_name}_feature_table}}
 rawFeat <- {object_name} %>%
   binneR::binnedData() %>%
   purrr::map(~{{
@@ -59,7 +65,9 @@ setMethod('chromatograms',signature = 'Binalysis',
             object_name <- objectName(...)
             glue(
 "
-```{{r chromatograms}}
+### Infusion profiles
+
+```{{r {object_name}_chromatograms}}
 binneR::plotChromatogram({object_name})
 ```
 " 
@@ -71,7 +79,9 @@ setMethod('fingerprints',signature = 'Binalysis',
             object_name <- objectName(...)
             glue(
 "
-```{{r fingerprint}}
+### Spectrum fingerprints
+
+```{{r {object_name}_fingerprint}}
 binneR::plotFingerprint({object_name})
 ```
 " 
@@ -83,7 +93,8 @@ setMethod('purityAndCentrality',signature = 'Binalysis',
             object_name <- objectName(...)
             glue(
 "
-```{{r PurityCentrality}}
+### Bin purity and centrality
+```{{r {object_name}_purity_centrality}}
 patchwork::wrap_plots(binneR::plotPurity({object_name}),
                       binneR::plotCentrality({object_name}))
 ```
@@ -97,7 +108,9 @@ setMethod('ticPlot',signature = 'Binalysis',
             object_name <- objectName(...)
             glue(
 "
-```{{r TICplot}}
+### Sample total ion counts
+
+```{{r {object_name}_TIC_plot}}
 binneR::plotTIC({object_name}, 
                 by = 'injOrder', 
                 colour = 'block')
@@ -111,7 +124,9 @@ setMethod('rsdPlot',signature = 'Binalysis',
             object_name <- objectName(...)
             glue(
 "
-```{{r RSDplot}}
+### Feature relative standard deviations
+
+```{{r {object_name}_RSD_plot}}
 patchwork::wrap_plots(
   metaboMisc::plotRSD({object_name}),
   ncol = 1)

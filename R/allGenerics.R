@@ -178,6 +178,10 @@ setGeneric('load', function(...){
   standardGeneric('load')
 })
 
+setGeneric('introduction', function(...){
+  standardGeneric('introduction')
+})
+
 setGeneric('parameters', function(...){
   standardGeneric('parameters')
 })
