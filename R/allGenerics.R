@@ -136,6 +136,12 @@ setGeneric("reportRMD", function(x) {
   standardGeneric("reportRMD")
 })
 
+#' @rdname reportObjects
+
+setGeneric("reportObjects", function(x) {
+  standardGeneric("reportObjects")
+})
+
 setGeneric('generateReport', function(parameters,...){
   standardGeneric('generateReport')
 })

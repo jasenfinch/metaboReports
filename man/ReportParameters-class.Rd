@@ -16,7 +16,7 @@ An S4 class to store report parameters.
 
 \item{\code{investigator}}{investigator name}
 
-\item{\code{sessionInfo}}{logical, inclusion of session info}
+\item{\code{sessionInformation}}{logical, inclusion of session information}
 
 \item{\code{toc}}{logical, inclusion of table of contents}
 

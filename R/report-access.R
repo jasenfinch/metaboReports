@@ -60,3 +60,21 @@ setMethod('reportRMD',signature = 'Report',
               reportFooter(x)) %>%
               glue_collapse(sep = '\n\n')
           })
+
+#' Object classes included in a report
+#' @rdname reportObjects
+#' @description Return object calsses in a report.
+#' @param x S4 object of class Report
+#' @export
+
+setMethod('reportObjects',signature = 'Report',
+          function(x){
+            report_data <- reportData(x)
+            
+            classes <- map_chr(report_data,class)
+            
+            objects <- names(report_data)
+            names(objects) <- classes
+            
+            return(objects)
+          })

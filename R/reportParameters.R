@@ -19,14 +19,13 @@ reportParameters <- function(title,
                              cache = FALSE,
                              path = '.') {
   new('ReportParameters',
-      path = path,
+      path = normalizePath(path),
       title = title,
       investigator = investigator,
-      sessionInfo = sessionInfo,
+      sessionInformation = sessionInfo,
       toc = toc,
       echo = echo,
       cache = cache,
-      time = Sys.Date(),
       output = 'html_document'
   )
 }

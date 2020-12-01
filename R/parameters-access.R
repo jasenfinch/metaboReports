@@ -58,7 +58,7 @@ setMethod('investigator<-',signature = 'ReportParameters',
 
 setMethod('sessionInformation',signature = 'ReportParameters',
           function(x){
-            x@sessionInfo
+            x@sessionInformation
           })
 
 #' @rdname parameters
@@ -66,7 +66,7 @@ setMethod('sessionInformation',signature = 'ReportParameters',
 
 setMethod('sessionInformation<-',signature = 'ReportParameters',
           function(x,value){
-            x@sessionInfo <- value
+            x@sessionInformation <- value
             return(x)
           })
 
