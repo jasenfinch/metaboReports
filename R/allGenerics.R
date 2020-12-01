@@ -1,5 +1,17 @@
 #' @rdname parameters
 
+setGeneric('path', function(x){
+  standardGeneric('path')
+})
+
+#' @rdname parameters
+
+setGeneric('path<-', function(x,value){
+  standardGeneric('path<-')
+})
+
+#' @rdname parameters
+
 setGeneric('title', function(x){
   standardGeneric('title')
 })
@@ -146,6 +158,16 @@ setGeneric('sessionInformationSection', function(x){
 
 setGeneric('reportFooter', function(x){
   standardGeneric('reportFooter')
+})
+
+setGeneric('reportDirectory', function(x){
+  standardGeneric('reportDirectory')
+})
+
+#' @rdname renderReport
+
+setGeneric('renderReport', function(x,open = TRUE,...){
+  standardGeneric('renderReport')
 })
 
 setGeneric('sectionTitle', function(...){

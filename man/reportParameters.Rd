@@ -9,6 +9,8 @@ reportParameters(
   investigator,
   sessionInfo = TRUE,
   toc = TRUE,
+  echo = FALSE,
+  cache = FALSE,
   path = "."
 )
 }
@@ -17,9 +19,13 @@ reportParameters(
 
 \item{investigator}{investigator name}
 
-\item{sessionInfo}{TRUE/FALSE, should session info included?}
+\item{sessionInfo}{TRUE/FALSE, include session info}
 
-\item{toc}{TRUE/FALSE, should a table of contents be included}
+\item{toc}{TRUE/FALSE, include a table of contents}
+
+\item{echo}{TRUE/FALSE, echo code chunks}
+
+\item{cache}{TRUE/FALSE, cache report code chunk data}
 
 \item{path}{report output path}
 }

@@ -16,13 +16,15 @@ An S4 class to store report parameters.
 
 \item{\code{investigator}}{investigator name}
 
-\item{\code{echo}}{logical, inclusion of code chunks}
-
 \item{\code{sessionInfo}}{logical, inclusion of session info}
 
 \item{\code{toc}}{logical, inclusion of table of contents}
 
-\item{\code{date}}{creation date}
+\item{\code{echo}}{logical, inclusion of code chunks}
+
+\item{\code{cache}}{logical, cache data}
+
+\item{\code{time}}{creation time}
 
 \item{\code{output}}{output type}
 }}

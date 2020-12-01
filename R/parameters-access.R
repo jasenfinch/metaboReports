@@ -5,6 +5,23 @@
 #' @param value parameter value to set
 #' @export
 
+setMethod('path',signature = 'ReportParameters',
+          function(x){
+            x@path
+          })
+
+#' @rdname parameters
+#' @export
+
+setMethod('path<-',signature = 'ReportParameters',
+          function(x,value){
+            x@path <- value
+            return(x)
+          })
+
+#' @rdname parameters
+#' @export
+
 setMethod('title',signature = 'ReportParameters',
           function(x){
             x@title
@@ -16,7 +33,7 @@ setMethod('title',signature = 'ReportParameters',
 setMethod('title<-',signature = 'ReportParameters',
           function(x,value){
             x@title <- value
-            return(title)
+            return(x)
           })
 
 #' @rdname parameters

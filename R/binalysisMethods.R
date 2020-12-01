@@ -111,8 +111,10 @@ setMethod('rsdPlot',signature = 'Binalysis',
             object_name <- objectName(...)
             glue(
 "
-```{{r RSDplot,fig.show='hold''}}
-metaboMisc::plotRSD({object_name})
+```{{r RSDplot}}
+patchwork::wrap_plots(
+  metaboMisc::plotRSD({object_name}),
+  ncol = 1)
 ````
 " 
             )
