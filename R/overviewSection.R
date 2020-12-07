@@ -1,5 +1,4 @@
 #' @importFrom stringr str_c
-#' @importFrom binneR info
 #' @importFrom metabolyseR rawInfo
 #' @importFrom purrr map
 
