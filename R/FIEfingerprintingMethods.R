@@ -38,7 +38,7 @@ preTreatedFeatures <- analysis %>%
 purCent <- binalysis %>%
   accurateData() %>%
   mutate(Feature = str_c(polarity,mz)) %>%
-  dplyr::select(polarity,Feature,Purity,Centrality) %>%
+  dplyr::select(polarity,Feature,purity,centrality) %>%
   gather('Measure','Value',-polarity,-Feature) %>%
   mutate(polarity = as.character(polarity)) %>%
   na.omit() %>%
@@ -49,7 +49,7 @@ purCent$polarity[purCent$polarity == 'n'] <- 'Negative'
 purCent$polarity[purCent$polarity == 'p'] <- 'Positive'
     
 purPlot <- purCent %>%
-  filter(Measure == 'Purity') %>%
+  filter(Measure == 'purity') %>%
   ggplot(aes(x = Value)) +
   geom_histogram(fill = ptol_pal()(5)[2],colour = 'black',bins = histBins) +
   theme_bw() +
@@ -61,7 +61,7 @@ purPlot <- purCent %>%
   ylab('Frequency')
     
 centPlot <- purCent %>%
-filter(Measure == 'Centrality') %>%
+filter(Measure == 'centrality') %>%
 ggplot(aes(x = Value)) +
   geom_histogram(fill = ptol_pal()(5)[2],colour = 'black',bins = histBins) +
   theme_bw() +
