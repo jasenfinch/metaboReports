@@ -1,3 +1,13 @@
+
+setClass('Chunk',
+         slots = list(
+           id = 'character',
+           options = 'list',
+           code = 'call',
+           text_before = 'character',
+           text_after = 'character'
+         ))
+
 #' Report parameters class
 #' @description An S4 class to store report parameters.
 #' @slot path report directory output path
