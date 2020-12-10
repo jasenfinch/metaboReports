@@ -49,11 +49,11 @@ setClass('ReportParameters',
            toc = 'logical',
            echo = 'logical',
            cache = 'logical',
-           time = 'Date',
+           creation_date = 'Date',
            output = 'character'
          ),
          prototype = list(
-           time = Sys.Date()
+           creation_date = Sys.Date()
          )
 )
 

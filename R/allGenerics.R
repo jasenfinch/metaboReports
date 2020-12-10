@@ -70,13 +70,13 @@ setGeneric('cache<-', function(x,value)
 
 #' @rdname parameters
 
-setGeneric('time', function(x)
-  standardGeneric('time'))
+setGeneric('creationDate', function(x)
+  standardGeneric('creationDate'))
 
 #' @rdname parameters
 
-setGeneric('time<-', function(...)
-  standardGeneric('time<-'))
+setGeneric('creationDate<-', function(x,value)
+  standardGeneric('creationDate<-'))
 
 #' @rdname parameters
 

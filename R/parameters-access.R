@@ -124,17 +124,17 @@ setMethod('cache<-',signature = 'ReportParameters',
 #' @rdname parameters
 #' @export
 
-setMethod('time',signature = 'ReportParameters',
+setMethod('creationDate',signature = 'ReportParameters',
           function(x){
-            x@time
+            x@creation_date
           })
 
 #' @rdname parameters
 #' @export
 
-setMethod('time<-',signature = 'ReportParameters',
+setMethod('creationDate<-',signature = 'ReportParameters',
           function(x,value){
-            x@time <- value
+            x@creation_date <- value
             return(x)
           })
 

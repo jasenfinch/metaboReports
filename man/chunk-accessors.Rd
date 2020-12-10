@@ -2,7 +2,6 @@
 % Please edit documentation in R/allGenerics.R, R/chunk.R
 \name{code}
 \alias{code}
-\alias{code<-}
 \alias{label}
 \alias{label<-}
 \alias{chunkOptions}
@@ -13,7 +12,6 @@
 \alias{textBelow<-}
 \alias{rmd}
 \alias{code,Chunk-method}
-\alias{code<-,Chunk-method}
 \alias{label,Chunk-method}
 \alias{label<-,Chunk-method}
 \alias{chunkOptions,Chunk-method}
@@ -25,8 +23,6 @@
 \title{Chunk get and set methods}
 \usage{
 code(x)
-
-code(x, ...) <- value
 
 label(x)
 
@@ -48,8 +44,6 @@ rmd(x)
 
 \S4method{code}{Chunk}(x)
 
-\S4method{code}{Chunk}(x, ...) <- value
-
 \S4method{label}{Chunk}(x)
 
 \S4method{label}{Chunk}(x) <- value
@@ -69,9 +63,9 @@ rmd(x)
 \arguments{
 \item{x}{S4 object of class Chunk}
 
-\item{...}{R expressions to set}
-
 \item{value}{value to set}
+
+\item{...}{R expressions to set}
 }
 \description{
 Get and set methods for Chunk S4 class.

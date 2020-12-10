@@ -15,8 +15,8 @@
 \alias{echo<-}
 \alias{cache}
 \alias{cache<-}
-\alias{time}
-\alias{time<-}
+\alias{creationDate}
+\alias{creationDate<-}
 \alias{output}
 \alias{output<-}
 \alias{path,ReportParameters-method}
@@ -33,8 +33,8 @@
 \alias{echo<-,ReportParameters-method}
 \alias{cache,ReportParameters-method}
 \alias{cache<-,ReportParameters-method}
-\alias{time,ReportParameters-method}
-\alias{time<-,ReportParameters-method}
+\alias{creationDate,ReportParameters-method}
+\alias{creationDate<-,ReportParameters-method}
 \alias{output,ReportParameters-method}
 \alias{output<-,ReportParameters-method}
 \title{Get and set report parameters}
@@ -67,9 +67,9 @@ cache(x)
 
 cache(x) <- value
 
-time(x, ...)
+creationDate(x)
 
-time(...) <- value
+creationDate(x) <- value
 
 output(x)
 
@@ -103,9 +103,9 @@ output(x) <- value
 
 \S4method{cache}{ReportParameters}(x) <- value
 
-\S4method{time}{ReportParameters}(x)
+\S4method{creationDate}{ReportParameters}(x)
 
-\S4method{time}{ReportParameters}(x) <- value
+\S4method{creationDate}{ReportParameters}(x) <- value
 
 \S4method{output}{ReportParameters}(x)
 
