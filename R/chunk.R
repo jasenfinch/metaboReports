@@ -108,10 +108,20 @@ setMethod('rmd',signature = 'Chunk',
               code() %>%
               expr_text()
             
-            chunk_rmd <- glue("
+            if (chunk_code == 'expr()') {
+              chunk_code <- ''
+            }
+            
+            if (nchar(chunk_code) > 0 |
+                nchar(chunk_id) > 0 |
+                nchar(chunk_options) > 0) {
+              chunk_rmd <- glue("
             ```{{r{chunk_id}{chunk_options}}}
             {chunk_code}
-            ```")
+            ```")  
+            } else {
+              chunk_rmd <- glue('')
+            }
             
             text_above <- textAbove(x)
             
