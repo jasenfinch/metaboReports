@@ -177,35 +177,52 @@ setGeneric('rsdPlot', function(...)
 setGeneric('assignments', function(...)
   standardGeneric('assignments'))
 
+#' @rdname chunk-accessors
+
 setGeneric('code', function(x)
   standardGeneric('code'))
 
-setGeneric('code<-', function(x,...)
-  standardGeneric('code<-'))
+#' @rdname chunk-accessors
 
 setGeneric('label', function(x)
   standardGeneric('label'))
 
+#' @rdname chunk-accessors
+
 setGeneric('label<-', function(x,value)
   standardGeneric('label<-'))
+
+#' @rdname chunk-accessors
 
 setGeneric('chunkOptions', function(x)
   standardGeneric('chunkOptions'))
 
+#' @rdname chunk-accessors
+
 setGeneric('chunkOptions<-', function(x,value)
   standardGeneric('chunkOptions<-'))
+
+#' @rdname chunk-accessors
 
 setGeneric('textAbove', function(x)
   standardGeneric('textAbove'))
 
+#' @rdname chunk-accessors
+
 setGeneric('textAbove<-', function(x,value)
   standardGeneric('textAbove<-'))
+
+#' @rdname chunk-accessors
 
 setGeneric('textBelow', function(x)
   standardGeneric('textBelow'))
 
+#' @rdname chunk-accessors
+
 setGeneric('textBelow<-', function(x,value)
   standardGeneric('textBelow<-'))
+
+#' @rdname chunk-accessors
 
 setGeneric('rmd', function(x)
   standardGeneric('rmd'))

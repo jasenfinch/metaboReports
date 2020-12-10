@@ -49,16 +49,6 @@ setMethod('code',signature = 'Chunk',
 #' @rdname chunk-accessors
 #' @export
 
-setMethod('code<-',signature = 'Chunk',
-          function(x,...){
-            value <- enexprs(...)
-            x@code <- value
-            return(x)
-          })
-
-#' @rdname chunk-accessors
-#' @export
-
 setMethod('label',signature = 'Chunk',
           function(x){
             x@label
@@ -152,7 +142,7 @@ setMethod('rmd',signature = 'Chunk',
               label()
             
             if (nchar(chunk_label) > 0){
-              chunk_label <- glue(" {chunk_id}")
+              chunk_label <- glue(" {chunk_label}")
             }
             
             chunk_options <- x %>%
