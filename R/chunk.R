@@ -24,6 +24,7 @@ setMethod('code',signature = 'Chunk',
 
 setMethod('code<-',signature = 'Chunk',
           function(x,value){
+            value <- enexpr(value)
             x@code <- value
             return(x)
           })
