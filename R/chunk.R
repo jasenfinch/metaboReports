@@ -1,12 +1,12 @@
-#' @importFrom rlang enexpr expr
+#' @importFrom rlang enexprs
 
-chunk <- function(code = expr(),
+chunk <- function(...,
                   id = '',
                   chunk_options = list(),
                   text_above = '',
                   text_below = ''){
   
-  code_chunk <- enexpr(code)
+  code_chunk <- enexprs(...)
   
   new('Chunk',
       id = id,
@@ -23,8 +23,8 @@ setMethod('code',signature = 'Chunk',
           })
 
 setMethod('code<-',signature = 'Chunk',
-          function(x,value){
-            value <- enexpr(value)
+          function(x,...){
+            value <- enexpr(...)
             x@code <- value
             return(x)
           })
@@ -107,7 +107,8 @@ setMethod('rmd',signature = 'Chunk',
             
             chunk_code <- x %>%
               code() %>%
-              expr_text()
+              map_chr(expr_text) %>%
+              glue_collapse(sep = '\n')
             
             if (chunk_code == 'expr()') {
               chunk_code <- ''

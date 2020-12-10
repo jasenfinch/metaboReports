@@ -180,7 +180,7 @@ setGeneric('assignments', function(...)
 setGeneric('code', function(x)
   standardGeneric('code'))
 
-setGeneric('code<-', function(x,value)
+setGeneric('code<-', function(x,...)
   standardGeneric('code<-'))
 
 setGeneric('id', function(x)

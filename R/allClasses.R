@@ -3,7 +3,7 @@ setClass('Chunk',
          slots = list(
            id = 'character',
            knitr_options = 'list',
-           code = 'call',
+           code = 'list',
            text_above = 'character',
            text_below = 'character'
          ))
