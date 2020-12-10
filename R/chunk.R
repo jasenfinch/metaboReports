@@ -1,7 +1,23 @@
+#' Genreate an Rmarkdown chunk
+#' @description Generate an Rmarkdown code chunk.
+#' @param ... R expressions from which to generate a chunk
+#' @param label chunk label
+#' @param chunk_options knitr chunk options
+#' @param text_above optional text to be placed above the code chunk
+#' @param text_below optional text to be placed below the code chunk
+#' @examples 
+#' chunk(a <- 1,
+#'       b <- 2,
+#'       a + b,
+#'       label = 'example',
+#'       chunk_options = list(eval = FALSE),
+#'       text_above = 'Some example text above.',
+#'       text_below = 'Some example text below.') 
 #' @importFrom rlang enexprs
+#' @export
 
 chunk <- function(...,
-                  id = '',
+                  label = '',
                   chunk_options = list(),
                   text_above = '',
                   text_below = ''){
@@ -9,7 +25,7 @@ chunk <- function(...,
   code_chunk <- enexprs(...)
   
   new('Chunk',
-      id = id,
+      label = label,
       knitr_options = chunk_options,
       code = code_chunk,
       text_above = text_above,
@@ -17,33 +33,56 @@ chunk <- function(...,
   )
 }
 
+#' Chunk get and set methods
+#' @rdname chunk-accessors
+#' @description Get and set methods for Chunk S4 class.
+#' @param x S4 object of class Chunk
+#' @param value value to set
+#' @param ... R expressions to set
+#' @export
+
 setMethod('code',signature = 'Chunk',
           function(x){
             x@code
           })
 
+#' @rdname chunk-accessors
+#' @export
+
 setMethod('code<-',signature = 'Chunk',
           function(x,...){
-            value <- enexpr(...)
+            value <- enexprs(...)
             x@code <- value
             return(x)
           })
 
-setMethod('id',signature = 'Chunk',
+#' @rdname chunk-accessors
+#' @export
+
+setMethod('label',signature = 'Chunk',
           function(x){
-            x@id
+            x@label
           })
 
-setMethod('id<-',signature = 'Chunk',
+#' @rdname chunk-accessors
+#' @export
+
+setMethod('label<-',signature = 'Chunk',
           function(x,value){
-            x@id <- value
+            x@label <- value
             return(x)
           })
+
+#' @rdname chunk-accessors
+#' @export
 
 setMethod('chunkOptions',signature = 'Chunk',
           function(x){
             x@knitr_options
           })
+
+#' @rdname chunk-accessors
+#' @export
 
 setMethod('chunkOptions<-',signature = 'Chunk',
           function(x,value){
@@ -51,10 +90,16 @@ setMethod('chunkOptions<-',signature = 'Chunk',
             return(x)
           })
 
+#' @rdname chunk-accessors
+#' @export
+
 setMethod('textAbove',signature = 'Chunk',
           function(x){
             x@text_above
           })
+
+#' @rdname chunk-accessors
+#' @export
 
 setMethod('textAbove<-',signature = 'Chunk',
           function(x,value){
@@ -62,10 +107,16 @@ setMethod('textAbove<-',signature = 'Chunk',
             return(x)
           })
 
+#' @rdname chunk-accessors
+#' @export
+
 setMethod('textBelow',signature = 'Chunk',
           function(x){
             x@text_below
           })
+
+#' @rdname chunk-accessors
+#' @export
 
 setMethod('textBelow<-',signature = 'Chunk',
           function(x,value){
@@ -85,16 +136,23 @@ collapseOptions <- function(options){
   }
 }
 
+#' Chunk Rmarkdown
+#' @description Retrieve Rmarkdown from an object of class Chunk.
+#' @param x S4 object of class Chunk
+#' @examples
+#' x <- chunk(1 + 1)
+#' rmd(x)
 #' @importFrom rlang expr_text
+#' @export
 
 setMethod('rmd',signature = 'Chunk',
           function(x){
             
-            chunk_id <- x %>%
-              id()
+            chunk_label <- x %>%
+              label()
             
-            if (nchar(chunk_id) > 0){
-              chunk_id <- glue(" {chunk_id}")
+            if (nchar(chunk_label) > 0){
+              chunk_label <- glue(" {chunk_id}")
             }
             
             chunk_options <- x %>%
@@ -106,16 +164,18 @@ setMethod('rmd',signature = 'Chunk',
             }
             
             chunk_code <- x %>%
-              code() %>%
-              map_chr(expr_text) %>%
-              glue_collapse(sep = '\n')
+              code()
             
-            if (chunk_code == 'expr()') {
+            if (length(chunk_code) > 0) {
+              chunk_code <-  chunk_code %>%
+                map_chr(expr_text) %>%
+                glue_collapse(sep = '\n')
+            } else {
               chunk_code <- ''
             }
             
             if (nchar(chunk_code) > 0 |
-                nchar(chunk_id) > 0 |
+                nchar(chunk_label) > 0 |
                 nchar(chunk_options) > 0) {
               chunk_rmd <- glue("
             ```{{r{chunk_id}{chunk_options}}}

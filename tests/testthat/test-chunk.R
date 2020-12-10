@@ -19,13 +19,13 @@ test_that('empty chunk correctly displayed',{
 test_that('we can get and set Chunk code',{
   x <- chunk()
   code(x) <- expr(1 + 1)
-  expect_identical(code(x),expr(1 + 1))
+  expect_identical(code(x),list(value = expr(1 + 1)))
 })
 
-test_that('we can get and set Chunk id',{
+test_that('we can get and set Chunk label',{
   x <- chunk()
-  id(x) <- 'test'
-  expect_identical(id(x),'test')
+  label(x) <- 'test'
+  expect_identical(label(x),'test')
 })
 
 test_that('we can get and set Chunk knitr options',{

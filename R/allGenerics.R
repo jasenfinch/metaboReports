@@ -183,11 +183,11 @@ setGeneric('code', function(x)
 setGeneric('code<-', function(x,...)
   standardGeneric('code<-'))
 
-setGeneric('id', function(x)
-  standardGeneric('id'))
+setGeneric('label', function(x)
+  standardGeneric('label'))
 
-setGeneric('id<-', function(x,value)
-  standardGeneric('id<-'))
+setGeneric('label<-', function(x,value)
+  standardGeneric('label<-'))
 
 setGeneric('chunkOptions', function(x)
   standardGeneric('chunkOptions'))
