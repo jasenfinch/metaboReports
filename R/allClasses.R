@@ -2,11 +2,30 @@
 setClass('Chunk',
          slots = list(
            id = 'character',
-           options = 'list',
+           knitr_options = 'list',
            code = 'call',
-           text_before = 'character',
-           text_after = 'character'
+           text_above = 'character',
+           text_below = 'character'
          ))
+
+#' @importFrom knitr opts_chunk
+
+setValidity('Chunk',function(object){
+  knitr_options <- opts_chunk$get() %>%
+    names()
+  
+  chunk_options <- object %>%
+    chunkOptions() %>%
+    names()
+  
+  options_matches <- chunk_options %in% knitr_options 
+  
+  if (FALSE %in% options_matches) {
+    'knitr chunk option not found.'
+  } else {
+    return(TRUE)
+  }
+})
 
 #' Report parameters class
 #' @description An S4 class to store report parameters.

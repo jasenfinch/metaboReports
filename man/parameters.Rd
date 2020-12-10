@@ -67,7 +67,7 @@ cache(x)
 
 cache(x) <- value
 
-time(x)
+time(x, ...)
 
 time(...) <- value
 

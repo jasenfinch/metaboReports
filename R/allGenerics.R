@@ -176,3 +176,36 @@ setGeneric('rsdPlot', function(...)
 
 setGeneric('assignments', function(...)
   standardGeneric('assignments'))
+
+setGeneric('code', function(x)
+  standardGeneric('code'))
+
+setGeneric('code<-', function(x,value)
+  standardGeneric('code<-'))
+
+setGeneric('id', function(x)
+  standardGeneric('id'))
+
+setGeneric('id<-', function(x,value)
+  standardGeneric('id<-'))
+
+setGeneric('chunkOptions', function(x)
+  standardGeneric('chunkOptions'))
+
+setGeneric('chunkOptions<-', function(x,value)
+  standardGeneric('chunkOptions<-'))
+
+setGeneric('textAbove', function(x)
+  standardGeneric('textAbove'))
+
+setGeneric('textAbove<-', function(x,value)
+  standardGeneric('textAbove<-'))
+
+setGeneric('textBelow', function(x)
+  standardGeneric('textBelow'))
+
+setGeneric('textBelow<-', function(x,value)
+  standardGeneric('textBelow<-'))
+
+setGeneric('rmd', function(x)
+  standardGeneric('rmd'))
