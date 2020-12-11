@@ -26,6 +26,7 @@ reportParameters <- function(title,
       toc = toc,
       echo = echo,
       cache = cache,
+      creation_date = date(),
       output = 'html_document'
   )
 }

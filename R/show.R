@@ -3,6 +3,7 @@
 #' @description Show method for ReportParameters class
 #' @param object S4 object of class ReportParameters
 #' @importFrom crayon blue bold col_nchar
+#' @importFrom purrr map
 #' @export
 
 setMethod('show',signature = 'ReportParameters',
@@ -11,12 +12,11 @@ setMethod('show',signature = 'ReportParameters',
             cat(bold(blue('\nReport parameters:\n')))
             
             slots <- slotNames(object)
-
+            slots[8] <- 'creationDate'
+            
             pars <- slots %>%
               map(do.call,args = list(x = object)) %>%
               set_names(slots)
-
-            pars$time <- format(pars$time)
 
             par_names <- glue("{names(pars)}:") %>%
               blue()
