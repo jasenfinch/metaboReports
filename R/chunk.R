@@ -168,7 +168,7 @@ setMethod('rmd',signature = 'Chunk',
                 nchar(chunk_label) > 0 |
                 nchar(chunk_options) > 0) {
               chunk_rmd <- glue("
-            ```{{r{chunk_id}{chunk_options}}}
+            ```{{r{chunk_label}{chunk_options}}}
             {chunk_code}
             ```")  
             } else {

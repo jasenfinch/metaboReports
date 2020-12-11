@@ -38,22 +38,17 @@ objectName <- function(x){
 
 objectTitle <- function(...){
   object_name <- objectName(...)
-  glue(
-    "
-## {object_name$name}  
-"
-  )
+  chunk(text_above = glue("## {object_name$name}"))
 } 
+
+#' @importFrom rlang parse_expr
 
 loadData <- function(...){
   object_name <- objectName(...)
-  glue(
-  "
-```{{r {object_name$chunk}_load_data}}
-{object_name$variable} <- readr::read_rds('data/{object_name$chunk}.rds')
-```
-"
-  )
+  chunk_code <- glue("{object_name$variable} <- readr::read_rds('data/{object_name$chunk}.rds')") %>%
+    parse_expr()
+  chunk(!!chunk_code,
+        label = glue("{object_name$chunk}_load_data"))
 }
 
 argumentNames <- function(...){
