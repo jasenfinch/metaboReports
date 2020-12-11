@@ -14,7 +14,7 @@ setMethod('reportHeader',signature = 'Report',
 ---
 title: {title(x)}
 author: {investigator(x)}
-date: {time(x)}
+date: {creationDate(x)}
 output: 
   {output(x)}:
     toc: {toc_option}

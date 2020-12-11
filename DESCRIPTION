@@ -53,6 +53,7 @@ Collate: allClasses.R
         profilingMethods.R
         render.R
         report-access.R
+        Report-chunks.R
         reportMethods.R
         reportParameters.R
         show.R
