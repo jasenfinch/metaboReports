@@ -18,7 +18,7 @@ test_that('empty chunk correctly displayed',{
 
 test_that('we can get Chunk code',{
   x <- chunk(1 + 1)
-  expect_identical(code(x),exprs(1 + 1))
+  expect_identical(code(x),rlang::exprs(1 + 1))
 })
 
 test_that('we can get and set Chunk label',{
