@@ -34,3 +34,26 @@ Suggests:
 VignetteBuilder: knitr
 Remotes: aberHRML/binneR,
         jasenfinch/metabolyseR
+Collate: allClasses.R
+        allGenerics.R
+        analysisMethods.R
+        assignmentMethods.R
+        Binalysis-chunks.R
+        chunk.R
+        correlationMethods.R
+        erahMethods.R
+        FIEfingerprintingMethods.R
+        generate.R
+        internals.R
+        metaboReports.R
+        modellingMethods.R
+        parameters-access.R
+        preTreatmentMethods.R
+        profileMethods.R
+        profilingMethods.R
+        render.R
+        report-access.R
+        reportMethods.R
+        reportParameters.R
+        show.R
+        XCMSmethods.R
