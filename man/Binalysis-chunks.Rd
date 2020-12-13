@@ -17,21 +17,21 @@
 
 \S4method{load}{Binalysis}(x)
 
-\S4method{introduction}{Binalysis}(...)
+\S4method{introduction}{Binalysis}(x)
 
-\S4method{parameters}{Binalysis}(...)
+\S4method{parameters}{Binalysis}(x)
 
-\S4method{featureTable}{Binalysis}(...)
+\S4method{featureTable}{Binalysis}(x)
 
-\S4method{chromatograms}{Binalysis}(...)
+\S4method{chromatograms}{Binalysis}(x)
 
-\S4method{fingerprints}{Binalysis}(...)
+\S4method{fingerprints}{Binalysis}(x)
 
-\S4method{purityAndCentrality}{Binalysis}(...)
+\S4method{purityAndCentrality}{Binalysis}(x)
 
-\S4method{ticPlot}{Binalysis}(...)
+\S4method{ticPlot}{Binalysis}(x)
 
-\S4method{rsdPlot}{Binalysis}(...)
+\S4method{rsdPlot}{Binalysis}(x)
 }
 \arguments{
 \item{x}{S4 object of class Binalysis}
