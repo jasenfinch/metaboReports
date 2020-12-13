@@ -121,7 +121,7 @@ setGeneric("reportObjects", function(x)
 setGeneric('generateReport', function(parameters,...)
   standardGeneric('generateReport'))
 
-setGeneric('generate', function(...)
+setGeneric('generate', function(x)
   standardGeneric('generate'))
 
 setGeneric('reportHeader', function(x)

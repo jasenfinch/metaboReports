@@ -1,32 +1,32 @@
 #' @importFrom magrittr set_names
 
 setMethod('generate',signature = 'Binalysis',
-          function(...){
+          function(x){
             
             list(
-              title = sectionTitle(...),
-              load = load(...),
-              introduction = introduction(...),
-              parameters = parameters(...),
-              featureTable = featureTable(...),
-              chromatograms = chromatograms(...),
-              fingerprints = fingerprints(...),
-              purityAndCentrality = purityAndCentrality(...),
-              ticPlot = ticPlot(...),
-              rsdPlot = rsdPlot(...)
+              title = sectionTitle(x),
+              load = load(x),
+              introduction = introduction(x),
+              parameters = parameters(x),
+              featureTable = featureTable(x),
+              chromatograms = chromatograms(x),
+              fingerprints = fingerprints(x),
+              purityAndCentrality = purityAndCentrality(x),
+              ticPlot = ticPlot(x),
+              rsdPlot = rsdPlot(x)
             ) 
             
           })
 
 setMethod('generate',signature = 'Assignment',
-          function(...){
+          function(x){
             
             list(
-              title = sectionTitle(...),
-              load = load(...),
-              introduction = introduction(...),
-              parameters = parameters(...),
-              assignments = assignments(...)
+              title = sectionTitle(x),
+              load = load(x),
+              introduction = introduction(x),
+              parameters = parameters(x),
+              assignments = assignments(x)
             ) 
             
           })
