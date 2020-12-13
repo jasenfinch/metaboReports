@@ -133,6 +133,7 @@ collapseOptions <- function(options){
 #' x <- chunk(1 + 1)
 #' rmd(x)
 #' @importFrom rlang expr_text
+#' @importFrom styler style_text
 #' @export
 
 setMethod('rmd',signature = 'Chunk',
@@ -159,6 +160,7 @@ setMethod('rmd',signature = 'Chunk',
             if (length(chunk_code) > 0) {
               chunk_code <-  chunk_code %>%
                 map_chr(expr_text) %>%
+                style_text() %>%
                 glue_collapse(sep = '\n')
             } else {
               chunk_code <- ''
@@ -167,6 +169,7 @@ setMethod('rmd',signature = 'Chunk',
             if (nchar(chunk_code) > 0 |
                 nchar(chunk_label) > 0 |
                 nchar(chunk_options) > 0) {
+              
               chunk_rmd <- glue("
             ```{{r{chunk_label}{chunk_options}}}
             {chunk_code}
