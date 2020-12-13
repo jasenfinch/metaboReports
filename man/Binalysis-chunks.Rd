@@ -13,9 +13,9 @@
 \alias{rsdPlot,Binalysis-method}
 \title{Report chunks for Binalysis class}
 \usage{
-\S4method{sectionTitle}{Binalysis}(...)
+\S4method{sectionTitle}{Binalysis}(x)
 
-\S4method{load}{Binalysis}(...)
+\S4method{load}{Binalysis}(x)
 
 \S4method{introduction}{Binalysis}(...)
 
@@ -34,7 +34,7 @@
 \S4method{rsdPlot}{Binalysis}(...)
 }
 \arguments{
-\item{...}{S4 object of class Binalysis}
+\item{x}{S4 object of class Binalysis}
 }
 \value{
 S4 object of class Chunk.

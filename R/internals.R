@@ -18,37 +18,33 @@ sanitiseArgumentNames <- function(x){
   return(argument_names)
 }
 
-objectName <- function(x){
-  object_name <- list()
-  
-  object_name$name <- deparse(substitute(x))
-  
-  object_name$chunk <- object_name$name %>%
+chunkName <- function(x){
+  x %>%
     tolower() %>%
     str_replace_all(' ','_')
-  
-  if (str_detect(object_name$name,' ')) {
-    object_name$variable <- glue("`{object_name$name}`")
-  } else {
-    object_name$variable <- object_name$name
-  }
-  
-  return(object_name)
 }
 
-objectTitle <- function(...){
-  object_name <- objectName(...)
-  chunk(text_above = glue("## {object_name$name}"))
+#' @importFrom rlang ensym
+
+objectTitle <- function(x){
+  object_name <- ensym(x) %>%
+    expr_text()
+  
+  chunk(text_above = glue("## {object_name}"))
 } 
 
-#' @importFrom rlang parse_expr
+#' @importFrom rlang expr parse_expr as_string
 
-loadData <- function(...){
-  object_name <- objectName(...)
-  chunk_code <- glue("{object_name$variable} <- readr::read_rds('data/{object_name$chunk}.rds')") %>%
+loadData <- function(x){
+  object_name <- ensym(x) %>%
+    as_string()
+  chunk_name <- chunkName(object_name)
+  
+  chunk_code <- glue("{object_name} <- readr::read_rds('data/{chunk_name}.rds')") %>%
     parse_expr()
+  
   chunk(!!chunk_code,
-        label = glue("{object_name$chunk}_load_data"))
+        label = glue("{chunk_name}_load_data"))
 }
 
 argumentNames <- function(...){

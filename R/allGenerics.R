@@ -144,37 +144,37 @@ setGeneric('reportDirectory', function(x)
 setGeneric('renderReport', function(x,open = TRUE,...)
   standardGeneric('renderReport'))
 
-setGeneric('sectionTitle', function(...)
+setGeneric('sectionTitle', function(x)
   standardGeneric('sectionTitle'))
 
-setGeneric('load', function(...)
+setGeneric('load', function(x)
   standardGeneric('load'))
 
-setGeneric('introduction', function(...)
+setGeneric('introduction', function(x)
   standardGeneric('introduction'))
 
-setGeneric('parameters', function(...)
+setGeneric('parameters', function(x)
   standardGeneric('parameters'))
 
-setGeneric('featureTable', function(...)
+setGeneric('featureTable', function(x)
   standardGeneric('featureTable'))
 
-setGeneric('chromatograms', function(...)
+setGeneric('chromatograms', function(x)
   standardGeneric('chromatograms'))
 
-setGeneric('fingerprints', function(...)
+setGeneric('fingerprints', function(x)
   standardGeneric('fingerprints'))
 
-setGeneric('purityAndCentrality', function(...)
+setGeneric('purityAndCentrality', function(x)
   standardGeneric('purityAndCentrality'))
 
-setGeneric('ticPlot', function(...)
+setGeneric('ticPlot', function(x)
   standardGeneric('ticPlot'))
 
-setGeneric('rsdPlot', function(...)
+setGeneric('rsdPlot', function(x)
   standardGeneric('rsdPlot'))
 
-setGeneric('assignments', function(...)
+setGeneric('assignments', function(x)
   standardGeneric('assignments'))
 
 #' @rdname chunk-accessors
