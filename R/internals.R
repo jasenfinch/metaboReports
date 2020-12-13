@@ -1,22 +1,3 @@
-#' @importFrom stringr str_remove_all
-
-sanitiseArgumentNames <- function(x){
-  argument_names <- list()
-  
-  if (str_detect(x,'`') | str_detect(x,' ')){
-    argument_names$name <- str_remove_all(x,'`')
-    argument_names$file_name <- argument_names$name %>%
-      tolower() %>%
-      str_replace_all(' ','_')
-  } else {
-    argument_names$name <- x
-    argument_names$file_name <- x
-  }
-  
-  argument_names$variable <- x
-  
-  return(argument_names)
-}
 
 chunkName <- function(x){
   x %>%
@@ -45,8 +26,4 @@ loadData <- function(x){
   
   chunk(!!chunk_code,
         label = glue("{chunk_name}_load_data"))
-}
-
-argumentNames <- function(...){
-  as.character(match.call())
 }
