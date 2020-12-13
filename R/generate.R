@@ -37,6 +37,7 @@ setMethod('generate',signature = 'Assignment',
 #' @param ... 
 #' @importFrom magrittr %>%
 #' @importFrom purrr map_chr
+#' @importFrom rlang sym eval_tidy syms
 
 setMethod('generateReport',signature = 'ReportParameters',
           function(parameters,...){
@@ -46,28 +47,17 @@ setMethod('generateReport',signature = 'ReportParameters',
             argument_names <- as.character(match.call()) %>%
               .[-(1:2)] 
             
-            argument_names <- argument_names %>%
-              map(sanitiseArgumentNames) %>%
-              {
-                names(.) <- map_chr(.,~{.$name}) 
-                .
-              }
-            
             report(r) <- argument_names %>%
               map(~{
-                glue('generate({.x$variable})') %>%
-                  parse(text = .) %>%
-                  eval()
+                object_name <- sym(.x) 
+                eval_tidy(expr(generate(!!object_name))) 
               }) %>%
-              set_names(names(argument_names))
+              set_names(argument_names)
 
             reportData(r) <- argument_names %>%
-              map(~{
-                .x$variable %>%
-                  parse(text = .) %>%
-                  eval()
-              }) %>%
-              set_names(names(argument_names))
+              syms() %>%
+              map(eval_tidy) %>%
+              set_names(argument_names)
             
             return(r)
           })
