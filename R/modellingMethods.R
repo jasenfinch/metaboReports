@@ -1,5 +1,3 @@
-#' @importFrom metabolyseR modellingResults
-
 modellingMethods <- function(analysis,type = 'head'){
   
   headHash <- '##'
@@ -8,13 +6,13 @@ modellingMethods <- function(analysis,type = 'head'){
     headHash <- '###'
   }
   
-  if ({analysis %>% modellingResults() %>% length()} > 0) {
+  if ({analysis %>% analysisResults('modelling') %>% length()} > 0) {
     str_c("
 ",headHash," Modelling
 
 ```{r modellingOverview, cache = FALSE,results = 'asis'}
 modellingRes <- analysis %>%
-  modellingResults()
+  analysisResults('modelling')
 
 if (names(modellingRes)[1] == 'randomForest') {
 modellingRes %>%

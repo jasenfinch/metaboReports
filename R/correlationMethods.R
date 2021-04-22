@@ -1,4 +1,4 @@
-#' @importFrom metabolyseR correlationResults
+#' @importFrom metabolyseR analysisResults
 
 correlationMethods <- function(analysis,type = 'head'){
   
@@ -8,13 +8,13 @@ correlationMethods <- function(analysis,type = 'head'){
     headHash <- '###'
   }
   
-  if ({analysis %>% correlationResults() %>% length()} > 0) {
+  if ({analysis %>% analysisResults(element = 'correlations') %>% length()} > 0) {
     str_c("
 ",headHash," Correlations
 
 ```{r correlationTable,echo = F,cache = F}
 cors <- analysis %>%
-  correlationResults()
+  analysisResults('correlations')
 if (nrow(cors) > 10000) {
   cors <- cors %>%
     arrange(desc(r)) %>%
