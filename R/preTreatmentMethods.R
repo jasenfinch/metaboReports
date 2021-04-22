@@ -1,4 +1,4 @@
-#' @importFrom metabolyseR preTreatedInfo
+#' @importFrom metabolyseR sinfo
 #' @importFrom glue glue
 #' @importFrom stringr str_detect
 #' @importFrom tibble deframe tibble
@@ -11,7 +11,7 @@ preTreatmentMethods <- function(analysis, type = 'head', cls = 'class', chunks =
   
   legend <- addLegend(analysis,cls)
   
-  if ({analysis %>% preTreatedInfo() %>% nrow()} > 0) {
+  if ({analysis %>% sinfo(type = 'pre-treated') %>% nrow()} > 0) {
     glue("
     
 {headHash} Pre-treatment
@@ -29,7 +29,7 @@ metabolyseR::plotPCA(analysis,cls = '{cls}',ellipses = {ellipses},legend = {lege
 
 getClasses <- function(analysis,cls = 'class'){
   analysis %>% 
-    preTreatedInfo() %>% 
+    sinfo(type = 'pre-treated') %>% 
     select(cls) %>%
     deframe()
 }
