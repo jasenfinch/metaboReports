@@ -118,7 +118,7 @@ setGeneric("reportRMD", function(x)
 setGeneric("reportObjects", function(x)
   standardGeneric("reportObjects"))
 
-setGeneric('generateReport', function(parameters,...)
+setGeneric('generateReport', function(report_parameters,...)
   standardGeneric('generateReport'))
 
 setGeneric('generate', function(x)

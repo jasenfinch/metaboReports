@@ -51,13 +51,20 @@ setMethod('report<-',signature = 'Report',
 setMethod('reportRMD',signature = 'Report',
           function(x){
             r <- report(x) %>%
+              map(~{
+                map_chr(.x,rmd)
+              }) %>%
               flatten()
             
-            c(reportHeader(x),
-              reportOptions(x),
+            c(reportHeader(x) %>%
+                rmd(),
+              reportOptions(x) %>% 
+                rmd(),
               r,
-              sessionInformationSection(x),
-              reportFooter(x)) %>%
+              sessionInformationSection(x) %>%
+                rmd(),
+              reportFooter(x) %>%
+                rmd()) %>%
               glue_collapse(sep = '\n\n')
           })
 

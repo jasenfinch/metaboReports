@@ -6,10 +6,12 @@ chunkName <- function(x){
 }
 
 #' @importFrom rlang ensym
+#' @importFrom stringr str_remove_all
 
 objectTitle <- function(x){
   object_name <- ensym(x) %>%
-    expr_text()
+    expr_text() %>%
+    str_remove_all('`')
   
   chunk(text_above = glue("## {object_name}"))
 } 

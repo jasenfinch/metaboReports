@@ -3,18 +3,29 @@
 setMethod('generate',signature = 'Binalysis',
           function(x){
             
+            object_name <- substitute(x)
+            
+            envir <- rlang::env()
+            envir[[expr_text(object_name)]] <- x
+            
+            # eval_tidy(expr(!!object_name <- x),env = envir)
+            
             list(
-              title = sectionTitle(x),
-              load = load(x),
-              introduction = introduction(x),
-              parameters = parameters(x),
-              featureTable = featureTable(x),
-              chromatograms = chromatograms(x),
-              fingerprints = fingerprints(x),
-              purityAndCentrality = purityAndCentrality(x),
-              ticPlot = ticPlot(x),
-              rsdPlot = rsdPlot(x)
-            ) 
+              title = sectionTitle,
+              load = load,
+              introduction = introduction,
+              parameters = parameters,
+              featureTable = featureTable,
+              chromatograms = chromatograms,
+              fingerprints = fingerprints,
+              purityAndCentrality = purityAndCentrality,
+              ticPlot = ticPlot,
+              rsdPlot = rsdPlot
+            ) %>%
+              map(~{
+                eval_expr <- expr(.x(!!object_name))
+                eval_tidy(eval_expr,env = envir)
+              })
             
           })
 
@@ -40,9 +51,9 @@ setMethod('generate',signature = 'Assignment',
 #' @importFrom rlang sym eval_tidy syms
 
 setMethod('generateReport',signature = 'ReportParameters',
-          function(parameters,...){
+          function(report_parameters,...){
             
-            r <- new('Report',parameters)
+            r <- new('Report',report_parameters)
             
             argument_names <- as.character(match.call()) %>%
               .[-(1:2)] 
