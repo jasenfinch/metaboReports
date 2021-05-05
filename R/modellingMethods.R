@@ -17,7 +17,7 @@ modellingRes <- analysis %>%
 if (names(modellingRes)[1] == 'randomForest') {
 modellingRes %>%
   .[[1]] %>%
-  map(measures) %>%
+  metrics() %>% 
   bind_rows() %>%
   mutate_if(is.numeric,round,digits = 3) %>%
   datatable(rownames = F,filter = 'top',caption = 'Table of model measures')
