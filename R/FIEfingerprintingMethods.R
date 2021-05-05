@@ -32,8 +32,7 @@ FIEfingerprintingMethods <- function(analysis){
 histBins <- 30
 
 preTreatedFeatures <- analysis %>%
-  preTreatedData() %>%
-  colnames()
+  features(type = 'pre-treated')
 
 purCent <- binalysis %>%
   accurateData() %>%
