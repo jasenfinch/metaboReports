@@ -9,15 +9,13 @@ preTreatmentMethods <- function(analysis, type = 'head', cls = 'class', chunks =
   
   ellipses <- addEllipses(analysis,cls)
   
-  legend <- addLegend(analysis,cls)
-  
   if ({analysis %>% sinfo(type = 'pre-treated') %>% nrow()} > 0) {
     glue("
     
 {headHash} Pre-treatment
 {ifelse('rsd' %in% chunks,RSDplot(analysis,cls),'')}
 ```{{r unsupervisedPlots,echo = F,fig.width = 10}}
-metabolyseR::plotPCA(analysis,cls = '{cls}',ellipses = {ellipses},legend = {legend}) + plotUnsupervisedRF(analysis,cls = '{cls}',ellipses = {ellipses},title = 'Multidimensional scaling (MDS) -\nunsupervised Random Forest',legend = {legend})
+metabolyseR::plotPCA(analysis,type = 'pre-treated',cls = '{cls}',ellipses = {ellipses}) + plotUnsupervisedRF(analysis,type = 'pre-treated',cls = '{cls}',ellipses = {ellipses},title = 'Multidimensional scaling (MDS) -\nunsupervised Random Forest')
 ```
 {ifelse('lda' %in% chunks,LDAplot(analysis,cls),'')}
 {ifelse('supervisedRF' %in% chunks,supervisedRFplots(analysis,cls),'')}
@@ -56,16 +54,6 @@ classFreq <- function(analysis,cls = 'class'){
     summarise(Freq = n())
 }
 
-addLegend <- function(analysis,cls = 'class'){
-  nCls <- getClasses(analysis,cls) %>%
-    nClasses()
-  if (nCls < 30) {
-    TRUE
-  } else {
-    FALSE
-  }
-}
-
 ROCplot <- function(analysis,cls = 'class'){
   classes <- getClasses(analysis,cls)
   if (is.numeric(classes)){
@@ -93,13 +81,12 @@ LDAplot <- function(analysis,cls = 'class'){
   classes <- getClasses(analysis,cls)
   nCls <- nClasses(classes)
   clsFreq <- classFreq(analysis,cls)
-  legend <- addLegend(analysis,cls)
   if (nCls > 1) {
     if (!(1 %in% clsFreq$Freq)) {
       glue("
       
 ```{{r LDAplot,echo = F,fig.width = 10}}
-plotLDA(analysis,cls = '{cls}',ellipses = {ellipses},legend = {legend})
+plotLDA(analysis,type = 'pre-treated',cls = '{cls}',ellipses = {ellipses})
 ```
   ")
     } else {
@@ -112,7 +99,6 @@ supervisedRFplots <- function(analysis,cls = 'class'){
   ellipses <- addEllipses(analysis,cls)
   classes <- getClasses(analysis,cls)
   clsFreq <- classFreq(analysis,cls)
-  legend <- addLegend(analysis,cls)
   nCls <- nClasses(classes)
   if (nCls > 1) {
     if (nrow(clsFreq %>%
@@ -120,7 +106,7 @@ supervisedRFplots <- function(analysis,cls = 'class'){
       glue("
     
 ```{{r supervisedRFplots,echo = F,fig.width = 10}}
-  plotSupervisedRF(analysis,cls = '{cls}',label = NULL,ellipses = {ellipses},title = 'Multidimensional scaling (MDS) -\nsupervised Random Forest',legend = {legend},ROC = {ROCplot(analysis,cls)})
+  plotSupervisedRF(analysis,type = 'pre-treated',cls = '{cls}',label = NULL,ellipses = {ellipses},title = 'Multidimensional scaling (MDS) -\nsupervised Random Forest',ROC = {ROCplot(analysis,cls)})
 ```
        ")
     } else {
