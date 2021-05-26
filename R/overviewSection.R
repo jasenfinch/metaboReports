@@ -1,6 +1,4 @@
 #' @importFrom stringr str_c
-#' @importFrom binneR info
-#' @importFrom metabolyseR rawInfo
 #' @importFrom purrr map
 
 overViewSection <- function(analysis,type = 'head'){

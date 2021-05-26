@@ -14,7 +14,7 @@ binalysisMethods <- function(analysis) {
 ",headHash," Parameters
 
 ```{r binParamters,echo=FALSE}
-binalysis@binParameters
+binningParameters(binalysis)
 ```
 ")
     },
@@ -86,43 +86,7 @@ plotFingerprint(binalysis)
       "
 
 ```{r PurityCentrality,echo=FALSE}
-histBins <- 30
-    
-purCent <- binalysis %>%
-  accurateData() %>%
-  dplyr::select(polarity,Purity,Centrality) %>%
-  gather('Measure','Value',-polarity) %>%
-  mutate(polarity = as.character(polarity)) %>%
-  na.omit()
-    
-purCent$polarity[purCent$polarity == 'n'] <- 'Negative'
-purCent$polarity[purCent$polarity == 'p'] <- 'Positive'
-    
-purPlot <- purCent %>%
-  filter(Measure == 'Purity') %>%
-  ggplot(aes(x = Value)) +
-  geom_histogram(fill = ptol_pal()(5)[2],colour = 'black',bins = histBins) +
-  theme_bw() +
-  facet_wrap(~polarity) +
-  ggtitle('Bin Purity Distribution') +
-  theme(plot.title = element_text(face = 'bold'),
-        axis.title = element_text(face = 'bold')) +
-  xlab('Purity Measure') +
-  ylab('Frequency')
-    
-centPlot <- purCent %>%
-filter(Measure == 'Centrality') %>%
-ggplot(aes(x = Value)) +
-  geom_histogram(fill = ptol_pal()(5)[2],colour = 'black',bins = histBins) +
-  theme_bw() +
-  facet_wrap(~polarity) +
-  ggtitle('Bin Centrality Distribution') +
-  theme(plot.title = element_text(face = 'bold'),
-        axis.title = element_text(face = 'bold')) +
-  xlab('Centrality Measure') +
-  ylab('Frequency')
-    
-purPlot + centPlot + plot_layout(ncol = 1)
+plotPurity(binalysis) + plotCentrality(binalysis)
 ```
 
 "
