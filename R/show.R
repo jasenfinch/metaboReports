@@ -74,8 +74,3 @@ setMethod('show',signature = 'Report',
               print()
             
           })
-
-setMethod('show',signature = 'Chunk',function(object){
-  rmd(object) %>%
-    print()
-})
