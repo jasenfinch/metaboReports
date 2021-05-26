@@ -2,21 +2,31 @@
 #' @description Initiate report parameters. 
 #' @param title report title
 #' @param investigator investigator name
-#' @param sessionInfo TRUE/FALSE, should session info included?
-#' @param toc TRUE/FALSE, should a table of contents be included
+#' @param sessionInfo TRUE/FALSE, include session info
+#' @param toc TRUE/FALSE, include a table of contents
+#' @param echo TRUE/FALSE, echo code chunks
+#' @param cache TRUE/FALSE, cache report code chunk data
 #' @param path report output path
 #' @seealso \code{\link{report}}
 #' @importFrom methods new
 #' @export
 
-reportParameters <- function(title, investigator, sessionInfo = TRUE, toc = TRUE, path = '.') {
+reportParameters <- function(title, 
+                             investigator, 
+                             sessionInfo = TRUE, 
+                             toc = TRUE,
+                             echo = FALSE,
+                             cache = FALSE,
+                             path = '.') {
   new('ReportParameters',
-      path = path,
+      path = normalizePath(path),
       title = title,
       investigator = investigator,
-      sessionInfo = sessionInfo,
+      sessionInformation = sessionInfo,
       toc = toc,
-      date = Sys.Date(),
+      echo = echo,
+      cache = cache,
+      creation_date = date(),
       output = 'html_document'
   )
 }

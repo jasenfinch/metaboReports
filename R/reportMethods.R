@@ -4,7 +4,6 @@ reportMethods <- function(method) {
     Binalysis = binalysisMethods,
     MetaboProfile = profileMethods,
     Analysis = analysisMethods,
-    Workflow = workflowMethods,
     Assignment = assignmentMethods 
   )
   method <- methods[[method]]
